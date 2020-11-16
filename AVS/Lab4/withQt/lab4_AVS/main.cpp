@@ -1,8 +1,22 @@
-#include <iostream>
 #include <cmath>
 #include <ctime>
+#include <iomanip>
+#include <iostream>
 
 using namespace std;
+
+double timeStart;
+double timeCounter;
+
+void BenchTimer(string task)
+{
+    if (task == "START"){
+        timeStart = clock();
+    } else if(task == "STOP"){
+        timeCounter = ((double)(clock() - timeStart)) / CLOCKS_PER_SEC;
+    }
+
+}
 
 void FillMatrix(double** aMatrix, double** bMatrix, int size)
 {
@@ -46,7 +60,7 @@ void DGEMM_BLAS(double** aMatrix, double** bMatrix, double** resMatrix, int size
     }
 }
 
-void DGEM_opt1(int size, double A[][size], double B[][size], double C[][size])
+void DGEM_opt1(double** A , double** B, double** C, int size)
 {
     double r;
 
@@ -71,13 +85,16 @@ int main(int argc, char *argv[])
     }
 
     FillMatrix(aMatrix, bMatrix, size);
-    cout << "A:" << endl;
-    PrintMatrix(aMatrix, size);
-    cout << "B:" << endl;
-    PrintMatrix(bMatrix, size);
+//    cout << "A:" << endl;
+//    PrintMatrix(aMatrix, size);
+//    cout << "B:" << endl;
+//    PrintMatrix(bMatrix, size);
+    BenchTimer("START");
     DGEMM_BLAS(aMatrix, bMatrix, resMatrix, size);
-    cout << "Res:" << endl;
-    PrintMatrix(resMatrix, size);
+    BenchTimer("STOP");
+//    cout << "Res:" << endl;
+//    PrintMatrix(resMatrix, size);
+    cout << setprecision(15) << "Time = " << timeCounter << endl;
 
     delete aMatrix;
     delete bMatrix;
