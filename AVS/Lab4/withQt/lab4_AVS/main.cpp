@@ -60,7 +60,7 @@ void DGEMM_BLAS(double** aMatrix, double** bMatrix, double** resMatrix, int size
     }
 }
 
-void DGEM_opt1(double** A , double** B, double** C, int size)
+void DGEMM_opt1(double** A , double** B, double** C, int size)
 {
     double r;
 
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 //    cout << "B:" << endl;
 //    PrintMatrix(bMatrix, size);
     BenchTimer("START");
-    DGEMM_BLAS(aMatrix, bMatrix, resMatrix, size);
+    DGEMM_opt1(aMatrix, bMatrix, resMatrix, size);
     BenchTimer("STOP");
 //    cout << "Res:" << endl;
 //    PrintMatrix(resMatrix, size);
