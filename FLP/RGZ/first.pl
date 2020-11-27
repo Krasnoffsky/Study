@@ -1,7 +1,3 @@
-stop(List):-
-    length(List, Len),
-    Len < 0.
-
 occurencesHelp(_X,[],N,N).
 
 occurencesHelp(X,[X|T],N,Y) :-
@@ -17,13 +13,9 @@ occurences(X,List,N) :-
     write(NewList),
     write(" ").
 
-first(List, N):-
-    repeat,
-    _List1 = [H|_],
-   	occurences(H, List, N),
-    List = List2,
-    stop(List),
-    !.
-
-
-
+first([]).
+first(List):-
+    _List1 = [H|List],
+    occurences(H, List, _N),
+	delete(List, H, List2),
+    first(List2).
