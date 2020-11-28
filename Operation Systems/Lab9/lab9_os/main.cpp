@@ -12,9 +12,7 @@
 using namespace std;
 
 bool readyFlags[2] = {false, false};
-
 int turn = 0;
-
 int criticalSection = 0;
 
 void EnterCriticalRegion(int threadId)
@@ -112,4 +110,3 @@ int main(void)
 
     return 0;
 }
-
