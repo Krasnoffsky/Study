@@ -1,5 +1,13 @@
 #include <iostream>
+#include <process.h>
 #include <thread>
+#include <stdio.h>
+#include <windows.h>
+#include <time.h>
+#include <chrono>
+
+#define ITERATIONS_NUMBER 100
+#define THREADS_NUMBER 2
 
 using namespace std;
 
@@ -9,7 +17,7 @@ int turn = 0;
 
 int criticalSection = 0;
 
-void InterCriticalRegion(int threadId)
+void EnterCriticalRegion(int threadId)
 {
     readyFlags[threadId] = true;
     turn = 1 - threadId;
@@ -23,33 +31,84 @@ void ExitCriticalRegion(int threadId)
 
 void func1(void)
 {
-    InterCriticalRegion(0);
-    for (int i = 0; i < 100; i++)
-        criticalSection += 1;
-    cout << "Thread 1: " << criticalSection << endl;
-    ExitCriticalRegion(0);
-    // there can be some non critical things
+    for (int i = 0; i < ITERATIONS_NUMBER; i++){
+        EnterCriticalRegion(0);
+        criticalSection += 5;
+        ExitCriticalRegion(0);
+        Sleep(10);
+    }
+
 }
 
 void func2(void)
 {
-    InterCriticalRegion(1);
-    for (int i = 0; i < 100; i++)
-        criticalSection += 2;
-    cout << "Thread 2: " << criticalSection << endl;
-    ExitCriticalRegion(1);
-    // there can be some non critical things
+    for (int i = 0; i < ITERATIONS_NUMBER; i++){
+        EnterCriticalRegion(1);
+        criticalSection += 5;
+        ExitCriticalRegion(1);
+        Sleep(10);
+    }
+
 }
 
-int main(void)
+
+DWORD dwCounter = 0;
+DWORD WINAPI ThreadProc(CONST LPVOID lpParam)
+{
+    CONST HANDLE hMutex = (CONST HANDLE)lpParam;
+    for(DWORD i = 0; i < ITERATIONS_NUMBER; i++)
+    {
+        WaitForSingleObject(hMutex, INFINITE);
+        dwCounter += 5;
+        ReleaseMutex(hMutex);
+        Sleep(10);
+    }
+    ExitThread(0);
+}
+
+int Peterson(void)
 {
     thread t1(func1);
     thread t2(func2);
 
+    auto start = chrono::system_clock::now();
+
     t1.join();
     t2.join();
 
-    cout << "At least it's: " << criticalSection << endl;
+    chrono::duration<double> duration = chrono::system_clock::now() - start;
+
+    cout << "Peterson Result = " << criticalSection << endl;
+    cout << "Peterson Time = " << criticalSection << endl;
+
+    return 0;
+}
+
+int WinAPI_Threads()
+{
+    DWORD dwTemp;
+    HANDLE hThreads[THREADS_NUMBER];
+    CONST HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
+
+    auto start = chrono::system_clock::now();
+
+    for(DWORD i = 0; i < THREADS_NUMBER; i++)
+        hThreads[i] = CreateThread(NULL, 0, &ThreadProc, hMutex, 0, NULL);
+
+    WaitForMultipleObjects(THREADS_NUMBER, hThreads, TRUE, INFINITE);
+
+    chrono::duration<double> duration = chrono::system_clock::now() - start;
+
+    cout << "Win API Result = " << dwCounter << endl;
+    cout << "Win API Time = " << dwCounter << endl;
+    return 0;
+}
+
+int main(void)
+{
+    Peterson();
+    cout << endl;
+    WinAPI_Threads();
 
     return 0;
 }
