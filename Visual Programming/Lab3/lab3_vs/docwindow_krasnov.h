@@ -10,14 +10,14 @@ private:
     QString m_strFileName;
 
 public:
-    DocWindow_Krasnov();
+    DocWindow_Krasnov(QWidget* pwgt = 0);
 signals:
     void ChangeWindowTitle(const QString&);
 
 public slots:
-    SlotLoad();
-    SlotSave();
-    SlotSaveAs();
+    void SlotLoad();
+    void SlotSave();
+    void SlotSaveAs();
 };
 
 #endif // DOCWINDOW_KRASNOV_H

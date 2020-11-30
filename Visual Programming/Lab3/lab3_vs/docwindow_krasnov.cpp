@@ -43,7 +43,7 @@ void DocWindow_Krasnov::SlotSave()
 
     QFile file(m_strFileName);
     if (file.open(QIODevice::WriteOnly)){
-        QtextStream(&file)<<toPlainText();
+        QTextStream(&file)<<toPlainText();
     }
     file.close();
     emit ChangeWindowTitle(m_strFileName);
