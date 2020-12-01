@@ -27,7 +27,7 @@ int lab4(int num1, int num2)
         buf = 0;
         do {
             temp_res = ((temp_num1 % 10) * temp_num2) % 10;
-            if ((temp_num1 % 10 == 1 || temp_num2 == 1) || (temp_num1 % 10 == 0 || temp_num2 == 0)){
+            if (temp_num1 % 10 == 0 || temp_num2 == 0){
                 U += 0;
             } else {
                 U++;
@@ -45,7 +45,8 @@ int lab4(int num1, int num2)
         temp_num1 = num1;
         num2 = (int)(num2 / 10);
         result += (res + buf * j) * k / 10;
-        S++;
+        if (res + buf * j != 0)
+            S++;
         res = 0;
         k *= 10;
         i = 10;
