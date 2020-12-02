@@ -49,12 +49,17 @@ void mergeSort(T * mas, int len) {
             if (l + n >= len) break;
             ost = (l + n * 2 > len) ? (len - (l + n)) : n;
             mas1 = merge(mas + l, mas + l + n, n, ost);
-            for (int i=0; i < n + ost; i++)
+            for (int i=0; i < n + ost; i++){
+
                 mas[l + i] = mas1[i];
+                cout << mas1[i] << " ";
+            }
             delete [] mas1;
             l += n * 2;
+            //cout << endl;
         }
         n *= 2;
+        cout << "------" <<endl;
     }
 }
 
@@ -67,6 +72,11 @@ int main() {
     for(int i = 0; i < n; i++) {
         cin >> array[i];
     }
+    cout << "Start Massive: ";
+    for (int i = 0; i < n; i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
     mergeSort(array, n);
     for(int i = 0; i < n; i++) {
         std::cout << array[i] << " ";
