@@ -56,6 +56,9 @@ int lab4(int num1, int num2)
     } while (counter != 0);
     S -= 1;
 
+    if ((num1 % 10 == 0) && (num1 > 0) || (num2 % 10 == 0) && (num2 > 0)){
+        S = 0;
+    }
 
     cout << "S = " << S << endl;
     cout << "U = " << U << endl;
