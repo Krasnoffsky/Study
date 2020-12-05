@@ -1,5 +1,6 @@
 #include <cmath>
 #include <ctime>
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <pthread.h>
@@ -8,6 +9,10 @@ using namespace std;
 
 double timeStart;
 double timeCounter;
+
+double** aMatrix;
+double** bMatrix;
+double** resMatrix;
 
 void BenchTimer(string task)
 {
@@ -19,7 +24,7 @@ void BenchTimer(string task)
 
 }
 
-void FillMatrix(double** aMatrix, double** bMatrix, int size)
+void FillMatrix(int size)
 {
     srand(time(NULL));
     for (int i = 0; i < size; i++){
@@ -40,7 +45,7 @@ void PrintMatrix(double** matrix, int size)
     }
 }
 
-double MultipicMatrix(double** aMatrix, double** bMatrix, int size, int x_pos, int y_pos)
+double MultipicMatrix(int size, int x_pos, int y_pos)
 {
     double res = 0;
     int i = 0, j = 0;
@@ -52,60 +57,78 @@ double MultipicMatrix(double** aMatrix, double** bMatrix, int size, int x_pos, i
     return res;
 }
 
-void DGEMM_BLAS(double** aMatrix, double** bMatrix, double** resMatrix, int size, int thread_start_x, int thread_start_y, int thread_stop)
+void* DGEMM_BLAS(void* args)
 {
-    int n = 0;
-    for (int i = thread_start_x; i < size; i++){
-        for (int j = thread_start_y; j < size; j++){
-            n++;
-            if (n >= thread_stop)
-                break;
-            resMatrix[i][j] = MultipicMatrix(aMatrix, bMatrix, size, i, j);
+    int start = atoi(((char**)args)[0]);
+    int end = atoi(((char**)args)[1]);
+    int size = atoi(((char**)args)[2]);
+    for (int i = start; i < end; i++){
+        for (int j = 0; j < size; j++){
+            resMatrix[i][j] = MultipicMatrix(size, i, j);
         }
     }
+
+    pthread_exit(0);
 }
 
-int main(void)
+int main(int argc, char** argv)
 {
+    if (argc < 2){
+        cout << "ERROR: Incorrrect number of elements"<< endl;
+        cout << "Elements: Matrix Size, Number of Threads"<<endl;
+//        return 0;
+    }
     int num_of_threads, matrix_size;
-    int thread_len_prev = 0;
 
-    cout << "Input Size of Matrix: ";
-    cin >> matrix_size;
-    cout << "Input Number of Threads: ";
-    cin >> num_of_threads;
+    matrix_size = atoi(argv[1]);
+    num_of_threads = atoi(argv[2]);
+    if (num_of_threads > matrix_size)
+        num_of_threads = matrix_size;
 
-    int* thread_len = new int [num_of_threads];
-    double** aMatrix = new double* [matrix_size];
-    double** bMatrix = new double* [matrix_size];
-    double** resMatrix = new double* [matrix_size];
+    aMatrix = new double* [matrix_size];
+    bMatrix = new double* [matrix_size];
+    resMatrix = new double* [matrix_size];
     for (int i = 0; i < matrix_size; i++){
         aMatrix[i] = new double[matrix_size];
         bMatrix[i] = new double[matrix_size];
         resMatrix[i] = new double[matrix_size];
     }
 
-    FillMatrix(aMatrix, bMatrix, matrix_size);
+    char** args = new char* [3];
+    for (int i = 0; i < 3; i++)
+        args[i] = new char[10];
+
+    int step =(int)(matrix_size / num_of_threads);
+    int start_i = 0;
+    int stop_i = step;
+
+
+    FillMatrix(matrix_size);
 
     pthread_t* threads = new pthread_t[num_of_threads];
+    snprintf(args[2], 10, "%d", matrix_size);
+
+    BenchTimer("START");
+
+    for (int i = 0; i < num_of_threads - 1; i++){
+        snprintf(args[0], 10, "%d", start_i);
+        snprintf(args[1], 10, "%d", stop_i);
+        pthread_create(&threads[i], NULL, DGEMM_BLAS, args);
+        start_i = stop_i;
+        stop_i += step;
+    }
+
+    snprintf(args[0], 10, "%d", start_i);
+    snprintf(args[1], 10, "%d", matrix_size);
+    pthread_create(&threads[num_of_threads - 1], NULL, DGEMM_BLAS, args);
 
     for (int i = 0; i < num_of_threads; i++){
-        thread_len[i] = thread_len_prev + (int)(matrix_size * matrix_size / num_of_threads);
-        thread_len_prev += (int)(matrix_size * matrix_size / num_of_threads);
-    }
-    int k = 0;
-    if (thread_len_prev < matrix_size * matrix_size){
-        do {
-            for (int i = k; i < num_of_threads; i++)
-                thread_len[i]++;
-            thread_len_prev++;
-            k++;
-        } while (thread_len_prev < matrix_size);
+        pthread_join(threads[i], NULL);
     }
 
-    for (int i = 0; i < num_of_threads; i++)
-        cout << thread_len[i] << endl;
-    cout << "Sum = " << thread_len_prev;
+    BenchTimer("STOP");
+
+    cout << "Time: " << timeCounter;
 
     delete aMatrix;
     delete bMatrix;
