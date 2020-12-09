@@ -9,11 +9,9 @@ void PrintModules( DWORD processID )
     DWORD cbNeeded;
     unsigned int i;
 
-    // печатаем идентификатор процесса.
 
     printf( "\nProcess ID: %u\n", processID );
 
-    // Получаем список всех модулей в этом процессе.
 
     hProcess = OpenProcess(  PROCESS_QUERY_INFORMATION |
                                     PROCESS_VM_READ,
@@ -30,12 +28,11 @@ void PrintModules( DWORD processID )
             (LPSTR)szModName, sizeof(szModName));
             printf("%u\t%s", hMods[i],szModName);
 
-            // Получаем полный путь файла модуля.
 
             if ( GetModuleFileNameEx( hProcess, hMods[i], szModName,
                                       sizeof(szModName)))
             {
-                // Печатаем имя модуля и значение его дескриптора.
+
 
                 printf("\t%s (0x%08X)\n", szModName, hMods[i] );
             }
@@ -47,7 +44,6 @@ void PrintModules( DWORD processID )
 
 void main( )
 {
-    // Пелучаем список идентификаторов процессов.
 
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     unsigned int i;
@@ -55,12 +51,10 @@ void main( )
     if ( !EnumProcesses( aProcesses, sizeof(aProcesses), &cbNeeded ) )
         return;
 
-    // Вычисляем количество полученных идентификаторов процессов.
+
 
     cProcesses = cbNeeded / sizeof(DWORD);
 
-    // Печатаем имена модулей для каждого процесса.
 
-    //for ( i = 0; i < cProcesses; i++ )
         PrintModules( aProcesses[cProcesses-2] );
 }
