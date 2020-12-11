@@ -45,5 +45,6 @@ void krasnov::on_buttonBox_clicked(QAbstractButton *button)
     }
     else if (button->text() == "Reset"){
         ui->textEdit->clear();
+        ui->label->clear();
     }
 }
