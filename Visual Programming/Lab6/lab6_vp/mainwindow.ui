@@ -14,7 +14,18 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#pushButton_2:hover {background: yellow}</string>
+   <string notr="true">QPushButton:hover {background: rgb(93, 93, 93)}
+#MainWindow {background: rgb(55, 55, 55)}
+QPushButton {background: rgb(87,87,87)}
+#label {background: rgb(55,55,55)}
+#label {border-color: rgb(45,45,45)}
+QLineEdit {background: rgb(45,45,45)}
+QDateEdit {background: rgb(45,45,45)}
+
+
+
+
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton_2">
@@ -30,10 +41,10 @@
      <string>Готово</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>230</x>
       <y>20</y>
       <width>331</width>
       <height>121</height>
@@ -86,7 +97,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -115,33 +126,37 @@
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>19</x>
       <y>20</y>
       <width>121</width>
-      <height>191</height>
+      <height>211</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QLabel" name="label">
-       <property name="frameShape">
-        <enum>QFrame::Panel</enum>
-       </property>
-       <property name="text">
-        <string>Фото</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="styleSheet">
-        <string notr="true">rgb{0,0,255}
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="frameShape">
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="text">
+          <string>Фото</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="styleSheet">
+          <string notr="true">rgb{0,0,255}
 </string>
-       </property>
-       <property name="text">
-        <string>Загрузить</string>
-       </property>
-      </widget>
+         </property>
+         <property name="text">
+          <string>Загрузить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>

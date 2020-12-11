@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <krasnov.h>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,16 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    krasnov* myForm;
+    QString name_for_send;
+
+signals:
+    void sendData(QString str);
+
+private slots:
+
+    void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
 };
 
 #endif // MAINWINDOW_H
