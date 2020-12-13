@@ -1,4 +1,3 @@
-
 #include <QApplication>
 #include <QSurfaceFormat>
 
@@ -10,7 +9,7 @@ int main(int argc, char *argv[])
     fmt.setSamples(4);
     QSurfaceFormat::setDefaultFormat(fmt);
 
-    Window window;
+    animation_krasnov window;
     window.show();
 
     return app.exec();
