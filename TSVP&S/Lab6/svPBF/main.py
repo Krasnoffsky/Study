@@ -12,10 +12,10 @@ def sv(a, b, size, n, m):
     for k in range(size):
         for i in range(n):
             for j in range(m):
-                # ch += 1
+                #ch += 1
                 if (i + j == k):
                     C[k] += a[i] * b[j]
-                    ch += 2
+                    ch += 3
     print("Операций = ", int(ch))
     return C
 
