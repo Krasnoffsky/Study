@@ -7,16 +7,27 @@ ch = 0
 
 
 def sv(a, b, size, n, m):
-    ch = 0
+    c_p = 0
+    c_u = 0
+    s = 0
     C = [0] * size
     for k in range(size):
+        print ("C[", k, "] = ", end= ' ')
+        s = 0
         for i in range(n):
             for j in range(m):
-                #ch += 1
                 if (i + j == k):
+                    if (s != 0): print(" + ", end= ' ')
                     C[k] += a[i] * b[j]
-                    ch += 3
-    print("Операций = ", int(ch))
+                    c_u += 1
+                    c_p += 1
+                    s += 1
+                    print("(", a[i], "*", b[j], ")", end= ' ')
+        c_p -= 1
+        print("")
+
+    print("Сложения = ", int(c_p))
+    print("Умножения = ", int(c_u))
     return C
 
 
@@ -105,9 +116,10 @@ for i in range(m):
 b = [3, 5, 6]'''
 
 print(a)
+print(b)
 print("Обычная свертка: ")
 C1 = sv(a, b, size1, n, m)
-
+'''
 for i in range(size1):
     print(C1[i])
 
@@ -140,7 +152,9 @@ for i in range(size1):
     print('({0} {1:.2f} {2} {3:.2f}i)'.format('  '[C_DFT[i].real < 0], abs(C_DFT[i].real), '+-'[C_DFT[i].imag < 0], abs(C_DFT[i].imag)))
 
 print(size)
+'''
 
+'''
 p1 = int(math.sqrt(size))
 while True:
     if size % p1 == 0:
@@ -165,3 +179,4 @@ print("count = ", count)
 C = PBFT_O(C)
 for i in range(size1):
     print('({0} {1:.2f} {2} {3:.2f}i)'.format('  '[C[i].real < 0], abs(C[i].real), '+-'[C[i].imag < 0], abs(C[i].imag)))
+'''
