@@ -119,7 +119,7 @@ int main(){
 	pNtHdr = (IMAGE_NT_HEADERS *)((DWORD)pDosHeader + pDosHeader->e_lfanew); 
 
 	
-	system("Start  C:\\Study\\Operation Systems\\Lab12\\lab12_2.exe");
+	system("Start  C:\\Study\\Lab12\\lab12_2.exe");
 	Sleep(20);
 	Export(pNtHdr, pSrcFile);
 	//system("PAUSE");
