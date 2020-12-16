@@ -3,9 +3,6 @@ import math
 import numpy as np
 import random
 
-ch = 0
-
-
 def sv(a, b, size, n, m):
     c_p = 0
     c_u = 0
@@ -30,31 +27,33 @@ def sv(a, b, size, n, m):
     print("Умножения = ", int(c_u))
     return C
 
-
 def DFT(a, size):
+    global ch
     ch = 0
     c = [0] * size
     for k in range(size):
         for j in range(size):
             c[k] += a[j] * cmath.exp(-2 * cmath.pi * 1j * (k * j / (size)))
-            ch += 1
+            ch += 5
         c[k] *= 1 / (size)
-    print("DP = ", int(ch))
+#    print("DP = ", int(ch))
     return c
 
 
 def DFT_1(c, size):
+    global ch
     ch = 0
     a = [0] * size
     for k in range(size):
         for j in range(size):
             a[k] += c[j] * cmath.exp(2 * cmath.pi * 1j * (k * j / (size)))
-            ch += 1
-    print("DO = ", ch)
+            ch += 5
+#    print("DO = ", ch)
     return a
 
 
-def PBFT(f):
+def PBFT(f, p1, p2, size):
+    global ch
     ch = 0
     a = [0] * size
     a2 = [0] * size
@@ -72,11 +71,12 @@ def PBFT(f):
                 a2[k1 + p1 * k2] += a[k1 + p1 * j2] * cmath.exp(-2 * cmath.pi * 1j * (j2 / (p1 * p2)) * (k1 + p1 * k2))
                 ch += 1
             a2[k1 + p1 * k2] *= 1 / p2
-    print("PP = ", ch)
+#    print("PP = ", ch)
     return a2
 
 
-def PBFT_O(a2):
+def PBFT_O(a2, p1, p2, size):
+    global ch
     ch = 0
     f1 = [0] * p1 * p2
     a1 = [0] * p1 * p2
@@ -94,12 +94,12 @@ def PBFT_O(a2):
             for j2 in range(p2):
                 a1[k1 + p1 * k2] += f1[k1 + p1 * j2] * cmath.exp(2 * cmath.pi * 1j * (j2 / (p1 * p2)) * (k1 + p1 * k2))
                 ch += 1
-    print("PO = ", ch)
+#    print("PO = ", ch)
     return a1
 
 
-n = 3
-m = 3
+n = 512
+m = 512
 
 size1 = m + n - 1
 C1 = [0] * size1
@@ -108,21 +108,21 @@ a = [0] * n
 b = [0] * m
 
 for i in range(n):
-    a[i] = i
+    a[i] = random.randint(0, 100)
 
 for i in range(m):
-    b[i] = i
-'''a = [1, 2, 4]
-b = [3, 5, 6]'''
-
+    b[i] = random.randint(0, 100)
+#a = [1, 2, 3]
+#b = [9, 8, 7, 6, 5]
+'''
 print(a)
 print(b)
 print("Обычная свертка: ")
 C1 = sv(a, b, size1, n, m)
-'''
+
 for i in range(size1):
     print(C1[i])
-
+'''
 if n >= m:
     size = 2 * n
 else:
@@ -132,29 +132,36 @@ for i in range(n, size):
 
 for i in range(m, size):
     b.append(0)
-
+result = 0
 print("Свертка с помощью ДПФ: ")
 C_DFT = [0] * (size)
 a_df = [0] * (size)
 b_df = [0] * (size)
 a_df = DFT(a, size)
+result += ch
 b_df = DFT(b, size)
+result += ch
 co = 0
 
 # C_DFT = DFT(a, b, size)
 for k in range(size):
     C_DFT[k] = a_df[k] * b_df[k]
     C_DFT[k] *= size
-    co += 1
+    result += 1
 print("count = ", co)
 C_DFT = DFT_1(C_DFT, size)
+result += ch
+print ("Операции = ", result)
+
+result = 0
+'''
 for i in range(size1):
     print('({0} {1:.2f} {2} {3:.2f}i)'.format('  '[C_DFT[i].real < 0], abs(C_DFT[i].real), '+-'[C_DFT[i].imag < 0], abs(C_DFT[i].imag)))
-
-print(size)
 '''
+#print(size)
 
-'''
+
+
 p1 = int(math.sqrt(size))
 while True:
     if size % p1 == 0:
@@ -169,14 +176,21 @@ count = 0
 a_pb = [0.0] * size
 b_pb = [0.0] * size
 C = [0.0] * size
-a_pb = PBFT(a)
-b_pb = PBFT(b)
+a_pb = PBFT(a, p1, p2, size)
+result += ch
+b_pb = PBFT(b, p1, p2, size)
+result += ch
 for k in range(size):
     C[k] = a_pb[k] * b_pb[k]
     C[k] *= size
-    count += 1
-print("count = ", count)
-C = PBFT_O(C)
+    result += 1
+#print("count = ", count)
+C = PBFT_O(C, p1, p2, size)
+result += ch
+print("Операции = ", result)
+
+
+'''
 for i in range(size1):
     print('({0} {1:.2f} {2} {3:.2f}i)'.format('  '[C[i].real < 0], abs(C[i].real), '+-'[C[i].imag < 0], abs(C[i].imag)))
 '''
