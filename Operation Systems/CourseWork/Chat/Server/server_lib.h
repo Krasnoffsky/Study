@@ -1,0 +1,5 @@
+#define IDD_HOSTTEST 101
+#define IDC_EDIT1 1000
+#define IDC_BTN1 1002
+#define IDC_TEXT 1003
+
