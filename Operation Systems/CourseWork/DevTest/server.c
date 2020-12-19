@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <windows.h>
-#include <windows.h>
 
 int main() {
     HANDLE hPipe1;

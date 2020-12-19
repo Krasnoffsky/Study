@@ -1,12 +1,12 @@
 [Project]
-FileName=server.dev
-Name=server
+FileName=Client1.dev
+Name=Client1
 Type=1
 Ver=2
 ObjFiles=
 Includes=
 Libs=
-PrivateResource=server_private.rc
+PrivateResource=Client1_private.rc
 ResourceIncludes=
 MakeIncludes=
 Compiler=
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=server_lib.h
+FileName=client1_lib.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -71,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=server_resource.rc
+FileName=client1_resource.rc
 Folder=Resources
 Compile=1
 Link=1
