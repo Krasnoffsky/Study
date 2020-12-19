@@ -9,7 +9,7 @@ int main(void)
 	HANDLE* hPipe = new HANDLE[CLIENT_NUMBER];
 	LPSTR* lpPipeName = new LPSTR[CLIENT_NUMBER]; 
 
-//	char server_output[255 * 2];
+	char server_output[255 + 10];
 	char client1_input[255];
 	char client2_input[255];
 	char client3_input[255];
@@ -40,41 +40,59 @@ int main(void)
         	
         //Connecting clients	
         if((ConnectNamedPipe(hPipe[i], NULL)) == 0) {
-        	printf("Client %d could not connect\n", i);
+        	printf("Client %d could not connect\n", i + 1);
         	return 0;
     	} else
-			printf("Client %d connected\n", i);
+			printf("Client %d connected\n", i + 1);
     }
     
     while(true)
     {
     	//catch message from client1
     	ReadFile(hPipe[0], client1_input, sizeof(client1_input), NULL, NULL);
-    	printf("test1\n");
+    	printf("C1 mess read\n");
 		
     	//send message from client1 to all clients
-    	for (int i = 0; i < CLIENT_NUMBER; i++)
-    		WriteFile(hPipe[i], client1_input, strlen(client1_input), NULL, NULL);
-    	
-    	printf("test2\n");
+    	for (int i = 0; i < CLIENT_NUMBER; i++){
+    		if (i == 0)
+    			strcpy(server_output, "You: ");
+			else
+				strcpy(server_output, "Client 1: ");
+				 
+			strcat(server_output, client1_input);
+    		WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
+    	}
+    	printf("C1 mess sent\n");
     	
     	//catch message from client2
     	ReadFile(hPipe[1], client2_input, sizeof(client2_input), NULL, NULL);
-    	printf("test3\n");
+    	printf("C2 mess read\n");
 			
     	//send message from client2 to all clients
-    	for (int i = 0; i < CLIENT_NUMBER; i++)
-    		WriteFile(hPipe[i], client2_input, strlen(client2_input), NULL, NULL);
-    	printf("test4\n");
+    	for (int i = 0; i < CLIENT_NUMBER; i++){
+    		if (i == 1)
+    			strcpy(server_output, "You: ");
+			else
+				strcpy(server_output, "Client 2: ");
+			strcat(server_output, client2_input);
+			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
+		}
+    	printf("C2 mess sent\n");
+    	
     	//catch message from client3
     	ReadFile(hPipe[2], client3_input, sizeof(client3_input), NULL, NULL);
-    	printf("%c\n", *client3_input);
-
-    	printf("test5\n");	
+    	printf("C3 mess read\n");
+			
     	//send message from client3 to all clients
-    	for (int i = 0; i < CLIENT_NUMBER; i++)
-    		WriteFile(hPipe[i], client3_input, strlen(client3_input), NULL, NULL);
-    		printf("test6\n");
+    	for (int i = 0; i < CLIENT_NUMBER; i++){
+    		if (i == 1)
+    			strcpy(server_output, "You: ");
+			else
+				strcpy(server_output, "Client 2: ");
+			strcat(server_output, client2_input);
+			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
+		}
+    	printf("C3 mess sent\n");
 
 	}
 	
