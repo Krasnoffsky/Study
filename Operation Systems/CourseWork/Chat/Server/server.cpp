@@ -90,10 +90,10 @@ int main(void)
 			
     	//send message from client3 to all clients
     	for (int i = 0; i < CLIENT_NUMBER; i++){
-    		if (i == 1)
+    		if (i == 2)
     			strcpy(server_output, "You: ");
 			else
-				strcpy(server_output, "Client 2: ");
+				strcpy(server_output, "Client 3: ");
 			strcat(server_output, client3_input);
 			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
 		}
