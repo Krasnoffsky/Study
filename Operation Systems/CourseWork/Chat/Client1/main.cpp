@@ -8,6 +8,12 @@ LPSTR lpPipeName = TEXT("\\\\.\\pipe\\MyPipe0");
 
 char input_buff[255];
 char output_buff[255] = " ";
+char message1[255];
+char message2[255];
+char message3[255];
+char message4[255];
+char message5[255];
+char message6[255];
 DWORD iBytesToWrite = 255;
 DWORD iBytesToRead;
 
@@ -42,8 +48,14 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     			printf("Client couldn't connected\n");
         		return GetLastError();}
         	else
-        		printf("Client connected\n"); 
-    		
+        		printf("Client connected\n");
+				 
+    		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1, " ");
+    		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2, " ");
+    		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT3, " ");
+    		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT4, " ");
+    		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT5, " ");
+    		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT6, " ");
 			return TRUE;
 			
 		case WM_COMMAND:
@@ -52,23 +64,40 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 					PostQuitMessage(0);
 					return TRUE;
 					
-				case IDC_BTN1:
+				case IDC_BTN1:	//Send
 					//send message by client1
 					GetDlgItemText(hDlg,IDC_EDIT_INPUT,output_buff, 255);
 					WriteFile(hPipe, output_buff, strlen(output_buff), NULL, NULL);
+					SetDlgItemText(hDlg,IDC_EDIT_INPUT, " ");
 					
-					//write message from client1
+					break;
+					
+				case IDC_BTN2:	//Update
 					ReadFile(hPipe, input_buff, sizeof(input_buff), NULL, NULL);
-					SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,input_buff);
-					
-					//write message from client2
-					ReadFile(hPipe, input_buff, sizeof(input_buff), NULL, NULL);
-					SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,input_buff);
-					
-					
-					//write message by client3
-					ReadFile(hPipe, input_buff, sizeof(input_buff), NULL, NULL);
-					SetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,input_buff);
+					for (int i = 0; i < 255; i++)
+						printf("%c",input_buff[i]);
+					GetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,message6, 255);
+					if (strcmp(message6, " ") != 0){
+						GetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message5, 255);
+						SetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message6);
+						if (strcmp(message5, " ") != 0){
+							GetDlgItemText(hDlg,IDC_EDIT_OUTPUT4,message4, 255);
+							SetDlgItemText(hDlg,IDC_EDIT_OUTPUT4,message5);
+							if (strcmp(message4, " ") != 0){
+								GetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,message3, 255);
+								SetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,message4);
+								if (strcmp(message3, " ") != 0){
+									GetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message2, 255);
+									SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message3);
+									if (strcmp(message2, " ") != 0){
+										GetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,message1, 255);
+										SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,message2);
+									}
+								}
+							}
+						}
+					}		
+					SetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,input_buff);
 					
 					break;
 			}

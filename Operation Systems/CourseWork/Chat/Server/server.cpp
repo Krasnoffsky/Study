@@ -79,6 +79,11 @@ int main(void)
 		}
     	printf("C2 mess sent\n");
     	
+    	for (int i = 0; i < 265; i++){
+    		printf("%c", server_output[i]);
+		}
+    	printf("\n");
+    	
     	//catch message from client3
     	ReadFile(hPipe[2], client3_input, sizeof(client3_input), NULL, NULL);
     	printf("C3 mess read\n");
@@ -89,7 +94,7 @@ int main(void)
     			strcpy(server_output, "You: ");
 			else
 				strcpy(server_output, "Client 2: ");
-			strcat(server_output, client2_input);
+			strcat(server_output, client3_input);
 			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
 		}
     	printf("C3 mess sent\n");

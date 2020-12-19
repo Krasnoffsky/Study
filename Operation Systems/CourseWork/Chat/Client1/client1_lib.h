@@ -7,5 +7,6 @@
 #define IDC_EDIT_OUTPUT5 1005
 #define IDC_EDIT_OUTPUT6 1006
 #define IDC_BTN1 1007
+#define IDC_BTN2 1008
 #define CLIENT_NUMBER 3
 
