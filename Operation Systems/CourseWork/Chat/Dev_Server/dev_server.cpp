@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <process.h> 
-#include <thread>
-#include <mutex>
 
 #define CLIENT_NUMBER 3
 
@@ -16,46 +14,21 @@ char server_output[255 + 10] = " ";
 char **client_input = new char*[CLIENT_NUMBER];
 DWORD iBytesToRead = 255;
 
-mutex tMutex;
-CONST HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
-
-void ThreadProc_Client(int client)
-{   
-    while(true){
-    	//catch message from client
-    	memset(client_input[client], 0, 255);
-    	ReadFile(hPipe[0], client_input[client], sizeof(client_input[client]), NULL, NULL);
-   		printf("C%i mess read\n", client + 1);
-
-   		tMutex.lock();  //locking critical section
-   		
-   		//send messages to all clients
-   		for (int i = 0; i < CLIENT_NUMBER; i++){
-   			memset(server_output, 0, 265);
-   			if (i == client)
-   				strcpy(server_output, "You: ");
-			else {
-				strcpy(server_output, "Client");
-				strcat(server_output, reinterpret_cast<char*>(i));
-				strcat(server_output, " : ");
-			}
-							 
-			strcat(server_output, client_input[client]);
-   			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
-   		}
-   		printf("C%d mess sent\n", client + 1);
-    	tMutex.unlock(); //unlocking critical section
-	}
-    
-    ExitThread(0);
-}
+struct arg{
+	HANDLE lpMutex;
+	int index;
+};
 
 DWORD WINAPI ThreadProc(CONST LPVOID lpParam)
 {	
-    int client = (int)lpParam;
+	arg* Param = reinterpret_cast<arg*>(lpParam);
+    int client = Param->index;
+    CONST HANDLE hMutex = Param->lpMutex;
+    printf("Thread %i started\n", client);
 	while(true){
     	//catch message from client
     	memset(client_input[client], 0, 255);
+    	printf("Thread %d waiting for message\n", client);
     	ReadFile(hPipe[0], client_input[client], sizeof(client_input[client]), NULL, NULL);
    		printf("C%i mess read\n", client + 1);
 
@@ -85,6 +58,10 @@ DWORD WINAPI ThreadProc(CONST LPVOID lpParam)
 int main(void)
 {
 	HANDLE hThreads[CLIENT_NUMBER];
+	CONST HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
+	arg Args;
+	
+	Args.lpMutex = hMutex;
 	
 	lpPipeName[0] = TEXT("\\\\.\\pipe\\MyPipe0");
 	lpPipeName[1] = TEXT("\\\\.\\pipe\\MyPipe1");
@@ -122,9 +99,11 @@ int main(void)
 			printf("Client %d connected\n", i + 1);
     }
     
+    Args.index = 0;
     for(DWORD i = 0; i < CLIENT_NUMBER; i++){
-    	hThreads[i] = CreateThread(NULL, 0, &ThreadProc, reinterpret_cast<LPVOID>(i), 0, NULL);
-
+    	Args.index++;
+    	hThreads[i] = CreateThread(NULL, 0, &ThreadProc, (LPVOID)&Args, 0, NULL);
+		printf("Thread %d created\n", i);
 	}
         
 
