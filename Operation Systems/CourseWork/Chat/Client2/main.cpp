@@ -74,6 +74,8 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 					
 				case IDC_BTN2:	//Update
 					ReadFile(hPipe, input_buff, sizeof(input_buff), NULL, NULL);
+					for (int i = 0; i < 255; i++)
+						printf("%c",input_buff[i]);
 					GetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,message6, 255);
 					if (strcmp(message6, " ") != 0){
 						GetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message5, 255);
@@ -87,14 +89,17 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 								if (strcmp(message3, " ") != 0){
 									GetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message2, 255);
 									SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message3);
-									if (strcmp(message2, " ") != 0){
-										GetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,message1, 255);
-										SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,message2);
-									}
-								}
-							}
-						}
-					}		
+									SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,message2);
+									
+								} else
+									SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message3);
+							} else
+								SetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,message4);
+						} else
+							SetDlgItemText(hDlg,IDC_EDIT_OUTPUT4,message5);
+						
+					} else 
+						SetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message6);	
 					SetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,input_buff);
 					
 					break;
