@@ -1,103 +1,48 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include <process.h>
+#include <thread>
+#include <mutex>
 
 #define CLIENT_NUMBER 3
+
+using namespace std;
 
 HANDLE* hPipe = new HANDLE[CLIENT_NUMBER];
 LPSTR* lpPipeName = new LPSTR[CLIENT_NUMBER]; 
 
 char server_output[255 + 10] = " ";
-char client1_input[255] = " ";
-char client2_input[255] = " ";
-char client3_input[255] = " ";
+char **client_input = new char*[CLIENT_NUMBER];
 DWORD iBytesToRead = 255;
 
-DWORD WINAPI Thread_Client1(CONST LPVOID lpParam)
-{
-    CONST HANDLE hMutex = (CONST HANDLE)lpParam;
-    
+mutex tMutex;
+
+void ThreadProc_Client(int client)
+{   
     while(true){
-    	//catch message from client1
-    	memset(client1_input, 0, 255);
-    	ReadFile(hPipe[0], client1_input, sizeof(client1_input), NULL, NULL);
-   		printf("C1 mess read\n");
-		
-   		//send message from client1 to all clients
-   		WaitForSingleObject(hMutex, INFINITE);
+    	//catch message from client
+    	memset(client_input[client], 0, 255);
+    	ReadFile(hPipe[0], client_input[client], sizeof(client_input[client]), NULL, NULL);
+   		printf("C%i mess read\n", client + 1);
+
+   		tMutex.lock();  //locking critical section
+   		
+   		//send messages to all clients
    		for (int i = 0; i < CLIENT_NUMBER; i++){
    			memset(server_output, 0, 265);
-   			if (i == 0)
+   			if (i == client)
    				strcpy(server_output, "You: ");
-			else
-				strcpy(server_output, "Client 1: ");
+			else {
+				strcpy(server_output, "Client");
+				strcat(server_output, reinterpret_cast<char*>(i));
+				strcat(server_output, " : ");
+			}
 							 
-			strcat(server_output, client1_input);
+			strcat(server_output, client_input[client]);
    			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
    		}
-   		printf("C1 mess sent\n");
-    
-    	ReleaseMutex(hMutex);
-	}
-    
-    ExitThread(0);
-}
-
-DWORD WINAPI Thread_Client2(CONST LPVOID lpParam)
-{
-    CONST HANDLE hMutex = (CONST HANDLE)lpParam;
-    
-    while(true){
-    	//catch message from client1
-    	memset(client2_input, 0, 255);
-    	ReadFile(hPipe[1], client2_input, sizeof(client2_input), NULL, NULL);
-   		printf("C2 mess read\n");
-		
-   		//send message from client2 to all clients
-   		WaitForSingleObject(hMutex, INFINITE);
-   		for (int i = 0; i < CLIENT_NUMBER; i++){
-   			memset(server_output, 0, 265);
-   			if (i == 1)
-   				strcpy(server_output, "You: ");
-			else
-				strcpy(server_output, "Client 2: ");
-							 
-			strcat(server_output, client2_input);
-   			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
-   	}
-   		printf("C1 mess sent\n");
-    
-    	ReleaseMutex(hMutex);
-	}
-    
-    ExitThread(0);
-}
-
-DWORD WINAPI Thread_Client3(CONST LPVOID lpParam)
-{
-    CONST HANDLE hMutex = (CONST HANDLE)lpParam;
-    
-    while(true){
-    	//catch message from client3
-    	memset(client3_input, 0, 255);
-    	ReadFile(hPipe[2], client3_input, sizeof(client3_input), NULL, NULL);
-   		printf("C3 mess read\n");
-		
-   		//send message from client1 to all clients
-   		WaitForSingleObject(hMutex, INFINITE);
-   		for (int i = 0; i < CLIENT_NUMBER; i++){
-   			memset(server_output, 0, 265);
-   			if (i == 2)
-   				strcpy(server_output, "You: ");
-			else
-				strcpy(server_output, "Client 3: ");
-						 
-			strcat(server_output, client3_input);
-   			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
-   		}
-   		printf("C3 mess sent\n");
-    	ReleaseMutex(hMutex);
+   		printf("C%d mess sent\n", client + 1);
+    	tMutex.unlock(); //unlocking critical section
 	}
     
     ExitThread(0);
@@ -105,12 +50,16 @@ DWORD WINAPI Thread_Client3(CONST LPVOID lpParam)
 
 int main(void)
 {
-	HANDLE hThreads[CLIENT_NUMBER];
-	CONST HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
+	thread* Threads = new thread[CLIENT_NUMBER];
 	
 	lpPipeName[0] = TEXT("\\\\.\\pipe\\MyPipe0");
 	lpPipeName[1] = TEXT("\\\\.\\pipe\\MyPipe1");
 	lpPipeName[2] = TEXT("\\\\.\\pipe\\MyPipe2");
+	
+	for (int i = 0; i < CLIENT_NUMBER; i++)
+		client_input[i] = new char[255];
+		
+	
 	
 	for(int i = 0; i < CLIENT_NUMBER; i++){
 		//Creating pipes
@@ -139,15 +88,19 @@ int main(void)
 			printf("Client %d connected\n", i + 1);
     }
     
-    hThreads[0] = CreateThread(NULL, 0, &Thread_Client1, hMutex, 0, NULL);
-    hThreads[1] = CreateThread(NULL, 0, &Thread_Client2, hMutex, 0, NULL);
-    hThreads[2] = CreateThread(NULL, 0, &Thread_Client3, hMutex, 0, NULL);
-    
-    WaitForMultipleObjects(CLIENT_NUMBER, hThreads, TRUE, INFINITE);
+    for (int i = 0; i < CLIENT_NUMBER; i++){
+		Threads[i] = thread(ThreadProc_Client, i);
+		printf("Thread %d created\n", i);
+	}
+	for (int i = 0; i < CLIENT_NUMBER; i++){
+		Threads[i].join();
+		printf("Thread %d started\n", i);
+	}
+    	
+    	
 	
 	for (int i = 0; i < CLIENT_NUMBER; i++)
 		CloseHandle(hPipe[i]);
 	
-	CloseHandle(hThreads);
 	return 0;
 }
