@@ -84,7 +84,7 @@ int main(void)
     	printf("C2 mess sent\n");
     	
     	//catch message from client3
-    	memset(client1_input, 0, 255);
+    	memset(client3_input, 0, 255);
     	ReadFile(hPipe[2], client3_input, sizeof(client3_input), NULL, NULL);
     	printf("C3 mess read\n");
 			
