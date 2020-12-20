@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#include <process.h> 
 #include <thread>
 #include <mutex>
 
@@ -16,6 +17,7 @@ char **client_input = new char*[CLIENT_NUMBER];
 DWORD iBytesToRead = 255;
 
 mutex tMutex;
+CONST HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
 
 void ThreadProc_Client(int client)
 {   
@@ -48,9 +50,41 @@ void ThreadProc_Client(int client)
     ExitThread(0);
 }
 
+DWORD WINAPI ThreadProc(CONST LPVOID lpParam)
+{	
+    int client = (int)lpParam;
+	while(true){
+    	//catch message from client
+    	memset(client_input[client], 0, 255);
+    	ReadFile(hPipe[0], client_input[client], sizeof(client_input[client]), NULL, NULL);
+   		printf("C%i mess read\n", client + 1);
+
+   		WaitForSingleObject(hMutex, INFINITE);  //locking critical section
+   		
+   		//send messages to all clients
+   		for (int i = 0; i < CLIENT_NUMBER; i++){
+   			memset(server_output, 0, 265);
+   			if (i == client)
+   				strcpy(server_output, "You: ");
+			else {
+				strcpy(server_output, "Client");
+				strcat(server_output, reinterpret_cast<char*>(i));
+				strcat(server_output, " : ");
+			}
+							 
+			strcat(server_output, client_input[client]);
+   			WriteFile(hPipe[i], server_output, strlen(server_output), NULL, NULL);
+   		}
+   		printf("C%d mess sent\n", client + 1);
+    	ReleaseMutex(hMutex); //unlocking critical section
+	}
+    
+    ExitThread(0);
+}
+
 int main(void)
 {
-	thread* Threads = new thread[CLIENT_NUMBER];
+	HANDLE hThreads[CLIENT_NUMBER];
 	
 	lpPipeName[0] = TEXT("\\\\.\\pipe\\MyPipe0");
 	lpPipeName[1] = TEXT("\\\\.\\pipe\\MyPipe1");
@@ -88,14 +122,13 @@ int main(void)
 			printf("Client %d connected\n", i + 1);
     }
     
-    for (int i = 0; i < CLIENT_NUMBER; i++){
-		Threads[i] = thread(ThreadProc_Client, i);
-		printf("Thread %d created\n", i);
+    for(DWORD i = 0; i < CLIENT_NUMBER; i++){
+    	hThreads[i] = CreateThread(NULL, 0, &ThreadProc, reinterpret_cast<LPVOID>(i), 0, NULL);
+
 	}
-	for (int i = 0; i < CLIENT_NUMBER; i++){
-		Threads[i].join();
-		printf("Thread %d started\n", i);
-	}
+        
+
+    WaitForMultipleObjects(CLIENT_NUMBER, hThreads, TRUE, INFINITE);
     	
     	
 	
