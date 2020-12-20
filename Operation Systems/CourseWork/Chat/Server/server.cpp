@@ -9,10 +9,10 @@ int main(void)
 	HANDLE* hPipe = new HANDLE[CLIENT_NUMBER];
 	LPSTR* lpPipeName = new LPSTR[CLIENT_NUMBER]; 
 
-	char server_output[255 + 10];
-	char client1_input[255];
-	char client2_input[255];
-	char client3_input[255];
+	char server_output[255 + 10] = " ";
+	char client1_input[255] = " ";
+	char client2_input[255] = " ";
+	char client3_input[255] = " ";
 	DWORD iBytesToRead = 255;
 	
 	lpPipeName[0] = TEXT("\\\\.\\pipe\\MyPipe0");
@@ -49,11 +49,13 @@ int main(void)
     while(true)
     {
     	//catch message from client1
+    	memset(client1_input, 0, 255);
     	ReadFile(hPipe[0], client1_input, sizeof(client1_input), NULL, NULL);
     	printf("C1 mess read\n");
 		
     	//send message from client1 to all clients
     	for (int i = 0; i < CLIENT_NUMBER; i++){
+    		memset(server_output, 0, 265);
     		if (i == 0)
     			strcpy(server_output, "You: ");
 			else
@@ -65,11 +67,13 @@ int main(void)
     	printf("C1 mess sent\n");
     	
     	//catch message from client2
+    	memset(client1_input, 0, 255);
     	ReadFile(hPipe[1], client2_input, sizeof(client2_input), NULL, NULL);
     	printf("C2 mess read\n");
 			
     	//send message from client2 to all clients
     	for (int i = 0; i < CLIENT_NUMBER; i++){
+    		memset(server_output, 0, 265);
     		if (i == 1)
     			strcpy(server_output, "You: ");
 			else
@@ -80,11 +84,13 @@ int main(void)
     	printf("C2 mess sent\n");
     	
     	//catch message from client3
+    	memset(client1_input, 0, 255);
     	ReadFile(hPipe[2], client3_input, sizeof(client3_input), NULL, NULL);
     	printf("C3 mess read\n");
 			
     	//send message from client3 to all clients
     	for (int i = 0; i < CLIENT_NUMBER; i++){
+    		memset(server_output, 0, 265);
     		if (i == 2)
     			strcpy(server_output, "You: ");
 			else

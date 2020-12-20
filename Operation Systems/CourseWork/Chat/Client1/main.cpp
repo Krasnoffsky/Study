@@ -6,14 +6,14 @@
 HANDLE hPipe;
 LPSTR lpPipeName = TEXT("\\\\.\\pipe\\MyPipe0");
 
-char input_buff[255];
+char input_buff[255 + 10];
 char output_buff[255] = " ";
-char message1[255];
-char message2[255];
-char message3[255];
-char message4[255];
-char message5[255];
-char message6[255];
+char message1[255 + 10];
+char message2[255 + 10];
+char message3[255 + 10];
+char message4[255 + 10];
+char message5[255 + 10];
+char message6[255 + 10];
 DWORD iBytesToWrite = 255;
 DWORD iBytesToRead;
 
@@ -66,6 +66,7 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 					
 				case IDC_BTN1:	//Send
 					//send message by client1
+					memset(output_buff, 0, 255);
 					GetDlgItemText(hDlg,IDC_EDIT_INPUT,output_buff, 255);
 					WriteFile(hPipe, output_buff, strlen(output_buff), NULL, NULL);
 					SetDlgItemText(hDlg,IDC_EDIT_INPUT, " ");
@@ -73,21 +74,29 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 					break;
 					
 				case IDC_BTN2:	//Update
+					memset(input_buff, 0, 265);
+					memset(message1, 0, 265);
+					memset(message2, 0, 265); 
+					memset(message3, 0, 265); 
+					memset(message4, 0, 265); 
+					memset(message5, 0, 265); 
+					memset(message6, 0, 265);  
+					
 					ReadFile(hPipe, input_buff, sizeof(input_buff), NULL, NULL);
 					for (int i = 0; i < 255; i++)
 						printf("%c",input_buff[i]);
-					GetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,message6, 255);
+					GetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,message6, 265);
 					if (strcmp(message6, " ") != 0){
-						GetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message5, 255);
+						GetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message5, 265);
 						SetDlgItemText(hDlg,IDC_EDIT_OUTPUT5,message6);
 						if (strcmp(message5, " ") != 0){
-							GetDlgItemText(hDlg,IDC_EDIT_OUTPUT4,message4, 255);
+							GetDlgItemText(hDlg,IDC_EDIT_OUTPUT4,message4, 265);
 							SetDlgItemText(hDlg,IDC_EDIT_OUTPUT4,message5);
 							if (strcmp(message4, " ") != 0){
-								GetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,message3, 255);
+								GetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,message3, 265);
 								SetDlgItemText(hDlg,IDC_EDIT_OUTPUT3,message4);
 								if (strcmp(message3, " ") != 0){
-									GetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message2, 255);
+									GetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message2, 265);
 									SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2,message3);
 									SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1,message2);
 									
