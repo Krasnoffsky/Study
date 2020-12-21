@@ -29,7 +29,7 @@ DWORD WINAPI ThreadProc(CONST LPVOID lpParam)
     	//catch message from client
     	memset(client_input[client], 0, 255);
     	printf("Thread %d waiting for message\n", client);
-    	ReadFile(hPipe[0], client_input[client], sizeof(client_input[client]), NULL, NULL);
+    	ReadFile(hPipe[client], client_input[client], sizeof(client_input[client]), NULL, NULL);
    		printf("C%i mess read\n", client + 1);
 
    		WaitForSingleObject(hMutex, INFINITE);  //locking critical section
