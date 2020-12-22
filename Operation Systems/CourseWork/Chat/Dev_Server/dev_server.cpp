@@ -101,8 +101,8 @@ int main(void)
     
     Args.index = 0;
     for(DWORD i = 0; i < CLIENT_NUMBER; i++){
-    	Args.index++;
     	hThreads[i] = CreateThread(NULL, 0, &ThreadProc, (LPVOID)&Args, 0, NULL);
+    	Args.index++;
 		printf("Thread %d created\n", i);
 	}
         
