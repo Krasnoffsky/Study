@@ -33,7 +33,11 @@ int main(){
     cout << "Input start vertex:" << endl;
     long long start;
     cin >> start;
-
+    
+/*    cout << "Input end vertex:" << endl;
+    long long end;
+    cin >> end;
+*/
     vector <int> d(n, INF);
     d[start-1] = 0;
 
@@ -51,10 +55,12 @@ int main(){
 
     for (int i = 0; i < n; i++)
     {
-        if (d[i] != INF)
-            cout << "Min path between " << start << " and " << i+1 << " = " << d[i] << endl;
-        else
-            cout << "No path between " << start << " and " << i+1 << endl;
+//    	if (i == end - 1){
+        	if (d[i] != INF)
+            	cout << "Min path between " << start << " and " << i+1 << " = " << d[i] << endl;
+        	else
+            	cout << "No path between " << start << " and " << i+1 << endl;
+ //       }
     }
     cout << endl;
 
