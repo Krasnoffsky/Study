@@ -8,18 +8,20 @@ int a[2000][2000];
  
 int main() {
     int N, W;
-    cout << "Enter Num of things and Capacity:";
-    cin >> N >> W
- 
+    cout << "Enter Capacity:";
+    cin >> W;
+    
+    cout << "Enter Things:";
+    cin >> N;
+    
     vector<int> cost(N + 1);
     vector<int> weight(N + 1);
  
-    cout << "m" << "  " << "c" << endl;
-    for (int i = 0; i < N; i++)
-    {
-    	cout << i+1 << ") ";
-    	cin  >> weight[i + 1] >> cost[i + 1];
-    }
+    for (int i = 1; i < N + 1; i++){
+    	cout << i << ") ";
+    	cin >>cost[i] >> weight[i];
+	}
+
  
     for (int j = 0; j <= W; j++)
         a[0][j] = 0;
@@ -47,9 +49,9 @@ int main() {
     cout << endl << "Best backpack's price: " << a[N][W] << endl << "The backpack contains: ";
  
 	int sum_w = 0;
-   //int repeat[W] = {0};
+
    int * repeat = new int [W];
-   //repeat
+
    for (int i = 0; i < W; i++)
    {
        repeat[i] = 0;
@@ -59,12 +61,10 @@ int main() {
 	   for (int i = 0; i <= N; i++)
 		if (repeat[i] > 0)
 		{
-			cout << i << " ("  << weight[i] << "; "<< cost[i] << ") " << " - "<< repeat[i] << " pcs    ";// << repeat[i] * cost[i]<< endl;
-			//sum_w += weight[i] * repeat[i];
+			cout << i << " ( weight = "  << weight[i] << "; cost = "<< cost[i] << ") " << " : "<< repeat[i] << " pieces" << endl;
+			sum_w += weight[i] * repeat[i];
 		}
 			
-	//cout << "The backpack's weight: " << sum_w;	
+	cout << "The backpack's weight: " << sum_w;	
 	
-    /*for (int i = 0; i < answer.size(); i++)
-        cout << answer[i] << ' ';*/
 }
