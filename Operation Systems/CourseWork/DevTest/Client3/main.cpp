@@ -3,8 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 
-HANDLE hPipe;
-LPSTR lpPipeName = TEXT("\\\\.\\pipe\\MyPipe2");
+HANDLE hPipeOutput;
+HANDLE hPipeInput;
+
+LPSTR lpPipeNameOutput = TEXT("\\\\.\\pipe\\MyPipeOut2");
+LPSTR lpPipeNameInput = TEXT("\\\\.\\pipe\\MyPipeOut2");
 
 char input_buff[255 + 10];
 char output_buff[255] = " ";
@@ -36,7 +39,7 @@ LRESULT CALLBACK
 DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	switch (message) {
 		case WM_INITDIALOG:
-    		hPipe = CreateFile(lpPipeName, 
+    		hPipeOutput = CreateFile(lpPipeNameOutput, 
                 	  GENERIC_READ | 
                       GENERIC_WRITE,
                       0, 
@@ -44,11 +47,27 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
                       OPEN_EXISTING, 
                       0,
                       NULL);
-    		if(hPipe == INVALID_HANDLE_VALUE){
-    			printf("Client couldn't connected\n");
+    		if(hPipeOutput == INVALID_HANDLE_VALUE){
+    			printf("Client couldn't connected for output\n");
         		return GetLastError();}
         	else
-        		printf("Client connected\n");
+        		printf("Client connected for output\n");
+        		
+        	Sleep(100);
+        		
+        	hPipeInput = CreateFile(lpPipeNameInput, 
+                	  GENERIC_READ | 
+                      GENERIC_WRITE,
+                      0, 
+                      NULL, 
+                      OPEN_EXISTING, 
+                      0,
+                      NULL);
+    		if(hPipeInput == INVALID_HANDLE_VALUE){
+    			printf("Client couldn't connected for Input\n");
+        		return GetLastError();}
+        	else
+        		printf("Client connected for Input\n");
 				 
     		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT1, " ");
     		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT2, " ");
@@ -56,6 +75,7 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT4, " ");
     		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT5, " ");
     		SetDlgItemText(hDlg,IDC_EDIT_OUTPUT6, " ");
+    		
 			return TRUE;
 			
 		case WM_COMMAND:
@@ -66,26 +86,23 @@ DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 					
 				case IDC_BTN1:	//Send
 					//send message by client3
-					for (int i = 0; i < 255; i++){
-						output_buff[i] = ' ';
-					}
+					memset(output_buff, 0, 255);
 					GetDlgItemText(hDlg,IDC_EDIT_INPUT,output_buff, 255);
-					WriteFile(hPipe, output_buff, strlen(output_buff), NULL, NULL);
+					WriteFile(hPipeOutput, output_buff, strlen(output_buff), NULL, NULL);
 					SetDlgItemText(hDlg,IDC_EDIT_INPUT, " ");
 					
 					break;
 					
 				case IDC_BTN2:	//Update
-				for (int i = 0; i < 265; i++){
-						input_buff[i] = ' ';
-						message1[i] = ' ';
-						message2[i] = ' ';
-						message3[i] = ' ';
-						message4[i] = ' ';
-						message5[i] = ' ';
-						message6[i] = ' '; 
-					}
-					ReadFile(hPipe, input_buff, sizeof(input_buff), NULL, NULL);
+					memset(input_buff, 0, 265);
+					memset(message1, 0, 265);
+					memset(message2, 0, 265); 
+					memset(message3, 0, 265); 
+					memset(message4, 0, 265); 
+					memset(message5, 0, 265); 
+					memset(message6, 0, 265);  
+					
+					ReadFile(hPipeInput, input_buff, sizeof(input_buff), NULL, NULL);
 					for (int i = 0; i < 255; i++)
 						printf("%c",input_buff[i]);
 					GetDlgItemText(hDlg,IDC_EDIT_OUTPUT6,message6, 265);

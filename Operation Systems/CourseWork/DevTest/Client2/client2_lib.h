@@ -9,3 +9,4 @@
 #define IDC_BTN1 1007
 #define IDC_BTN2 1008
 #define CLIENT_NUMBER 3
+

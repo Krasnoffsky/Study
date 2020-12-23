@@ -1,12 +1,12 @@
 [Project]
-FileName=Client2.dev
-Name=Client2
+FileName=client2.dev
+Name=client2
 Type=1
 Ver=2
 ObjFiles=
 Includes=
 Libs=
-PrivateResource=
+PrivateResource=client2_private.rc
 ResourceIncludes=
 MakeIncludes=
 Compiler=
