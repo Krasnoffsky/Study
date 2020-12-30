@@ -31,6 +31,16 @@ public:
         if (krasnov->objectName().isEmpty())
             krasnov->setObjectName(QString::fromUtf8("krasnov"));
         krasnov->resize(423, 465);
+        krasnov->setStyleSheet(QString::fromUtf8("QPushButton:hover {background: rgb(93, 93, 93)}\n"
+"QPushButton {background: rgb(87,87,87); color: white}\n"
+"QTextEdit {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}\n"
+"QLabel {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}\n"
+"QWidget{background-color: rgb(55, 55, 55); color: white;}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+""));
         label = new QLabel(krasnov);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(20, 70, 91, 111));
@@ -50,7 +60,7 @@ public:
     void retranslateUi(QWidget *krasnov)
     {
         krasnov->setWindowTitle(QCoreApplication::translate("krasnov", "Form", nullptr));
-        label->setText(QCoreApplication::translate("krasnov", "TextLabel", nullptr));
+        label->setText(QString());
     } // retranslateUi
 
 };

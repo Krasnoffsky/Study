@@ -18,7 +18,7 @@
 QPushButton {background: rgb(87,87,87); color: white}
 QTextEdit {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
 QLabel {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
-QMainWindow{background-color: rgb(55, 55, 55); color: white;}
+QWidget{background-color: rgb(55, 55, 55); color: white;}
 
 
 
