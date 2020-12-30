@@ -29,10 +29,10 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if( ui->lineEdit->text() != NULL and
-            ui->lineEdit_2->text() != NULL and
-            ui->dateEdit->text() != NULL and
-            ui->dateEdit_2->text() != NULL)
+    if( ui->lineEdit->text() != "" and
+            ui->lineEdit_2->text() != "" and
+            ui->dateEdit->text() != "" and
+            ui->dateEdit_2->text() != "")
     {
         myForm->show();
         QString st = name_for_send + "*"

@@ -13,6 +13,18 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton:hover {background: rgb(93, 93, 93)}
+QPushButton {background: rgb(87,87,87); color: white}
+QTextEdit {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
+QLabel {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
+QMainWindow{background-color: rgb(55, 55, 55); color: white;}
+
+
+
+
+</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -23,7 +35,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QTextEdit" name="textEdit">

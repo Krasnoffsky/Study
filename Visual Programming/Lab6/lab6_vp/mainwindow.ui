@@ -15,12 +15,12 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton:hover {background: rgb(93, 93, 93)}
-#MainWindow {background: rgb(55, 55, 55)}
-QPushButton {background: rgb(87,87,87)}
-#label {background: rgb(55,55,55)}
-#label {border-color: rgb(45,45,45)}
-QLineEdit {background: rgb(45,45,45)}
-QDateEdit {background: rgb(45,45,45)}
+QPushButton {background: rgb(87,87,87); color: white}
+QRadioButton {color: white}
+QLabel {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
+QLineEdit {background: rgb(45,45,45); color: white;}
+QDateEdit {background: rgb(45,45,45); color: white;}
+QMainWindow{background-color: rgb(55, 55, 55); color: white;}
 
 
 
@@ -123,7 +123,7 @@ QDateEdit {background: rgb(45,45,45)}
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>19</x>
