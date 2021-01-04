@@ -10,10 +10,14 @@ CONFIG += c++11
 
 SOURCES += \
     animation_krasnov.cpp \
-    main.cpp
+    endlesscycle.cpp \
+    main.cpp \
+    widget.cpp
 
 HEADERS += \
-    animation_krasnov.h
+    animation_krasnov.h \
+    endlesscycle.h \
+    widget.h
 
 FORMS +=
 

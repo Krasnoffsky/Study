@@ -16,6 +16,6 @@ public:
     Animation_Krasnov();
 
 private:
- //   endlesscycle elc;
+    endlesscycle elc;
 };
 #endif // ANIMATION_KRASNOV_H
