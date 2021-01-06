@@ -18,6 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_testButton_clicked()
 {
+    ui->textEdit->clear();
     dataControl->updateDatabase();
     while (dataControl->query->next())
     {
@@ -31,5 +32,5 @@ void MainWindow::on_testButton_clicked()
 
 void MainWindow::on_testButton2_clicked()
 {
-
+    dataControl->addToDatabase();
 }
