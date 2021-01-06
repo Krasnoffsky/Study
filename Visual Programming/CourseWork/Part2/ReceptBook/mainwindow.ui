@@ -32,18 +32,19 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Recept Book</string>
+   <string>Recipe Book</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
-	background-color: red}
+	background-color: blue}
 #searchBox {
 	border-radius: 15px;
+	border-width: 1px;
 	min-height: 30px;
 	max-height: 30px;
 	min-width: 150px;
 	max-width: 150px;
-	border-color: black }
+	border-color: green }
 #categories_label {
 	background-color: green}
 #control_label {
@@ -57,7 +58,10 @@
 	max-width:80px;
 	max-height:80px;
 	min-width:80px;
-	min-height:80px;}</string>
+	min-height:80px;}
+QLabel {
+background-color: red;
+background: black}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="bestButton">
@@ -130,6 +134,42 @@
     </property>
     <property name="text">
      <string>+</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="testButton">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>140</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Import</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>541</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="testButton2">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>170</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Export</string>
     </property>
    </widget>
   </widget>

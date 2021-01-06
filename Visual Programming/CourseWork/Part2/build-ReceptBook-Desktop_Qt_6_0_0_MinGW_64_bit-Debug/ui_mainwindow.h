@@ -14,6 +14,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,6 +26,9 @@ public:
     QPushButton *bestButton;
     QLineEdit *searchBox;
     QPushButton *addButton;
+    QPushButton *testButton;
+    QTextEdit *textEdit;
+    QPushButton *testButton2;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -40,14 +44,15 @@ public:
         MainWindow->setMaximumSize(QSize(1219, 636));
         MainWindow->setMouseTracking(false);
         MainWindow->setStyleSheet(QString::fromUtf8("QMainWindow {\n"
-"	background-color: red}\n"
+"	background-color: blue}\n"
 "#searchBox {\n"
 "	border-radius: 15px;\n"
+"	border-width: 1px;\n"
 "	min-height: 30px;\n"
 "	max-height: 30px;\n"
 "	min-width: 150px;\n"
 "	max-width: 150px;\n"
-"	border-color: black }\n"
+"	border-color: green }\n"
 "#categories_label {\n"
 "	background-color: green}\n"
 "#control_label {\n"
@@ -61,7 +66,10 @@ public:
 "	max-width:80px;\n"
 "	max-height:80px;\n"
 "	min-width:80px;\n"
-"	min-height:80px;}"));
+"	min-height:80px;}\n"
+"QLabel {\n"
+"background-color: red;\n"
+"background: black}"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         bestButton = new QPushButton(centralwidget);
@@ -86,6 +94,15 @@ public:
         font1.setPointSize(70);
         addButton->setFont(font1);
         addButton->setCursor(QCursor(Qt::PointingHandCursor));
+        testButton = new QPushButton(centralwidget);
+        testButton->setObjectName(QString::fromUtf8("testButton"));
+        testButton->setGeometry(QRect(560, 140, 80, 25));
+        textEdit = new QTextEdit(centralwidget);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setGeometry(QRect(10, 140, 541, 351));
+        testButton2 = new QPushButton(centralwidget);
+        testButton2->setObjectName(QString::fromUtf8("testButton2"));
+        testButton2->setGeometry(QRect(560, 170, 80, 25));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -95,11 +112,13 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Recept Book", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Recipe Book", nullptr));
         bestButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         searchBox->setInputMask(QString());
         searchBox->setText(QString());
         addButton->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
+        testButton->setText(QCoreApplication::translate("MainWindow", "Import", nullptr));
+        testButton2->setText(QCoreApplication::translate("MainWindow", "Export", nullptr));
     } // retranslateUi
 
 };
