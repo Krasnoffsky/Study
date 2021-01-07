@@ -19,14 +19,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_testButton_clicked()
 {
     ui->textEdit->clear();
-    dataControl->updateDatabase();
-    while (dataControl->query->next())
-    {
-        QString name = dataControl->query->value(0).toString();
-        QString age = dataControl->query->value(1).toString();
-        QString color = dataControl->query->value(2).toString();
-        ui->textEdit->insertPlainText(name + " " + age + " " + color +"\n");
-    }
+
 }
 
 

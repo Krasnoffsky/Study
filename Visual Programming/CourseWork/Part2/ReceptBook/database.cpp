@@ -2,40 +2,109 @@
 
 database::database()
 {
-    initDatabase();
+    if(QFile(DATABASE_NAME).exists())
+        this->openDatabase();
+    else
+        this->restoreDatabase();
 }
 
-void database::initDatabase()
+bool database::openDatabase()
 {
-    db = new QSqlDatabase;
-    *db = QSqlDatabase::addDatabase("QSQLITE");
-    db->setDatabaseName("C:\\Study\\Visual Programming\\CourseWork\\Part2\\ReceptBook\\database.db");
-    db->open();
-
-    query = new QSqlQuery(*db);
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(DATABASE_NAME);
+    if (db.open())
+        return true;
+    else
+        return false;
 
 }
 
-void database::updateDatabase()
+bool database::restoreDatabase()
 {
-    query->clear();
-    query->exec("SELECT name, age, color FROM test");
+    if(this->openDatabase())
+        return (this->createTable()) ? true : false;
+    else {
+        qDebug() << "ERROR: Database can't be opened";
+        return false;
+    }
 }
 
-void database::addToDatabase()
+bool database::createTable()
 {
-    int testing = 15;
-    query->clear();
-    query->prepare("INSERT INTO test VALUES ('Paul',?,'green');");
-    query->addBindValue(testing);
-    db->transaction();
-        if (!query->execBatch(QSqlQuery::ValuesAsColumns))
-        {
-            qDebug()<<"request"<<query->executedQuery();
-            db->rollback();
+    QSqlQuery query;
+    if(!query.exec( "CREATE TABLE " TABLE_NAME " ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    FIELD_BEST     " VARCHAR()    NOT NULL,"
+                    FIELD_NAME     " VARCHAR()    NOT NULL,"
+                    FIELD_INGREDIENTS     " VARCHAR()    NOT NULL,"
+                    FIELD_RECIPE       " VARCHAR()    NOT NULL"
+                    " )"
+     )){
+        qDebug() << "ERROR: Can't create table " << TABLE_NAME;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool database::addToDatabase(const QString &name, const QString &ingredients, const QString &recipe)
+{
+    QVariantList data;
+
+    data.append(name);
+    data.append(ingredients);
+    data.append(recipe);
+
+    QSqlQuery query;
+
+    while(query.next()){
+        query.exec("SELECT" FIELD_NAME " FROM " TABLE_NAME);
+        if (name == query.value(0).toString()){
+            qDebug() << "ERROR: Record with this name already exists";
+            return false;
         }
-        else
-        {
-           db->commit();
-        }
+    }
+
+    query.clear();
+
+    query.prepare("INSERT INTO " TABLE_NAME " ( "
+                                FIELD_NAME ", "
+                                FIELD_INGREDIENTS ", "
+                                FIELD_RECIPE " ) "
+                                "VALUES (:Name, :Ingredients, :Recipe)");
+    query.bindValue(":Name",       data[0].toString());
+    query.bindValue(":Ingredients",       data[1].toString());
+    query.bindValue(":Recipe",         data[2].toString());
+
+    if(!query.exec()){
+        qDebug() << "ERROR: Can't insert into table " << TABLE_NAME;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+
+    return false;
+
+}
+
+bool database::deleteFromDatabase(const QString element)
+{
+    QSqlQuery query;
+
+    query.prepare("DELETE FROM " TABLE_NAME " WHERE name= :NAME ;");
+    query.bindValue(":NAME", element);
+
+    if(!query.exec()){
+        qDebug() << "ERROR: Can't delete from table " << TABLE_NAME;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+
+    return false;
+
 }

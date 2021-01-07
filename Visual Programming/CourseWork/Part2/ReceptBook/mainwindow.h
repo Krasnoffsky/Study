@@ -12,6 +12,9 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public slots:
+    bool WriteFromDatabase(QVariantList &data);
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
