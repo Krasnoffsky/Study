@@ -12,17 +12,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public slots:
-    bool WriteFromDatabase(QVariantList &data);
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+public slots:
     void on_testButton_clicked();
-
     void on_testButton2_clicked();
+    void writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type);
 
 private:
     Ui::MainWindow *ui;
