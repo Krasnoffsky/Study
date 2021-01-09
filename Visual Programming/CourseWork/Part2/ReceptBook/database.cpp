@@ -121,11 +121,12 @@ void database::readFromDatabase()
 {
     QSqlQuery query;
 
-    query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE " FROM " TABLE_NAME);
+    query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE ", " FIELD_BEST " FROM " TABLE_NAME);
     while (query.next()){
         emit sendToWidget(query.value(0).toString(),
                      query.value(1).toString(),
                      query.value(2).toString(),
-                     query.value(3).toString());
+                     query.value(3).toString(),
+                     query.value(4).toString());
     }
 }

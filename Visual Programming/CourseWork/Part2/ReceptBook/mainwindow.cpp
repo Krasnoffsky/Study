@@ -11,11 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->nameLine->setPlaceholderText("Название рецепта");
     ui->ingredientsBox->setPlaceholderText("Ингредиенты");
     ui->recipeBox->setPlaceholderText("Рецепт приготовления");
-//    dataControl = new database;
     connect(&dataControl, SIGNAL(sendToWidget(const QString,
                                              const QString,
                                              const QString,
+                                             const QString,
                                              const QString)),this, SLOT(writeFromDatabase(const QString,
+                                                                                               const QString,
                                                                                                const QString,
                                                                                                const QString,
                                                                                                const QString)));
@@ -44,12 +45,12 @@ void MainWindow::on_testButton2_clicked()
     dataControl.addToDatabase(name, ingredients, recipe, type, best);
 }
 
-void MainWindow::writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type)
+void MainWindow::writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best)
 {
-    ui->textEdit->insertPlainText(name + " "
-                             + ingredients + " "
-                             + recipe + " "
-                             + type + "\n");
+    ui->textEdit->insertPlainText(name + "\n"
+                             + type + "\n"
+                             + ingredients + "\n"
+                             + recipe + "\n_______________________________________\n");
 
 }
 

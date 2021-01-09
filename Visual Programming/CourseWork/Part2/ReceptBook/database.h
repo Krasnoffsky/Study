@@ -28,7 +28,7 @@ public:
     void readFromDatabase();
 
 signals:
-    void sendToWidget(const QString name, const QString ingredients, const QString recipe, const QString type);
+    void sendToWidget(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);
 
 private:
 
