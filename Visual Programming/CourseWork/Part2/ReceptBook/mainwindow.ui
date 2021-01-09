@@ -114,33 +114,11 @@ background: black}</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="addButton">
-    <property name="geometry">
-     <rect>
-      <x>1120</x>
-      <y>540</y>
-      <width>80</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri Light</family>
-      <pointsize>70</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>+</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="testButton">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>140</y>
+      <x>580</x>
+      <y>80</y>
       <width>80</width>
       <height>25</height>
      </rect>
@@ -152,8 +130,8 @@ background: black}</string>
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>140</y>
+      <x>660</x>
+      <y>270</y>
       <width>541</width>
       <height>351</height>
      </rect>
@@ -162,14 +140,57 @@ background: black}</string>
    <widget class="QPushButton" name="testButton2">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>170</y>
+      <x>580</x>
+      <y>110</y>
       <width>80</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Export</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="testButton3">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>140</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="nameLine">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>251</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="ingredientsBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>240</y>
+      <width>251</width>
+      <height>121</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="recipeBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>251</width>
+      <height>171</height>
+     </rect>
     </property>
    </widget>
   </widget>

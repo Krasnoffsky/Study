@@ -21,9 +21,12 @@ public slots:
     void on_testButton2_clicked();
     void writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type);
 
+private slots:
+    void on_testButton3_clicked();
+
 private:
     Ui::MainWindow *ui;
-    database *dataControl;
+    database dataControl;
 
 };
 #endif // MAINWINDOW_H

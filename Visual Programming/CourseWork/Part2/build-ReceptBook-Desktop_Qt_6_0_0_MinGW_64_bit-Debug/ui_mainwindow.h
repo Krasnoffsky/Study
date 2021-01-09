@@ -25,10 +25,13 @@ public:
     QWidget *centralwidget;
     QPushButton *bestButton;
     QLineEdit *searchBox;
-    QPushButton *addButton;
     QPushButton *testButton;
     QTextEdit *textEdit;
     QPushButton *testButton2;
+    QPushButton *testButton3;
+    QLineEdit *nameLine;
+    QTextEdit *ingredientsBox;
+    QTextEdit *recipeBox;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -86,23 +89,27 @@ public:
         searchBox->setFont(font);
         searchBox->setCursor(QCursor(Qt::IBeamCursor));
         searchBox->setFrame(true);
-        addButton = new QPushButton(centralwidget);
-        addButton->setObjectName(QString::fromUtf8("addButton"));
-        addButton->setGeometry(QRect(1120, 540, 80, 80));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Calibri Light"));
-        font1.setPointSize(70);
-        addButton->setFont(font1);
-        addButton->setCursor(QCursor(Qt::PointingHandCursor));
         testButton = new QPushButton(centralwidget);
         testButton->setObjectName(QString::fromUtf8("testButton"));
-        testButton->setGeometry(QRect(560, 140, 80, 25));
+        testButton->setGeometry(QRect(580, 80, 80, 25));
         textEdit = new QTextEdit(centralwidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(10, 140, 541, 351));
+        textEdit->setGeometry(QRect(660, 270, 541, 351));
         testButton2 = new QPushButton(centralwidget);
         testButton2->setObjectName(QString::fromUtf8("testButton2"));
-        testButton2->setGeometry(QRect(560, 170, 80, 25));
+        testButton2->setGeometry(QRect(580, 110, 80, 25));
+        testButton3 = new QPushButton(centralwidget);
+        testButton3->setObjectName(QString::fromUtf8("testButton3"));
+        testButton3->setGeometry(QRect(580, 140, 80, 25));
+        nameLine = new QLineEdit(centralwidget);
+        nameLine->setObjectName(QString::fromUtf8("nameLine"));
+        nameLine->setGeometry(QRect(10, 210, 251, 24));
+        ingredientsBox = new QTextEdit(centralwidget);
+        ingredientsBox->setObjectName(QString::fromUtf8("ingredientsBox"));
+        ingredientsBox->setGeometry(QRect(10, 240, 251, 121));
+        recipeBox = new QTextEdit(centralwidget);
+        recipeBox->setObjectName(QString::fromUtf8("recipeBox"));
+        recipeBox->setGeometry(QRect(10, 370, 251, 171));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -116,9 +123,9 @@ public:
         bestButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         searchBox->setInputMask(QString());
         searchBox->setText(QString());
-        addButton->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         testButton->setText(QCoreApplication::translate("MainWindow", "Import", nullptr));
         testButton2->setText(QCoreApplication::translate("MainWindow", "Export", nullptr));
+        testButton3->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
     } // retranslateUi
 
 };

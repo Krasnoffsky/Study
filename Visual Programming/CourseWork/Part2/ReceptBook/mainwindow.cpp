@@ -8,14 +8,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->searchBox->setPlaceholderText("Поиск");
-    dataControl = new database;
-    connect(dataControl, SIGNAL(sendToWidget(const QString name,
-                                             const QString ingredients,
-                                             const QString recipe,
-                                             const QString type)),this, SLOT(writeFromDatabase(const QString name,
-                                                                                               const QString ingredients,
-                                                                                               const QString recipe,
-                                                                                               const QString type)));
+    ui->nameLine->setPlaceholderText("Название рецепта");
+    ui->ingredientsBox->setPlaceholderText("Ингредиенты");
+    ui->recipeBox->setPlaceholderText("Рецепт приготовления");
+//    dataControl = new database;
+    connect(&dataControl, SIGNAL(sendToWidget(const QString,
+                                             const QString,
+                                             const QString,
+                                             const QString)),this, SLOT(writeFromDatabase(const QString,
+                                                                                               const QString,
+                                                                                               const QString,
+                                                                                               const QString)));
 }
 
 MainWindow::~MainWindow()
@@ -26,26 +29,32 @@ MainWindow::~MainWindow()
 void MainWindow::on_testButton_clicked()
 {
     ui->textEdit->clear();
-    dataControl->readFromDatabase();
+    dataControl.readFromDatabase();
 
 }
 
 
 void MainWindow::on_testButton2_clicked()
 {
-    QString name = "Jhon";
-    QString ingredients = "paper";
-    QString recipe = "Some cheese";
+    QString name = ui->nameLine->text();
+    QString ingredients = ui->ingredientsBox->toPlainText();
+    QString recipe = ui->recipeBox->toPlainText();
     QString type = "soup";
     QString best = "false";
-    dataControl->addToDatabase(name, ingredients, recipe, type, best);
+    dataControl.addToDatabase(name, ingredients, recipe, type, best);
 }
 
 void MainWindow::writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type)
 {
-    ui->textEdit->setPlainText(name + " "
+    ui->textEdit->insertPlainText(name + " "
                              + ingredients + " "
                              + recipe + " "
                              + type + "\n");
 
+}
+
+void MainWindow::on_testButton3_clicked()
+{
+    QString name = ui->nameLine->text();
+    dataControl.deleteFromDatabase(name);
 }
