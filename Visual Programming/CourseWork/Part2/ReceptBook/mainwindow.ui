@@ -32,36 +32,20 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Recipe Book</string>
+   <string>Avocado</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
-	background-color: blue}
+	background-color: rgb(205, 249, 62)}
 #searchBox {
 	border-radius: 15px;
 	border-width: 1px;
 	min-height: 30px;
 	max-height: 30px;
-	min-width: 150px;
-	max-width: 150px;
+	min-width: 250px;
+	max-width: 250px;
 	border-color: green }
-#categories_label {
-	background-color: green}
-#control_label {
-	background-color: rgb(100, 255, 17)}
-#recept_label {
-	background-color: rgb(255, 235, 19)}
-#addButton {
-	background: white;
-	border-width:1px;
-	border-radius:40px;
-	max-width:80px;
-	max-height:80px;
-	min-width:80px;
-	min-height:80px;}
-QLabel {
-background-color: red;
-background: black}</string>
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="bestButton">
@@ -91,7 +75,7 @@ background: black}</string>
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>150</width>
+      <width>250</width>
       <height>30</height>
      </rect>
     </property>
@@ -117,8 +101,8 @@ background: black}</string>
    <widget class="QPushButton" name="testButton">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>80</y>
+      <x>350</x>
+      <y>10</y>
       <width>80</width>
       <height>25</height>
      </rect>
@@ -127,21 +111,21 @@ background: black}</string>
      <string>Import</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="outputBox">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>270</y>
-      <width>541</width>
-      <height>351</height>
+      <x>320</x>
+      <y>70</y>
+      <width>881</width>
+      <height>551</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="testButton2">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>110</y>
+      <x>440</x>
+      <y>10</y>
       <width>80</width>
       <height>25</height>
      </rect>
@@ -153,8 +137,8 @@ background: black}</string>
    <widget class="QPushButton" name="testButton3">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>140</y>
+      <x>530</x>
+      <y>10</y>
       <width>80</width>
       <height>25</height>
      </rect>
@@ -163,34 +147,147 @@ background: black}</string>
      <string>Delete</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="nameLine">
+   <widget class="QPushButton" name="firstButton">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>210</y>
-      <width>251</width>
-      <height>24</height>
+      <y>70</y>
+      <width>201</width>
+      <height>41</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="ingredientsBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>240</y>
-      <width>251</width>
-      <height>121</height>
-     </rect>
+    <property name="text">
+     <string>Первое блюдо</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="recipeBox">
+   <widget class="QPushButton" name="secondButton">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>370</y>
-      <width>251</width>
-      <height>171</height>
+      <y>110</y>
+      <width>201</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Второе блюдо</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="granishButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Гарнир</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sweetButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сладости</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="snackButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Закуски</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="drinkButtton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>270</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Напитки</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="marinadeButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Маринады</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="doughButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>350</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Изделия из теста</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sauceButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Соусы</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stockButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Заготовки</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="salatButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Салаты</string>
     </property>
    </widget>
   </widget>

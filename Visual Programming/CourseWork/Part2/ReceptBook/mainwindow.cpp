@@ -8,9 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->searchBox->setPlaceholderText("Поиск");
-    ui->nameLine->setPlaceholderText("Название рецепта");
-    ui->ingredientsBox->setPlaceholderText("Ингредиенты");
-    ui->recipeBox->setPlaceholderText("Рецепт приготовления");
+
     connect(&dataControl, SIGNAL(sendToWidget(const QString,
                                              const QString,
                                              const QString,
@@ -29,7 +27,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_testButton_clicked()
 {
-    ui->textEdit->clear();
+    ui->outputBox->clear();
     dataControl.readFromDatabase();
 
 }
@@ -37,17 +35,17 @@ void MainWindow::on_testButton_clicked()
 
 void MainWindow::on_testButton2_clicked()
 {
-    QString name = ui->nameLine->text();
-    QString ingredients = ui->ingredientsBox->toPlainText();
-    QString recipe = ui->recipeBox->toPlainText();
-    QString type = "soup";
-    QString best = "false";
-    dataControl.addToDatabase(name, ingredients, recipe, type, best);
+//    QString name = ui->nameLine->text();
+//    QString ingredients = ui->ingredientsBox->toPlainText();
+//    QString recipe = ui->recipeBox->toPlainText();
+//    QString type = "soup";
+//    QString best = "false";
+//    dataControl.addToDatabase(name, ingredients, recipe, type, best);
 }
 
 void MainWindow::writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best)
 {
-    ui->textEdit->insertPlainText(name + "\n"
+    ui->outputBox->insertPlainText(name + "\n"
                              + type + "\n"
                              + ingredients + "\n"
                              + recipe + "\n_______________________________________\n");
@@ -56,6 +54,6 @@ void MainWindow::writeFromDatabase(const QString name, const QString ingredients
 
 void MainWindow::on_testButton3_clicked()
 {
-    QString name = ui->nameLine->text();
-    dataControl.deleteFromDatabase(name);
+//    QString name = ui->nameLine->text();
+//    dataControl.deleteFromDatabase(name);
 }
