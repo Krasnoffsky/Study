@@ -9,16 +9,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->searchBox->setPlaceholderText("Поиск");
 
-    connect(&dataControl, SIGNAL(sendToWidget(const QString,
-                                             const QString,
-                                             const QString,
-                                             const QString,
-                                             const QString)),this, SLOT(writeFromDatabase(const QString,
-                                                                                               const QString,
-                                                                                               const QString,
-                                                                                               const QString,
-                                                                                               const QString)));
-    dataControl.readFromDatabase("READ_ALL");
+    connect(&dataControl, SIGNAL(sendToWidget(const int,
+                                              const QString,
+                                              const QString,
+                                              const QString,
+                                              const QString,
+                                              const QString)),this, SLOT(writeFromDatabase(const int,
+                                                                                          const QString,
+                                                                                          const QString,
+                                                                                          const QString,
+                                                                                          const QString,
+                                                                                          const QString)));
+//    dataControl.readFromDatabase("READ_ALL");
+    currentID = 1;
 
     recipesModel = new QSqlTableModel(this);
     recipesModel->setTable(TABLE_NAME);
@@ -49,7 +52,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best)
+void MainWindow::writeFromDatabase(const int id, const QString name, const QString ingredients, const QString recipe, const QString type, const QString best)
 {
     if (best == "1")
         ui->outputBox->insertPlainText("★");
@@ -57,6 +60,7 @@ void MainWindow::writeFromDatabase(const QString name, const QString ingredients
                              + type + "\n"
                              + ingredients + "\n"
                              + recipe + "\n_______________________________________\n");
+    currentID = id;
 
 }
 
@@ -64,5 +68,12 @@ void MainWindow::writeFromDatabase(const QString name, const QString ingredients
 void MainWindow::on_bestButton_clicked()
 {
     ui->outputBox->clear();
-    dataControl.readFromDatabase("READ_BEST");
+    dataControl.readBestFromDatabase();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    currentID += 1;
+    ui->outputBox->clear();
+    dataControl.readFromDatabase(currentID, "READ_CURRENT");
 }

@@ -19,11 +19,13 @@ public:
 
 public slots:
 
-    void writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);
+    void writeFromDatabase(const int id, const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);
 
 
 private slots:
     void on_bestButton_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -43,6 +45,8 @@ private:
     QAction *categoryDough;
     QAction *categorySnack;
     QAction *categorySweet;
+
+    int currentID;
 
 };
 #endif // MAINWINDOW_H

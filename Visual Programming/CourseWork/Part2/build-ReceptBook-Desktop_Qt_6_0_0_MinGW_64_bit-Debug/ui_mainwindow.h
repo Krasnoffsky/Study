@@ -31,6 +31,7 @@ public:
     QPushButton *categoriesButton;
     QTableView *recipesTable;
     QPushButton *addButton;
+    QPushButton *pushButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -84,6 +85,9 @@ public:
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
         addButton->setGeometry(QRect(20, 520, 201, 41));
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(430, 40, 80, 25));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -99,6 +103,7 @@ public:
         searchBox->setText(QString());
         categoriesButton->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217", nullptr));
         addButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\276\320\262\321\213\320\271 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };
