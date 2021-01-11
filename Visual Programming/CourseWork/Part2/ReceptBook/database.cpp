@@ -127,7 +127,7 @@ bool database::editInDatabase(const QString &id, const QString &name, const QStr
                             FIELD_RECIPE "=:RECIPE "
                             FIELD_TYPE "=:TYPE "
                             FIELD_BEST "=:BEST "
-                            "WHERE _id=:ID");
+                            "WHERE _id=ID");
 
     query.bindValue(":NAME", name);
     query.bindValue(":INGREDIENTS", ingredients);
@@ -156,7 +156,7 @@ void database::readFromDatabase(const QString &mode)
     if (mode == "READ_ALL")
         query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE ", " FIELD_BEST " FROM " TABLE_NAME);
     else if (mode == "READ_BEST")
-        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE ", " FIELD_BEST " FROM " TABLE_NAME "WHERE best=:1");
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE ", " FIELD_BEST " FROM " TABLE_NAME " WHERE " FIELD_BEST "=1");
     while (query.next()){
         emit sendToWidget(query.value(0).toString(),
                      query.value(1).toString(),

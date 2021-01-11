@@ -37,3 +37,9 @@ void MainWindow::writeFromDatabase(const QString name, const QString ingredients
 
 }
 
+
+void MainWindow::on_bestButton_clicked()
+{
+    ui->outputBox->clear();
+    dataControl.readFromDatabase("READ_BEST");
+}

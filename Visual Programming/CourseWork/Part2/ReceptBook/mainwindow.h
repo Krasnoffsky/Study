@@ -21,6 +21,9 @@ public slots:
     void writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);
 
 
+private slots:
+    void on_bestButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     database dataControl;
