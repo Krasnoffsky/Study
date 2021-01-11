@@ -24,8 +24,9 @@ public:
     database();
 
     bool addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
-    bool deleteFromDatabase(const QString element);
-    void readFromDatabase();
+    bool deleteFromDatabase(const QString id);
+    bool editInDatabase(const QString &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
+    void readFromDatabase(const QString &mode);
 
 signals:
     void sendToWidget(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);

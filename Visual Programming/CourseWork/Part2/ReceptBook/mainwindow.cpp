@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
                                                                                                const QString,
                                                                                                const QString,
                                                                                                const QString)));
+    dataControl.readFromDatabase("READ_ALL");
 }
 
 MainWindow::~MainWindow()
@@ -25,26 +26,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_testButton_clicked()
-{
-    ui->outputBox->clear();
-    dataControl.readFromDatabase();
-
-}
-
-
-void MainWindow::on_testButton2_clicked()
-{
-//    QString name = ui->nameLine->text();
-//    QString ingredients = ui->ingredientsBox->toPlainText();
-//    QString recipe = ui->recipeBox->toPlainText();
-//    QString type = "soup";
-//    QString best = "false";
-//    dataControl.addToDatabase(name, ingredients, recipe, type, best);
-}
-
 void MainWindow::writeFromDatabase(const QString name, const QString ingredients, const QString recipe, const QString type, const QString best)
 {
+    if (best == "1")
+        ui->outputBox->insertPlainText("★");
     ui->outputBox->insertPlainText(name + "\n"
                              + type + "\n"
                              + ingredients + "\n"
@@ -52,8 +37,3 @@ void MainWindow::writeFromDatabase(const QString name, const QString ingredients
 
 }
 
-void MainWindow::on_testButton3_clicked()
-{
-//    QString name = ui->nameLine->text();
-//    dataControl.deleteFromDatabase(name);
-}
