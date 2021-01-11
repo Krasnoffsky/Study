@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->recipesTable->setColumnHidden(2, true);
     ui->recipesTable->setColumnHidden(3, true);
     ui->recipesTable->setColumnHidden(4, true);
+    ui->recipesTable->horizontalHeader()->hide();
+    ui->recipesTable->verticalHeader()->hide();
 
 
     recipesModel->select();
