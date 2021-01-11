@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
                                                                                                const QString,
                                                                                                const QString)));
     dataControl.readFromDatabase("READ_ALL");
+
+    categoryFirst = new QAction();
 }
 
 MainWindow::~MainWindow()

@@ -28,5 +28,16 @@ private:
     Ui::MainWindow *ui;
     database dataControl;
 
+    QAction *categoryFirst;
+    QAction *categorySecond;
+    QAction *categoryGarnish;
+    QAction *categorySalat;
+    QAction *categorySauce;
+    QAction *categoryDrink;
+    QAction *categoryMarinade;
+    QAction *categoryStock;
+    QAction *categoryDough;
+    QAction *categorySnack;
+    QAction *categorySweet;
 };
 #endif // MAINWINDOW_H
