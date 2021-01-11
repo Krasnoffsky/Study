@@ -11,9 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
@@ -26,6 +28,9 @@ public:
     QPushButton *bestButton;
     QLineEdit *searchBox;
     QTextEdit *outputBox;
+    QPushButton *categoriesButton;
+    QTableView *recipesTable;
+    QPushButton *addButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -70,6 +75,15 @@ public:
         outputBox = new QTextEdit(centralwidget);
         outputBox->setObjectName(QString::fromUtf8("outputBox"));
         outputBox->setGeometry(QRect(320, 70, 881, 551));
+        categoriesButton = new QPushButton(centralwidget);
+        categoriesButton->setObjectName(QString::fromUtf8("categoriesButton"));
+        categoriesButton->setGeometry(QRect(20, 100, 201, 41));
+        recipesTable = new QTableView(centralwidget);
+        recipesTable->setObjectName(QString::fromUtf8("recipesTable"));
+        recipesTable->setGeometry(QRect(20, 150, 201, 361));
+        addButton = new QPushButton(centralwidget);
+        addButton->setObjectName(QString::fromUtf8("addButton"));
+        addButton->setGeometry(QRect(20, 520, 201, 41));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -83,6 +97,8 @@ public:
         bestButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         searchBox->setInputMask(QString());
         searchBox->setText(QString());
+        categoriesButton->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217", nullptr));
+        addButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\276\320\262\321\213\320\271 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
     } // retranslateUi
 
 };

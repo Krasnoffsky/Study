@@ -20,7 +20,26 @@ MainWindow::MainWindow(QWidget *parent)
                                                                                                const QString)));
     dataControl.readFromDatabase("READ_ALL");
 
-    categoryFirst = new QAction();
+    recipesModel = new QSqlTableModel(this);
+    recipesModel->setTable(TABLE_NAME);
+
+    ui->recipesTable->setModel(recipesModel);
+    ui->recipesTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->recipesTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->recipesTable->resizeColumnsToContents();
+    ui->recipesTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->recipesTable->horizontalHeader()->setStretchLastSection(true);
+    ui->recipesTable->setColumnHidden(1, true);
+    ui->recipesTable->setColumnHidden(2, true);
+    ui->recipesTable->setColumnHidden(3, true);
+    ui->recipesTable->setColumnHidden(4, true);
+
+
+    recipesModel->select();
+
+    ui->recipesTable->setModel(recipesModel);
+
+//    categoryFirst = new QAction();
 }
 
 MainWindow::~MainWindow()

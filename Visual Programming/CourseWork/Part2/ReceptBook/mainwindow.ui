@@ -108,6 +108,42 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="categoriesButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Категория</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="recipesTable">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>201</width>
+      <height>361</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>520</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Новый рецепт</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

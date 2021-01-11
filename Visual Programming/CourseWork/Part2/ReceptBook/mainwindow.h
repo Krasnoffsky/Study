@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSqlTableModel>
 #include "database.h"
 
 QT_BEGIN_NAMESPACE
@@ -26,7 +27,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
     database dataControl;
+
+    QSqlTableModel *recipesModel;
 
     QAction *categoryFirst;
     QAction *categorySecond;
@@ -39,5 +43,6 @@ private:
     QAction *categoryDough;
     QAction *categorySnack;
     QAction *categorySweet;
+
 };
 #endif // MAINWINDOW_H
