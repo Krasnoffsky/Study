@@ -154,9 +154,83 @@ void database::readFromDatabase(const QString &mode)
     QSqlQuery query(db);
 
     if (mode == "READ_ALL")
-        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE ", " FIELD_BEST " FROM " TABLE_NAME);
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME);
+
     else if (mode == "READ_BEST")
-        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", " FIELD_RECIPE ", " FIELD_TYPE ", " FIELD_BEST " FROM " TABLE_NAME " WHERE " FIELD_BEST "=1");
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_BEST "=1");
+
+    else if (mode == "READ_FIRST")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Первое блюдо'");
+
+    else if (mode == "READ_SECOND")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Второе блюдо'");
+
+    else if (mode == "READ_GARNISH")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Гарнир'");
+
+    else if (mode == "READ_DOUGH")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Изделия из теста'");
+
+    else if (mode == "READ_SNACK")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Закуски'");
+
+    else if (mode == "READ_MARINADE")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Маринады'");
+
+    else if (mode == "READ_DRINK")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Напитки'");
+
+    else if (mode == "READ_SWEET")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Сладости'");
+
+    else if (mode == "READ_STOCK")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Заготовки'");
+
+    else if (mode == "READ_SAUCE")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Соусы'");
+
+    else if (mode == "READ_SALAT")
+        query.exec("SELECT " FIELD_NAME ", " FIELD_INGREDIENTS ", "
+                             FIELD_RECIPE ", " FIELD_TYPE ", "
+                             FIELD_BEST " FROM " TABLE_NAME
+                             " WHERE " FIELD_TYPE "='Салаты'");
+
+
     while (query.next()){
         emit sendToWidget(query.value(0).toString(),
                      query.value(1).toString(),
