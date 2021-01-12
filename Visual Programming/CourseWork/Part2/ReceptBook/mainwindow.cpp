@@ -39,10 +39,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->recipesTable->horizontalHeader()->hide();
     ui->recipesTable->verticalHeader()->hide();
 
-
     recipesModel->select();
 
     ui->recipesTable->setModel(recipesModel);
+
+    connect(ui->recipesTable->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+                    this, SLOT(currentRecipe(QModelIndex)));
 
 //    categoryFirst = new QAction();
 }
@@ -54,6 +56,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::writeFromDatabase(const int id, const QString name, const QString ingredients, const QString recipe, const QString type, const QString best)
 {
+    ui->outputBox->clear();
     if (best == "1")
         ui->outputBox->insertPlainText("★");
     ui->outputBox->insertPlainText(name + "\n"
@@ -61,9 +64,9 @@ void MainWindow::writeFromDatabase(const int id, const QString name, const QStri
                              + ingredients + "\n"
                              + recipe + "\n_______________________________________\n");
     currentID = id;
+    recipesModel->select();
 
 }
-
 
 void MainWindow::on_bestButton_clicked()
 {
@@ -76,4 +79,12 @@ void MainWindow::on_pushButton_clicked()
     currentID += 1;
     ui->outputBox->clear();
     dataControl.readFromDatabase(currentID, "READ_CURRENT");
+}
+
+void MainWindow::currentRecipe(QModelIndex id)
+{
+    QString name = recipesModel->data(recipesModel->index(id.row(), 1)).toString();
+    QString ingredients = recipesModel->data(recipesModel->index(id.row(), 2)).toString();
+    QString recipe = recipesModel->data(recipesModel->index(id.row(), 1)).toString();
+    ui->outputBox->setPlainText(name + "\n" + ingredients + "\n" + recipe);
 }

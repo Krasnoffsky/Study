@@ -27,6 +27,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void currentRecipe(QModelIndex id);
+
 private:
     Ui::MainWindow *ui;
 

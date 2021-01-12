@@ -149,7 +149,7 @@ bool database::editInDatabase(const QString &id, const QString &name, const QStr
 
 }
 
-void database::readFromDatabase(const int &id, const QString &mode)
+void database::readFromDatabase(int &id, const QString &mode)
 {
     QSqlQuery query(db);
 
@@ -158,7 +158,7 @@ void database::readFromDatabase(const int &id, const QString &mode)
                              FIELD_RECIPE ", " FIELD_TYPE ", "
                              FIELD_BEST " FROM " TABLE_NAME
                              " WHERE " FIELD_ID "=:ID");
-        query.bindValue(":ID", id);
+        query.bindValue(":ID", char(id));
     }
 
     else if (mode == "READ_FIRST")
@@ -227,6 +227,8 @@ void database::readFromDatabase(const int &id, const QString &mode)
                              FIELD_BEST " FROM " TABLE_NAME
                              " WHERE " FIELD_TYPE "='Салаты'");
 
+    query.first();
+
     emit sendToWidget(query.value(0).toInt(),
                       query.value(1).toString(),
                       query.value(2).toString(),
@@ -244,6 +246,7 @@ void database::readBestFromDatabase()
                          FIELD_RECIPE ", " FIELD_TYPE ", "
                          FIELD_BEST " FROM " TABLE_NAME
                          " WHERE " FIELD_BEST "=1");
+    query.next();
 
     emit sendToWidget(query.value(0).toInt(),
                       query.value(1).toString(),
@@ -252,3 +255,4 @@ void database::readBestFromDatabase()
                       query.value(4).toString(),
                       query.value(5).toString());
 }
+
