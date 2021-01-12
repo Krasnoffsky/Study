@@ -25,8 +25,6 @@ public slots:
 private slots:
     void on_bestButton_clicked();
 
-    void on_pushButton_clicked();
-
     void currentRecipe(QModelIndex id);
 
 private:

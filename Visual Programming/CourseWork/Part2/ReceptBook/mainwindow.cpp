@@ -74,17 +74,16 @@ void MainWindow::on_bestButton_clicked()
     dataControl.readBestFromDatabase();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    currentID += 1;
-    ui->outputBox->clear();
-    dataControl.readFromDatabase(currentID, "READ_CURRENT");
-}
-
 void MainWindow::currentRecipe(QModelIndex id)
 {
-    QString name = recipesModel->data(recipesModel->index(id.row(), 1)).toString();
-    QString ingredients = recipesModel->data(recipesModel->index(id.row(), 2)).toString();
-    QString recipe = recipesModel->data(recipesModel->index(id.row(), 1)).toString();
-    ui->outputBox->setPlainText(name + "\n" + ingredients + "\n" + recipe);
+    QString name = recipesModel->data(recipesModel->index(id.row(), 0)).toString();
+    QString ingredients = recipesModel->data(recipesModel->index(id.row(), 1)).toString();
+    QString recipe = recipesModel->data(recipesModel->index(id.row(), 2)).toString();
+    QString type = recipesModel->data(recipesModel->index(id.row(), 3)).toString();
+    QString best = recipesModel->data(recipesModel->index(id.row(), 4)).toString();
+    if (best == "1")
+        ui->nameLabel->setText(name + " ★");
+    else
+        ui->nameLabel->setText(name);
+    ui->outputBox->setPlainText("Категория: " + type + "\nИнгредиенты:\n" + ingredients + "\nРецепт: \n" + recipe);
 }

@@ -45,6 +45,8 @@
 	min-width: 250px;
 	max-width: 250px;
 	border-color: green }
+
+QLabel { background-color: white}
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -101,10 +103,10 @@
    <widget class="QTextEdit" name="outputBox">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>70</y>
-      <width>881</width>
-      <height>551</height>
+      <x>570</x>
+      <y>90</y>
+      <width>631</width>
+      <height>531</height>
      </rect>
     </property>
    </widget>
@@ -144,17 +146,69 @@
      <string>Новый рецепт</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="edit_bestButton">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>40</y>
-      <width>80</width>
-      <height>25</height>
+      <x>330</x>
+      <y>480</y>
+      <width>201</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Добавить в избранное</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="picLabel">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>90</y>
+      <width>221</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>dick_pic</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="editButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>380</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Изменить рецепт</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>430</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Удалить рецепт</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="nameLabel">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>300</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

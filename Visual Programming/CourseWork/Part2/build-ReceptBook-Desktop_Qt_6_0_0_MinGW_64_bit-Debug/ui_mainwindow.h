@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
@@ -31,7 +32,11 @@ public:
     QPushButton *categoriesButton;
     QTableView *recipesTable;
     QPushButton *addButton;
-    QPushButton *pushButton;
+    QPushButton *edit_bestButton;
+    QLabel *picLabel;
+    QPushButton *editButton;
+    QPushButton *deleteButton;
+    QLabel *nameLabel;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -56,6 +61,8 @@ public:
 "	min-width: 250px;\n"
 "	max-width: 250px;\n"
 "	border-color: green }\n"
+"\n"
+"QLabel { background-color: white}\n"
 ""));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -75,7 +82,7 @@ public:
         searchBox->setFrame(true);
         outputBox = new QTextEdit(centralwidget);
         outputBox->setObjectName(QString::fromUtf8("outputBox"));
-        outputBox->setGeometry(QRect(320, 70, 881, 551));
+        outputBox->setGeometry(QRect(570, 90, 631, 531));
         categoriesButton = new QPushButton(centralwidget);
         categoriesButton->setObjectName(QString::fromUtf8("categoriesButton"));
         categoriesButton->setGeometry(QRect(20, 100, 201, 41));
@@ -85,9 +92,21 @@ public:
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
         addButton->setGeometry(QRect(20, 520, 201, 41));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(430, 40, 80, 25));
+        edit_bestButton = new QPushButton(centralwidget);
+        edit_bestButton->setObjectName(QString::fromUtf8("edit_bestButton"));
+        edit_bestButton->setGeometry(QRect(330, 480, 201, 41));
+        picLabel = new QLabel(centralwidget);
+        picLabel->setObjectName(QString::fromUtf8("picLabel"));
+        picLabel->setGeometry(QRect(320, 90, 221, 201));
+        editButton = new QPushButton(centralwidget);
+        editButton->setObjectName(QString::fromUtf8("editButton"));
+        editButton->setGeometry(QRect(330, 380, 201, 41));
+        deleteButton = new QPushButton(centralwidget);
+        deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
+        deleteButton->setGeometry(QRect(330, 430, 201, 41));
+        nameLabel = new QLabel(centralwidget);
+        nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
+        nameLabel->setGeometry(QRect(320, 300, 221, 41));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -103,7 +122,11 @@ public:
         searchBox->setText(QString());
         categoriesButton->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217", nullptr));
         addButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\276\320\262\321\213\320\271 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        edit_bestButton->setText(QCoreApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\262 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        picLabel->setText(QCoreApplication::translate("MainWindow", "dick_pic", nullptr));
+        editButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
+        deleteButton->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
+        nameLabel->setText(QString());
     } // retranslateUi
 
 };
