@@ -21,11 +21,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-public slots:
-
-    void writeFromDatabase(const int id, const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);
-
-
 private slots:
     void currentRecipe(QModelIndex id);
 

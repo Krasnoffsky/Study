@@ -16,6 +16,7 @@
 #define FIELD_RECIPE "recipe"
 #define FIELD_TYPE "type"
 #define FIELD_BEST "best"
+#define FIELD_PIC "pic"
 
 class database : public QObject
 {
@@ -27,12 +28,7 @@ public:
     bool addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
     bool deleteFromDatabase(const int id);
     bool editInDatabase(const QString &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
-    void readFromDatabase(int &id,const QString &mode);
-    void readBestFromDatabase();
     bool editBestInDatabase(const int id, const int flag);
-
-signals:
-    void sendToWidget(const int id, const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);
 
 private:
 
