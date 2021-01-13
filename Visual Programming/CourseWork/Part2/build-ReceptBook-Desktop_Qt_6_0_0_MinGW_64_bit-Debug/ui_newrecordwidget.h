@@ -29,6 +29,7 @@ public:
     QPushButton *saveButton;
     QPushButton *cancelButton;
     QLineEdit *nameLine;
+    QTextEdit *ingredientsBox;
 
     void setupUi(QWidget *NewRecordWidget)
     {
@@ -50,7 +51,7 @@ public:
         selectCategoryButton->setGeometry(QRect(30, 350, 200, 40));
         recipeBox = new QTextEdit(NewRecordWidget);
         recipeBox->setObjectName(QString::fromUtf8("recipeBox"));
-        recipeBox->setGeometry(QRect(280, 20, 601, 561));
+        recipeBox->setGeometry(QRect(280, 230, 601, 351));
         saveButton = new QPushButton(NewRecordWidget);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
         saveButton->setGeometry(QRect(510, 600, 180, 40));
@@ -60,6 +61,9 @@ public:
         nameLine = new QLineEdit(NewRecordWidget);
         nameLine->setObjectName(QString::fromUtf8("nameLine"));
         nameLine->setGeometry(QRect(30, 303, 200, 40));
+        ingredientsBox = new QTextEdit(NewRecordWidget);
+        ingredientsBox->setObjectName(QString::fromUtf8("ingredientsBox"));
+        ingredientsBox->setGeometry(QRect(280, 14, 600, 200));
 
         retranslateUi(NewRecordWidget);
         QObject::connect(cancelButton, &QPushButton::clicked, NewRecordWidget, &QWidget::close);
@@ -69,7 +73,7 @@ public:
 
     void retranslateUi(QWidget *NewRecordWidget)
     {
-        NewRecordWidget->setWindowTitle(QCoreApplication::translate("NewRecordWidget", "Form", nullptr));
+        NewRecordWidget->setWindowTitle(QCoreApplication::translate("NewRecordWidget", "\320\235\320\276\320\262\321\213\320\271 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         picLabel->setText(QString());
         addPicButton->setText(QCoreApplication::translate("NewRecordWidget", "\320\227\320\260\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\265", nullptr));
         selectCategoryButton->setText(QCoreApplication::translate("NewRecordWidget", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217", nullptr));

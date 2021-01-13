@@ -6,7 +6,23 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    setAttribute(Qt::WA_DeleteOnClose);
+
     ui->setupUi(this);
+
+    newRecord = new NewRecordWidget;
+    confirmDeleteDialog = new Dialog;
+
+    connect(newRecord,SIGNAL(sendToWidget(QString,
+                                          QString,
+                                          QString,
+                                          QString,
+                                          QString)), this, SLOT(addNewRecipe(QString,
+                                                                             QString,
+                                                                             QString,
+                                                                             QString,
+                                                                             QString)));
+
     ui->searchBox->setPlaceholderText("Поиск");
 
     recipesModel = new QSqlTableModel(this);
@@ -127,6 +143,7 @@ void MainWindow::currentRecipe(QModelIndex id)
     recipePic = QPixmap::fromImage(pic);
     ui->picLabel->setPixmap(recipePic);
     ui->picLabel->setPixmap(recipePic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
+
     currentID = id.row();
 }
 
@@ -231,7 +248,6 @@ void MainWindow::on_bestButton_clicked()
 
 void MainWindow::on_deleteButton_clicked()
 {
-    confirmDeleteDialog = new Dialog;
     switch(confirmDeleteDialog->exec()){
         case QDialog::Accepted:
             dataControl.deleteFromDatabase(currentID + 1);
@@ -244,8 +260,6 @@ void MainWindow::on_deleteButton_clicked()
         default:
             break;
     }
-
-    delete(confirmDeleteDialog);
 }
 
 void MainWindow::on_edit_bestButton_clicked()
@@ -297,6 +311,12 @@ void MainWindow::on_editButton_clicked()
 
 void MainWindow::on_addButton_clicked()
 {
-    newRecord = new NewRecordWidget;
-    newRecord->show();
+        newRecord->show();
+}
+
+void MainWindow::addNewRecipe(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &pic)
+{
+    dataControl.addToDatabase(name, ingredients, recipe, type, 0, pic);
+
+    recipesModel->select();
 }

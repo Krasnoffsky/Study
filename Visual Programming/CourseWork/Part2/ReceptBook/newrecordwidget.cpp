@@ -5,9 +5,13 @@ NewRecordWidget::NewRecordWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::NewRecordWidget)
 {
+    setAttribute(Qt::WA_DeleteOnClose);
+
     ui->setupUi(this);
+
     ui->nameLine->setPlaceholderText("Название рецепта");
-    ui->recipeBox->setPlaceholderText("Название рецепта");
+    ui->ingredientsBox->setPlaceholderText("Ингредиенты");
+    ui->recipeBox->setPlaceholderText("Рецепт");
 
     picLabel_width = ui->picLabel->width();
     picLabel_height = ui->picLabel->height();
@@ -64,6 +68,9 @@ NewRecordWidget::NewRecordWidget(QWidget *parent) :
     connect(categoryDough, SIGNAL(triggered()), SLOT(categoriesDoughButton_selected()));
     connect(categorySnack, SIGNAL(triggered()), SLOT(categoriesSnackButton_selected()));
     connect(categorySweet, SIGNAL(triggered()), SLOT(categoriesSweetButton_selected()));
+
+    currentPic = "";
+    currentCategory = "";
 }
 
 NewRecordWidget::~NewRecordWidget()
@@ -73,8 +80,8 @@ NewRecordWidget::~NewRecordWidget()
 
 void NewRecordWidget::on_addPicButton_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(0, "Выберите изображение", QDir::currentPath(), "*.png *.jpg *.gif *.jpeg");
-    QImage image(filename);
+    currentPic = QFileDialog::getOpenFileName(0, "Выберите изображение", QDir::currentPath(), "*.png *.jpg *.gif *.jpeg");
+    QImage image(currentPic);
     QPixmap pic = QPixmap::fromImage(image);
     ui->picLabel->setPixmap(pic);
     ui->picLabel->setPixmap(pic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
@@ -146,3 +153,22 @@ void NewRecordWidget::categoriesSweetButton_selected()
     ui->selectCategoryButton->setText(currentCategory);
 }
 
+
+void NewRecordWidget::on_saveButton_clicked()
+{
+    QString name = ui->nameLine->text();
+    QString ingredients = ui->ingredientsBox->toPlainText();
+    QString recipe = ui->recipeBox->toPlainText();
+
+    if (name != "" && ingredients != "" && recipe != "" && currentCategory != ""){
+        if (currentPic == "")
+            currentPic = "C:\\Study\\Visual Programming\\CourseWork\\Part2\\src\\default.jpg";
+        emit sendToWidget(name, ingredients, recipe, currentCategory, currentPic);
+        QMessageBox::information(0, "Avocado", "Новый рецепт добавлен");
+        close();
+    }
+    else {
+        QMessageBox::information(0, "Avocado", "Заполните все поля");
+    }
+
+}

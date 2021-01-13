@@ -24,6 +24,7 @@ public:
 
 private slots:
     void currentRecipe(QModelIndex id);
+    void addNewRecipe(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &pic);
 
     void on_bestButton_clicked();
     void on_deleteButton_clicked();

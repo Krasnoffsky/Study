@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QAction>
+#include <QMessageBox>
 
 namespace Ui {
 class NewRecordWidget;
@@ -33,6 +34,8 @@ private slots:
     void categoriesSnackButton_selected();
     void categoriesSweetButton_selected();
 
+    void on_saveButton_clicked();
+
 private:
     Ui::NewRecordWidget *ui;
 
@@ -54,6 +57,11 @@ private:
     QAction *categorySweet;
 
     QString currentCategory;
+    QString currentPic;
+
+signals:
+    void sendToWidget(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &pic);
+
 };
 
 #endif // NEWRECORDWIDGET_H
