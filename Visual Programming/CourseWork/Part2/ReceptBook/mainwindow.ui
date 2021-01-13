@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -101,6 +104,9 @@ QLabel { background-color: white}
     </property>
    </widget>
    <widget class="QTextEdit" name="outputBox">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -108,6 +114,9 @@ QLabel { background-color: white}
       <width>631</width>
       <height>531</height>
      </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="categoriesButton">
@@ -150,7 +159,7 @@ QLabel { background-color: white}
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>480</y>
+      <y>380</y>
       <width>201</width>
       <height>41</height>
      </rect>
@@ -176,7 +185,7 @@ QLabel { background-color: white}
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>380</y>
+      <y>430</y>
       <width>201</width>
       <height>41</height>
      </rect>
@@ -189,7 +198,7 @@ QLabel { background-color: white}
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>430</y>
+      <y>480</y>
       <width>201</width>
       <height>41</height>
      </rect>
@@ -206,6 +215,9 @@ QLabel { background-color: white}
       <width>221</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>IBeamCursor</cursorShape>
     </property>
     <property name="text">
      <string/>

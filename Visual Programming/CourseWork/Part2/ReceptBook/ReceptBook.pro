@@ -12,15 +12,18 @@ SOURCES += \
     database.cpp \
     dialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    newrecordwidget.cpp
 
 HEADERS += \
     database.h \
     dialog.h \
-    mainwindow.h
+    mainwindow.h \
+    newrecordwidget.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    newrecordwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

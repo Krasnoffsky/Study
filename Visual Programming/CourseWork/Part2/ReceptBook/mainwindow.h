@@ -8,6 +8,7 @@
 #include <QSqlTableModel>
 #include "database.h"
 #include "dialog.h"
+#include "newrecordwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,10 +43,15 @@ private slots:
     void categoriesSweetButton_selected();
 
 
+    void on_editButton_clicked();
+
+    void on_addButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     Dialog *confirmDeleteDialog;
+    NewRecordWidget *newRecord;
 
     database dataControl;
 

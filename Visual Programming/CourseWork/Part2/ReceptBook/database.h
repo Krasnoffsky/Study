@@ -25,9 +25,9 @@ Q_OBJECT
 public:
     database();
 
-    bool addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
+    bool addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best, const QString &pic);
     bool deleteFromDatabase(const int id);
-    bool editInDatabase(const QString &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
+    bool editInDatabase(const QString &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best, const QString &pic);
     bool editBestInDatabase(const int id, const int flag);
 
 private:

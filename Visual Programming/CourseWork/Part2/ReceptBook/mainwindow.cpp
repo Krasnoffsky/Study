@@ -244,6 +244,8 @@ void MainWindow::on_deleteButton_clicked()
         default:
             break;
     }
+
+    delete(confirmDeleteDialog);
 }
 
 void MainWindow::on_edit_bestButton_clicked()
@@ -286,4 +288,15 @@ void MainWindow::categorySelected()
             else
                ui->recipesTable->setRowHidden(i, false);
        }
+}
+
+void MainWindow::on_editButton_clicked()
+{
+
+}
+
+void MainWindow::on_addButton_clicked()
+{
+    newRecord = new NewRecordWidget;
+    newRecord->show();
 }

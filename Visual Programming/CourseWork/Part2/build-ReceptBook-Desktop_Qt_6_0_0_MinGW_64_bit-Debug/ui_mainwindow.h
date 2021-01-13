@@ -42,6 +42,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+        MainWindow->setEnabled(true);
         MainWindow->resize(1219, 636);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -82,7 +83,9 @@ public:
         searchBox->setFrame(true);
         outputBox = new QTextEdit(centralwidget);
         outputBox->setObjectName(QString::fromUtf8("outputBox"));
+        outputBox->setEnabled(true);
         outputBox->setGeometry(QRect(570, 90, 631, 531));
+        outputBox->setReadOnly(true);
         categoriesButton = new QPushButton(centralwidget);
         categoriesButton->setObjectName(QString::fromUtf8("categoriesButton"));
         categoriesButton->setGeometry(QRect(20, 100, 201, 41));
@@ -94,19 +97,20 @@ public:
         addButton->setGeometry(QRect(20, 520, 201, 41));
         edit_bestButton = new QPushButton(centralwidget);
         edit_bestButton->setObjectName(QString::fromUtf8("edit_bestButton"));
-        edit_bestButton->setGeometry(QRect(330, 480, 201, 41));
+        edit_bestButton->setGeometry(QRect(330, 380, 201, 41));
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
         picLabel->setGeometry(QRect(320, 90, 221, 201));
         editButton = new QPushButton(centralwidget);
         editButton->setObjectName(QString::fromUtf8("editButton"));
-        editButton->setGeometry(QRect(330, 380, 201, 41));
+        editButton->setGeometry(QRect(330, 430, 201, 41));
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
-        deleteButton->setGeometry(QRect(330, 430, 201, 41));
+        deleteButton->setGeometry(QRect(330, 480, 201, 41));
         nameLabel = new QLabel(centralwidget);
         nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
         nameLabel->setGeometry(QRect(320, 300, 221, 41));
+        nameLabel->setCursor(QCursor(Qt::IBeamCursor));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
