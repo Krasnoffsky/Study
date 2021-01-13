@@ -53,9 +53,9 @@ QLabel { background-color: white}
    <widget class="QPushButton" name="bestButton">
     <property name="geometry">
      <rect>
-      <x>1110</x>
+      <x>1049</x>
       <y>10</y>
-      <width>100</width>
+      <width>161</width>
       <height>30</height>
      </rect>
     </property>
@@ -69,7 +69,7 @@ QLabel { background-color: white}
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="text">
-     <string>Избранное</string>
+     <string>Показать избранное</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="searchBox">

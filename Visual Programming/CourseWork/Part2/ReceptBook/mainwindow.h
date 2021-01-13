@@ -72,6 +72,11 @@ private:
     QAction *categorySweet;
 
     int currentID;
+    QString currentCategory;
+
+    bool flag_best;
+
+    void categorySelected();
 
 };
 #endif // MAINWINDOW_H

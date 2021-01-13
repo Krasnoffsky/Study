@@ -103,6 +103,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(categorySnack, SIGNAL(triggered()), SLOT(categoriesSnackButton_selected()));
     connect(categorySweet, SIGNAL(triggered()), SLOT(categoriesSweetButton_selected()));
 
+    currentCategory = "Все рецепты";
+
 }
 
 MainWindow::~MainWindow()
@@ -145,68 +147,100 @@ void MainWindow::currentRecipe(QModelIndex id)
 
 void MainWindow::categoriesAllButton_selected()
 {
-    ui->categoriesButton->setText("Все рецепты");
+    currentCategory = "Все рецепты";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesFirstButton_selected()
 {
-    ui->categoriesButton->setText("Первое блюдо");
+    currentCategory = "Первое блюдо";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesSecondButton_selected()
 {
-    ui->categoriesButton->setText("Второе блюдо");
+    currentCategory = "Второе блюдо";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesGarnishButton_selected()
 {
-    ui->categoriesButton->setText("Гарнир");
+    currentCategory = "Гарнир";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesSalatButton_selected()
 {
-    ui->categoriesButton->setText("Салаты");
+    currentCategory = "Салаты";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesSauceButton_selected()
 {
-    ui->categoriesButton->setText("Соусы");
+    currentCategory = "Соусы";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesDrinkButton_selected()
 {
-    ui->categoriesButton->setText("Напитки");
+    currentCategory = "Напитки";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesMarinadeButton_selected()
 {
-    ui->categoriesButton->setText("Маринады");
+    currentCategory = "Маринады";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesStockButton_selected()
 {
-    ui->categoriesButton->setText("Заготовки");
+    currentCategory = "Заготовки";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesDoughButton_selected()
 {
-    ui->categoriesButton->setText("Изделия из теста");
+    currentCategory = "Изделия из теста";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesSnackButton_selected()
 {
-    ui->categoriesButton->setText("Закуски");
+    currentCategory = "Закуски";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::categoriesSweetButton_selected()
 {
-    ui->categoriesButton->setText("Сладости");
+    currentCategory = "Сладости";
+    ui->categoriesButton->setText(currentCategory);
+    categorySelected();
 }
 
 void MainWindow::on_bestButton_clicked()
 {
-    ui->outputBox->clear();
-    dataControl.readBestFromDatabase();
+    if (flag_best){
+        flag_best = false;
+        ui->bestButton->setText("Показать избранное");
+    }
+    else {
+        flag_best = true;
+        ui->bestButton->setText("Показать всё");
+    }
+
+    categorySelected();
 }
 
 
@@ -232,19 +266,39 @@ void MainWindow::on_edit_bestButton_clicked()
     QString name = recipesModel->data(recipesModel->index(currentID, 0)).toString();
     QString best = recipesModel->data(recipesModel->index(currentID, 4)).toString();
 
-    if (best == '1' )
+    if (best == '1' ){
         dataControl.editBestInDatabase(currentID + 1, 0);
-    else
-        dataControl.editBestInDatabase(currentID + 1, 1);
-    recipesModel->select();
-
-    if (best == '1'){
         ui->nameLabel->setText(name + " ★");
         ui->edit_bestButton->setText("Удалить из избранного");
     }
     else {
+        dataControl.editBestInDatabase(currentID + 1, 1);
         ui->nameLabel->setText(name);
         ui->edit_bestButton->setText("Добавить в избранное");
     }
+    recipesModel->select();
     ui->recipesTable->selectRow(currentID);
+    categorySelected();
+}
+
+void MainWindow::categorySelected()
+{
+    int rowNumber = recipesModel->rowCount();
+    if (currentCategory == "Все рецепты")
+        for (int i = 0 ; i < rowNumber; i++){
+            if (flag_best && recipesModel->data(recipesModel->index(i, 4)).toString() != '1')
+                ui->recipesTable->setRowHidden(i, true);
+            else
+                ui->recipesTable->setRowHidden(i, false);
+        }
+
+    else
+        for (int i = 0; i < rowNumber; i++){
+            if (recipesModel->data(recipesModel->index(i, 3)).toString() != currentCategory)
+                ui->recipesTable->setRowHidden(i, true);
+            else if (flag_best && recipesModel->data(recipesModel->index(i, 4)).toString() != '1')
+                ui->recipesTable->setRowHidden(i, true);
+            else
+               ui->recipesTable->setRowHidden(i, false);
+       }
 }

@@ -68,7 +68,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         bestButton = new QPushButton(centralwidget);
         bestButton->setObjectName(QString::fromUtf8("bestButton"));
-        bestButton->setGeometry(QRect(1110, 10, 100, 30));
+        bestButton->setGeometry(QRect(1049, 10, 161, 30));
         QFont font;
         font.setFamily(QString::fromUtf8("Calibri Light"));
         font.setPointSize(10);
@@ -117,7 +117,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Avocado", nullptr));
-        bestButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        bestButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         searchBox->setInputMask(QString());
         searchBox->setText(QString());
         categoriesButton->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217", nullptr));
