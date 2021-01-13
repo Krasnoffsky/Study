@@ -255,6 +255,7 @@ void MainWindow::on_deleteButton_clicked()
             ui->nameLabel->clear();
             ui->outputBox->clear();
             ui->picLabel->clear();
+            QMessageBox::information(0, "Avocado", "Рецепт удалён");
         case QDialog::Rejected:
             break;
         default:

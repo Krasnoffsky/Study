@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QMenu>
 #include <QSqlTableModel>
+#include <QMessageBox>
 #include "database.h"
 #include "dialog.h"
 #include "newrecordwidget.h"
