@@ -24,25 +24,12 @@ QTextEdit {background-color: white}
     <rect>
      <x>30</x>
      <y>20</y>
-     <width>221</width>
-     <height>201</height>
+     <width>200</width>
+     <height>200</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="nameLabel">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>300</y>
-     <width>221</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="addPicButton">
@@ -50,8 +37,8 @@ QTextEdit {background-color: white}
     <rect>
      <x>30</x>
      <y>230</y>
-     <width>221</width>
-     <height>41</height>
+     <width>200</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
@@ -63,15 +50,15 @@ QTextEdit {background-color: white}
     <rect>
      <x>30</x>
      <y>350</y>
-     <width>221</width>
-     <height>41</height>
+     <width>200</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
     <string>Категория</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextEdit" name="recipeBox">
    <property name="geometry">
     <rect>
      <x>280</x>
@@ -86,8 +73,8 @@ QTextEdit {background-color: white}
     <rect>
      <x>510</x>
      <y>600</y>
-     <width>181</width>
-     <height>41</height>
+     <width>180</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
@@ -99,15 +86,42 @@ QTextEdit {background-color: white}
     <rect>
      <x>700</x>
      <y>600</y>
-     <width>181</width>
-     <height>41</height>
+     <width>180</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
     <string>Отменить</string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="nameLine">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>303</y>
+     <width>200</width>
+     <height>40</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>NewRecordWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>790</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

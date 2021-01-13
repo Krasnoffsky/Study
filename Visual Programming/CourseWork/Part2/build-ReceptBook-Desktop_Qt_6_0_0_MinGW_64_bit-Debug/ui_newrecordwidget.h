@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
@@ -22,12 +23,12 @@ class Ui_NewRecordWidget
 {
 public:
     QLabel *picLabel;
-    QLabel *nameLabel;
     QPushButton *addPicButton;
     QPushButton *selectCategoryButton;
-    QTextEdit *textEdit;
+    QTextEdit *recipeBox;
     QPushButton *saveButton;
     QPushButton *cancelButton;
+    QLineEdit *nameLine;
 
     void setupUi(QWidget *NewRecordWidget)
     {
@@ -40,27 +41,28 @@ public:
 ""));
         picLabel = new QLabel(NewRecordWidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
-        picLabel->setGeometry(QRect(30, 20, 221, 201));
-        nameLabel = new QLabel(NewRecordWidget);
-        nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
-        nameLabel->setGeometry(QRect(30, 300, 221, 41));
+        picLabel->setGeometry(QRect(30, 20, 200, 200));
         addPicButton = new QPushButton(NewRecordWidget);
         addPicButton->setObjectName(QString::fromUtf8("addPicButton"));
-        addPicButton->setGeometry(QRect(30, 230, 221, 41));
+        addPicButton->setGeometry(QRect(30, 230, 200, 40));
         selectCategoryButton = new QPushButton(NewRecordWidget);
         selectCategoryButton->setObjectName(QString::fromUtf8("selectCategoryButton"));
-        selectCategoryButton->setGeometry(QRect(30, 350, 221, 41));
-        textEdit = new QTextEdit(NewRecordWidget);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(280, 20, 601, 561));
+        selectCategoryButton->setGeometry(QRect(30, 350, 200, 40));
+        recipeBox = new QTextEdit(NewRecordWidget);
+        recipeBox->setObjectName(QString::fromUtf8("recipeBox"));
+        recipeBox->setGeometry(QRect(280, 20, 601, 561));
         saveButton = new QPushButton(NewRecordWidget);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
-        saveButton->setGeometry(QRect(510, 600, 181, 41));
+        saveButton->setGeometry(QRect(510, 600, 180, 40));
         cancelButton = new QPushButton(NewRecordWidget);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
-        cancelButton->setGeometry(QRect(700, 600, 181, 41));
+        cancelButton->setGeometry(QRect(700, 600, 180, 40));
+        nameLine = new QLineEdit(NewRecordWidget);
+        nameLine->setObjectName(QString::fromUtf8("nameLine"));
+        nameLine->setGeometry(QRect(30, 303, 200, 40));
 
         retranslateUi(NewRecordWidget);
+        QObject::connect(cancelButton, &QPushButton::clicked, NewRecordWidget, &QWidget::close);
 
         QMetaObject::connectSlotsByName(NewRecordWidget);
     } // setupUi
@@ -68,8 +70,7 @@ public:
     void retranslateUi(QWidget *NewRecordWidget)
     {
         NewRecordWidget->setWindowTitle(QCoreApplication::translate("NewRecordWidget", "Form", nullptr));
-        picLabel->setText(QCoreApplication::translate("NewRecordWidget", "TextLabel", nullptr));
-        nameLabel->setText(QCoreApplication::translate("NewRecordWidget", "TextLabel", nullptr));
+        picLabel->setText(QString());
         addPicButton->setText(QCoreApplication::translate("NewRecordWidget", "\320\227\320\260\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\265", nullptr));
         selectCategoryButton->setText(QCoreApplication::translate("NewRecordWidget", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217", nullptr));
         saveButton->setText(QCoreApplication::translate("NewRecordWidget", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
