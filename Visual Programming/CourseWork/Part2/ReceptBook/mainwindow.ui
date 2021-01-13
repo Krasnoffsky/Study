@@ -169,7 +169,7 @@ QLabel { background-color: white}
      </rect>
     </property>
     <property name="text">
-     <string>dick_pic</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="editButton">

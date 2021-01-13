@@ -21,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
                                                                                           const QString,
                                                                                           const QString)));
 
-    currentID = 1;
-
     recipesModel = new QSqlTableModel(this);
     recipesModel->setTable(TABLE_NAME);
 
@@ -36,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->recipesTable->setColumnHidden(2, true);
     ui->recipesTable->setColumnHidden(3, true);
     ui->recipesTable->setColumnHidden(4, true);
+    ui->recipesTable->setColumnHidden(5, true);
     ui->recipesTable->horizontalHeader()->hide();
     ui->recipesTable->verticalHeader()->hide();
 
@@ -103,7 +102,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(categorySnack, SIGNAL(triggered()), SLOT(categoriesSnackButton_selected()));
     connect(categorySweet, SIGNAL(triggered()), SLOT(categoriesSweetButton_selected()));
 
+    picLabel_width = ui->picLabel->width();
+    picLabel_height = ui->picLabel->height();
+
     currentCategory = "Все рецепты";
+
+    flag_best = false;
 
 }
 
@@ -133,6 +137,9 @@ void MainWindow::currentRecipe(QModelIndex id)
     QString recipe = recipesModel->data(recipesModel->index(id.row(), 2)).toString();
     QString type = recipesModel->data(recipesModel->index(id.row(), 3)).toString();
     QString best = recipesModel->data(recipesModel->index(id.row(), 4)).toString();
+    QString pic_path = recipesModel->data(recipesModel->index(id.row(), 5)).toString();
+    QImage pic(pic_path);
+
     if (best == "1"){
         ui->nameLabel->setText(name + " ★");
         ui->edit_bestButton->setText("Удалить из избранного");
@@ -142,6 +149,10 @@ void MainWindow::currentRecipe(QModelIndex id)
         ui->edit_bestButton->setText("Добавить в избранное");
     }
     ui->outputBox->setPlainText("Категория: " + type + "\nИнгредиенты:\n" + ingredients + "\nРецепт: \n" + recipe);
+
+    recipePic = QPixmap::fromImage(pic);
+    ui->picLabel->setPixmap(recipePic);
+    ui->picLabel->setPixmap(recipePic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
     currentID = id.row();
 }
 

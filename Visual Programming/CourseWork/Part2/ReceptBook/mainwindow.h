@@ -50,13 +50,13 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    Dialog* confirmDeleteDialog;
+    Dialog *confirmDeleteDialog;
 
     database dataControl;
 
     QSqlTableModel *recipesModel;
 
-    QMenu* categoriesMenu;
+    QMenu *categoriesMenu;
 
     QAction *categoryAll;
     QAction *categoryFirst;
@@ -73,6 +73,11 @@ private:
 
     int currentID;
     QString currentCategory;
+
+    int picLabel_width;
+    int picLabel_height;
+
+    QPixmap recipePic;
 
     bool flag_best;
 
