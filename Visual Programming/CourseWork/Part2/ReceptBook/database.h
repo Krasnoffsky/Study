@@ -25,10 +25,11 @@ public:
     database();
 
     bool addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
-    bool deleteFromDatabase(const QString id);
+    bool deleteFromDatabase(const int id);
     bool editInDatabase(const QString &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best);
     void readFromDatabase(int &id,const QString &mode);
     void readBestFromDatabase();
+    bool editBestInDatabase(const int id, const int flag);
 
 signals:
     void sendToWidget(const int id, const QString name, const QString ingredients, const QString recipe, const QString type, const QString best);

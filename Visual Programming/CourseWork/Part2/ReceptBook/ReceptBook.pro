@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     database.cpp \
+    dialog.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     database.h \
+    dialog.h \
     mainwindow.h
 
 FORMS += \

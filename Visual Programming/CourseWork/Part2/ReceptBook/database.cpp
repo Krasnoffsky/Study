@@ -98,11 +98,11 @@ bool database::addToDatabase(const QString &name, const QString &ingredients, co
 
 }
 
-bool database::deleteFromDatabase(const QString id)
+bool database::deleteFromDatabase(const int id)
 {
     QSqlQuery query(db);
 
-    query.prepare("DELETE FROM " TABLE_NAME " WHERE _id= :ID ;");
+    query.prepare("DELETE FROM " TABLE_NAME " WHERE " FIELD_ID "= :ID ;");
     query.bindValue(":ID", id);
 
     if(!query.exec()){
@@ -254,5 +254,28 @@ void database::readBestFromDatabase()
                       query.value(3).toString(),
                       query.value(4).toString(),
                       query.value(5).toString());
+}
+
+bool database::editBestInDatabase(const int id, const int flag)
+{
+    QSqlQuery query(db);
+
+    query.prepare("UPDATE " TABLE_NAME " SET "
+                            FIELD_BEST "=:BEST "
+                            "WHERE " FIELD_ID "=:ID");
+
+    query.bindValue(":BEST", flag);
+    query.bindValue(":ID", id);
+
+    if(!query.exec()){
+
+        qDebug() << "ERROR: Can't edit best record in table " << TABLE_NAME;
+        qDebug() << query.lastError().text();
+        return false;
+    }
+    else
+        return true;
+
+    return false;
 }
 

@@ -1,9 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QAction>
+#include <QDialog>
 #include <QMainWindow>
+#include <QMenu>
 #include <QSqlTableModel>
 #include "database.h"
+#include "dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,17 +27,38 @@ public slots:
 
 
 private slots:
-    void on_bestButton_clicked();
-
     void currentRecipe(QModelIndex id);
+
+    void on_bestButton_clicked();
+    void on_deleteButton_clicked();
+    void on_edit_bestButton_clicked();
+
+    void categoriesAllButton_selected();
+    void categoriesFirstButton_selected();
+    void categoriesSecondButton_selected();
+    void categoriesGarnishButton_selected();
+    void categoriesSalatButton_selected();
+    void categoriesSauceButton_selected();
+    void categoriesDrinkButton_selected();
+    void categoriesMarinadeButton_selected();
+    void categoriesStockButton_selected();
+    void categoriesDoughButton_selected();
+    void categoriesSnackButton_selected();
+    void categoriesSweetButton_selected();
+
 
 private:
     Ui::MainWindow *ui;
+
+    Dialog* confirmDeleteDialog;
 
     database dataControl;
 
     QSqlTableModel *recipesModel;
 
+    QMenu* categoriesMenu;
+
+    QAction *categoryAll;
     QAction *categoryFirst;
     QAction *categorySecond;
     QAction *categoryGarnish;
