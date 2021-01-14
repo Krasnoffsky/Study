@@ -1,6 +1,7 @@
 #ifndef NEWRECORDWIDGET_H
 #define NEWRECORDWIDGET_H
 
+#include <QBuffer>
 #include <QWidget>
 #include <QFileDialog>
 #include <QMenu>
@@ -60,7 +61,7 @@ private:
     QString currentPic;
 
 signals:
-    void sendToWidget(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &pic);
+    void sendToWidget(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic);
 
 };
 

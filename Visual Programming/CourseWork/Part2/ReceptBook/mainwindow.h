@@ -8,8 +8,8 @@
 #include <QSqlTableModel>
 #include <QMessageBox>
 #include "database.h"
-#include "dialog.h"
 #include "newrecordwidget.h"
+#include "editrecordwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,7 +25,8 @@ public:
 
 private slots:
     void currentRecipe(QModelIndex id);
-    void addNewRecipe(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &pic);
+    void addNewRecipe(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic);
+    void editOldRecipe(const int &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic);
 
     void on_bestButton_clicked();
     void on_deleteButton_clicked();
@@ -49,11 +50,12 @@ private slots:
 
     void on_addButton_clicked();
 
+
 private:
     Ui::MainWindow *ui;
 
-    Dialog *confirmDeleteDialog;
     NewRecordWidget *newRecord;
+    EditRecordWidget *editRecord;
 
     database dataControl;
 
@@ -75,16 +77,21 @@ private:
     QAction *categorySweet;
 
     int currentID;
+    int currentRow;
     QString currentCategory;
+    QString currentPic;
 
     int picLabel_width;
     int picLabel_height;
 
-    QPixmap recipePic;
+    QByteArray recipePic;
 
     bool flag_best;
 
     void categorySelected();
+
+signals:
+    void sendForEdit(const int &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic);
 
 };
 #endif // MAINWINDOW_H

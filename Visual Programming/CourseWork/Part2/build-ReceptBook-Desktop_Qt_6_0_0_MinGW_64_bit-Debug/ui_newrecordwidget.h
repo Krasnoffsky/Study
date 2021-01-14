@@ -37,6 +37,8 @@ public:
         if (NewRecordWidget->objectName().isEmpty())
             NewRecordWidget->setObjectName(QString::fromUtf8("NewRecordWidget"));
         NewRecordWidget->resize(900, 650);
+        NewRecordWidget->setMinimumSize(QSize(900, 650));
+        NewRecordWidget->setMaximumSize(QSize(900, 650));
         QIcon icon;
         icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         NewRecordWidget->setWindowIcon(icon);

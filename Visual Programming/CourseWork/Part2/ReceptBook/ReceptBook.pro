@@ -10,18 +10,19 @@ CONFIG += c++11
 
 SOURCES += \
     database.cpp \
-    dialog.cpp \
+    editrecordwidget.cpp \
     main.cpp \
     mainwindow.cpp \
     newrecordwidget.cpp
 
 HEADERS += \
     database.h \
-    dialog.h \
+    editrecordwidget.h \
     mainwindow.h \
     newrecordwidget.h
 
 FORMS += \
+    editrecordwidget.ui \
     mainwindow.ui \
     newrecordwidget.ui
 

@@ -10,17 +10,39 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     newRecord = new NewRecordWidget;
-    confirmDeleteDialog = new Dialog;
+    editRecord = new EditRecordWidget;
 
     connect(newRecord,SIGNAL(sendToWidget(QString,
                                           QString,
                                           QString,
                                           QString,
-                                          QString)), this, SLOT(addNewRecipe(QString,
-                                                                             QString,
-                                                                             QString,
-                                                                             QString,
-                                                                             QString)));
+                                          QByteArray)), this, SLOT(addNewRecipe(QString,
+                                                                                QString,
+                                                                                QString,
+                                                                                QString,
+                                                                                QByteArray)));
+    connect(editRecord,SIGNAL(sendToWidgetUpdate(int,
+                                                 QString,
+                                                 QString,
+                                                 QString,
+                                                 QString,
+                                                 QByteArray)), this, SLOT(editOldRecipe(int,
+                                                                                 QString,
+                                                                                 QString,
+                                                                                 QString,
+                                                                                 QString,
+                                                                                 QByteArray)));
+    connect(this,SIGNAL(sendForEdit(int,
+                                    QString,
+                                    QString,
+                                    QString,
+                                    QString,
+                                    QByteArray)), editRecord, SLOT(catchInfo(int,
+                                                                           QString,
+                                                                           QString,
+                                                                           QString,
+                                                                           QString   ,
+                                                                           QByteArray)));
 
     ui->searchBox->setPlaceholderText("Поиск");
 
@@ -33,11 +55,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->recipesTable->resizeColumnsToContents();
     ui->recipesTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->recipesTable->horizontalHeader()->setStretchLastSection(true);
-    ui->recipesTable->setColumnHidden(1, true);
+    ui->recipesTable->setColumnHidden(0, true);
     ui->recipesTable->setColumnHidden(2, true);
     ui->recipesTable->setColumnHidden(3, true);
     ui->recipesTable->setColumnHidden(4, true);
     ui->recipesTable->setColumnHidden(5, true);
+    ui->recipesTable->setColumnHidden(6, true);
     ui->recipesTable->horizontalHeader()->hide();
     ui->recipesTable->verticalHeader()->hide();
 
@@ -121,13 +144,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::currentRecipe(QModelIndex id)
 {
-    QString name = recipesModel->data(recipesModel->index(id.row(), 0)).toString();
-    QString ingredients = recipesModel->data(recipesModel->index(id.row(), 1)).toString();
-    QString recipe = recipesModel->data(recipesModel->index(id.row(), 2)).toString();
-    QString type = recipesModel->data(recipesModel->index(id.row(), 3)).toString();
-    QString best = recipesModel->data(recipesModel->index(id.row(), 4)).toString();
-    QString pic_path = recipesModel->data(recipesModel->index(id.row(), 5)).toString();
-    QImage pic(pic_path);
+    currentID = recipesModel->data(recipesModel->index(id.row(), 0)).toInt();
+    currentRow = id.row();
+
+    QString name = recipesModel->data(recipesModel->index(currentRow, 1)).toString();
+    QString ingredients = recipesModel->data(recipesModel->index(currentRow, 2)).toString();
+    QString recipe = recipesModel->data(recipesModel->index(currentRow, 3)).toString();
+    QString type = recipesModel->data(recipesModel->index(currentRow, 4)).toString();
+    QString best = recipesModel->data(recipesModel->index(currentRow, 5)).toString();
+    QPixmap pic = QPixmap();
 
     if (best == "1"){
         ui->nameLabel->setText(name + " ★");
@@ -139,11 +164,9 @@ void MainWindow::currentRecipe(QModelIndex id)
     }
     ui->outputBox->setPlainText("Категория: " + type + "\nИнгредиенты:\n" + ingredients + "\nРецепт: \n" + recipe);
 
-    recipePic = QPixmap::fromImage(pic);
-    ui->picLabel->setPixmap(recipePic);
-    ui->picLabel->setPixmap(recipePic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
-
-    currentID = id.row();
+    pic.loadFromData(recipesModel->data(recipesModel->index(id.row(), 6)).toByteArray());
+    recipePic = recipesModel->data(recipesModel->index(id.row(), 6)).toByteArray();
+    ui->picLabel->setPixmap(pic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
 }
 
 void MainWindow::categoriesAllButton_selected()
@@ -247,38 +270,42 @@ void MainWindow::on_bestButton_clicked()
 
 void MainWindow::on_deleteButton_clicked()
 {
-    switch(confirmDeleteDialog->exec()){
-        case QDialog::Accepted:
-            dataControl.deleteFromDatabase(currentID + 1);
-            recipesModel->select();
-            ui->nameLabel->clear();
-            ui->outputBox->clear();
-            ui->picLabel->clear();
-            QMessageBox::information(0, "Avocado", "Рецепт удалён");
-        case QDialog::Rejected:
-            break;
-        default:
-            break;
+    int n = QMessageBox::warning(0,
+                                 "Avocado",
+                                 "Вы действительно хотите удалить рецепт?",
+                                 "Да",
+                                 "Нет",
+                                 QString(),
+                                 0,
+                                 1
+                                );
+    if(!n) {
+        dataControl.deleteFromDatabase(currentID);
+        recipesModel->select();
+        ui->nameLabel->clear();
+        ui->outputBox->clear();
+        ui->picLabel->clear();
+        QMessageBox::information(0, "Avocado", "Рецепт удалён");
     }
 }
 
 void MainWindow::on_edit_bestButton_clicked()
 {
-    QString name = recipesModel->data(recipesModel->index(currentID, 0)).toString();
-    QString best = recipesModel->data(recipesModel->index(currentID, 4)).toString();
+    QString name = recipesModel->data(recipesModel->index(currentRow, 1)).toString();
+    QString best = recipesModel->data(recipesModel->index(currentRow, 5)).toString();
 
     if (best == '1' ){
-        dataControl.editBestInDatabase(currentID + 1, 0);
+        dataControl.editBestInDatabase(currentID, 0);
         ui->nameLabel->setText(name + " ★");
         ui->edit_bestButton->setText("Удалить из избранного");
     }
     else {
-        dataControl.editBestInDatabase(currentID + 1, 1);
+        dataControl.editBestInDatabase(currentID, 1);
         ui->nameLabel->setText(name);
         ui->edit_bestButton->setText("Добавить в избранное");
     }
     recipesModel->select();
-    ui->recipesTable->selectRow(currentID);
+    ui->recipesTable->selectRow(currentRow);
     categorySelected();
 }
 
@@ -287,7 +314,7 @@ void MainWindow::categorySelected()
     int rowNumber = recipesModel->rowCount();
     if (currentCategory == "Все рецепты")
         for (int i = 0 ; i < rowNumber; i++){
-            if (flag_best && recipesModel->data(recipesModel->index(i, 4)).toString() != '1')
+            if (flag_best && recipesModel->data(recipesModel->index(i, 5)).toString() != '1')
                 ui->recipesTable->setRowHidden(i, true);
             else
                 ui->recipesTable->setRowHidden(i, false);
@@ -295,9 +322,9 @@ void MainWindow::categorySelected()
 
     else
         for (int i = 0; i < rowNumber; i++){
-            if (recipesModel->data(recipesModel->index(i, 3)).toString() != currentCategory)
+            if (recipesModel->data(recipesModel->index(i, 4)).toString() != currentCategory)
                 ui->recipesTable->setRowHidden(i, true);
-            else if (flag_best && recipesModel->data(recipesModel->index(i, 4)).toString() != '1')
+            else if (flag_best && recipesModel->data(recipesModel->index(i, 5)).toString() != '1')
                 ui->recipesTable->setRowHidden(i, true);
             else
                ui->recipesTable->setRowHidden(i, false);
@@ -306,7 +333,13 @@ void MainWindow::categorySelected()
 
 void MainWindow::on_editButton_clicked()
 {
+    QString name = recipesModel->data(recipesModel->index(currentRow, 1)).toString();
+    QString ingredients = recipesModel->data(recipesModel->index(currentRow, 2)).toString();
+    QString recipe = recipesModel->data(recipesModel->index(currentRow, 3)).toString();
+    QString type = recipesModel->data(recipesModel->index(currentRow, 4)).toString();
 
+    editRecord->show();
+    emit sendForEdit(currentID, name, ingredients, recipe, type, recipePic);
 }
 
 void MainWindow::on_addButton_clicked()
@@ -314,9 +347,20 @@ void MainWindow::on_addButton_clicked()
         newRecord->show();
 }
 
-void MainWindow::addNewRecipe(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &pic)
+void MainWindow::addNewRecipe(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic)
 {
     dataControl.addToDatabase(name, ingredients, recipe, type, 0, pic);
 
     recipesModel->select();
 }
+
+void MainWindow::editOldRecipe(const int &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic)
+{
+    dataControl.editInDatabase(id, name, ingredients, recipe, type, pic);
+
+    recipesModel->select();
+}
+
+
+
+

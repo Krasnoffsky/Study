@@ -34,13 +34,13 @@ bool database::createTable()
 {
     QSqlQuery query(db);
     if(!query.exec( "CREATE TABLE " TABLE_NAME " ("
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    FIELD_NAME     " VARCHAR()    NOT NULL,"
-                    FIELD_INGREDIENTS     " VARCHAR()    NOT NULL,"
-                    FIELD_RECIPE       " VARCHAR()    NOT NULL"
-                    FIELD_TYPE       " VARCHAR()    NOT NULL"
-                    FIELD_BEST     " VARCHAR()    NOT NULL,"
-                    FIELD_PIC     " VARCHAR()    NOT NULL"
+                    FIELD_ID " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    FIELD_NAME     " TEXT    NOT NULL,"
+                    FIELD_INGREDIENTS     " TEXT    NOT NULL,"
+                    FIELD_RECIPE       " TEXT    NOT NULL"
+                    FIELD_TYPE       " TEXT    NOT NULL"
+                    FIELD_BEST     " TEXT    NOT NULL,"
+                    FIELD_PIC     " BLOB    NOT NULL"
                     " )"
      )){
         qDebug() << "ERROR: Can't create table " << TABLE_NAME;
@@ -52,7 +52,7 @@ bool database::createTable()
     return false;
 }
 
-bool database::addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best, const QString &pic)
+bool database::addToDatabase(const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best, const QByteArray &pic)
 {
 
     QSqlQuery query(db);
@@ -64,13 +64,13 @@ bool database::addToDatabase(const QString &name, const QString &ingredients, co
                                 FIELD_TYPE ", "
                                 FIELD_BEST ", "
                                 FIELD_PIC " ) "
-                                "VALUES (:Name, :Ingredients, :Recipe, :Type, :Best, :Pic)");
-    query.bindValue(":Name", name);
-    query.bindValue(":Ingredients", ingredients);
-    query.bindValue(":Recipe", recipe);
-    query.bindValue(":Type", type);
-    query.bindValue(":Best", best);
-    query.bindValue(":Pic", pic);
+                                "VALUES (?, ?, ?, ?, ?, ?)");
+    query.addBindValue(name);
+    query.addBindValue(ingredients);
+    query.addBindValue(recipe);
+    query.addBindValue(type);
+    query.addBindValue(best);
+    query.addBindValue(pic);
 
 
     if(!query.exec()){
@@ -104,16 +104,15 @@ bool database::deleteFromDatabase(const int id)
 
 }
 
-bool database::editInDatabase(const QString &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QString &best, const QString &pic)
+bool database::editInDatabase(const int &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic)
 {
     QSqlQuery query(db);
 
     query.prepare("UPDATE " TABLE_NAME " SET "
-                            FIELD_NAME "=:NAME "
-                            FIELD_INGREDIENTS "=:INGREDIENTS "
-                            FIELD_RECIPE "=:RECIPE "
-                            FIELD_TYPE "=:TYPE "
-                            FIELD_BEST "=:BEST "
+                            FIELD_NAME "=:NAME, "
+                            FIELD_INGREDIENTS "=:INGREDIENTS, "
+                            FIELD_RECIPE "=:RECIPE, "
+                            FIELD_TYPE "=:TYPE, "
                             FIELD_PIC "=:PIC "
                             "WHERE " FIELD_ID "=:ID");
 
@@ -121,7 +120,6 @@ bool database::editInDatabase(const QString &id, const QString &name, const QStr
     query.bindValue(":INGREDIENTS", ingredients);
     query.bindValue(":RECIPE", recipe);
     query.bindValue(":TYPE", type);
-    query.bindValue(":BEST", best);
     query.bindValue(":ID", id);
     query.bindValue(":PIC", pic);
 

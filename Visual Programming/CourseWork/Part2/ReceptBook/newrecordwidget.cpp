@@ -84,6 +84,7 @@ void NewRecordWidget::on_addPicButton_clicked()
     QPixmap pic = QPixmap::fromImage(image);
     ui->picLabel->setPixmap(pic);
     ui->picLabel->setPixmap(pic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
+
 }
 
 void NewRecordWidget::categoriesFirstButton_selected()
@@ -159,10 +160,19 @@ void NewRecordWidget::on_saveButton_clicked()
     QString ingredients = ui->ingredientsBox->toPlainText();
     QString recipe = ui->recipeBox->toPlainText();
 
+    if (currentPic == "")
+        currentPic = "C:\\Study\\Visual Programming\\CourseWork\\Part2\\src\\default.jpg";
+
+    QPixmap inPixmap;
+    inPixmap.load(currentPic);
+    QByteArray inByteArray;
+    QBuffer inBuffer( &inByteArray );
+    inBuffer.open( QIODevice::WriteOnly );
+    inPixmap.save( &inBuffer, "PNG" );
+
+
     if (name != "" && ingredients != "" && recipe != "" && currentCategory != ""){
-        if (currentPic == "")
-            currentPic = "C:\\Study\\Visual Programming\\CourseWork\\Part2\\src\\default.jpg";
-        emit sendToWidget(name, ingredients, recipe, currentCategory, currentPic);
+        emit sendToWidget(name, ingredients, recipe, currentCategory, inByteArray);
         QMessageBox::information(0, "Avocado", "Новый рецепт добавлен");
         close();
     }

@@ -37,7 +37,8 @@ public:
     QLabel *picLabel;
     QPushButton *editButton;
     QPushButton *deleteButton;
-    QLabel *nameLabel;
+    QLabel *designLabel_big;
+    QLineEdit *nameLabel;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -67,7 +68,10 @@ public:
 "	max-width: 250px;\n"
 "	border-color: green }\n"
 "\n"
-"QLabel { background-color: white}\n"
+"#nameLabel {background-color: white}\n"
+"#picLabel {background-color: white}\n"
+"\n"
+"#designLabel_big { background-color: blue}\n"
 ""));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -88,34 +92,49 @@ public:
         outputBox = new QTextEdit(centralwidget);
         outputBox->setObjectName(QString::fromUtf8("outputBox"));
         outputBox->setEnabled(true);
-        outputBox->setGeometry(QRect(570, 90, 631, 531));
+        outputBox->setGeometry(QRect(550, 90, 631, 531));
         outputBox->setReadOnly(true);
         categoriesButton = new QPushButton(centralwidget);
         categoriesButton->setObjectName(QString::fromUtf8("categoriesButton"));
-        categoriesButton->setGeometry(QRect(20, 100, 200, 40));
+        categoriesButton->setGeometry(QRect(30, 130, 200, 40));
         recipesTable = new QTableView(centralwidget);
         recipesTable->setObjectName(QString::fromUtf8("recipesTable"));
-        recipesTable->setGeometry(QRect(20, 150, 200, 360));
+        recipesTable->setGeometry(QRect(30, 180, 200, 360));
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
-        addButton->setGeometry(QRect(20, 520, 200, 40));
+        addButton->setGeometry(QRect(30, 550, 200, 40));
         edit_bestButton = new QPushButton(centralwidget);
         edit_bestButton->setObjectName(QString::fromUtf8("edit_bestButton"));
-        edit_bestButton->setGeometry(QRect(330, 380, 200, 40));
+        edit_bestButton->setGeometry(QRect(300, 380, 220, 40));
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
-        picLabel->setGeometry(QRect(320, 90, 220, 220));
+        picLabel->setGeometry(QRect(300, 90, 220, 220));
         editButton = new QPushButton(centralwidget);
         editButton->setObjectName(QString::fromUtf8("editButton"));
-        editButton->setGeometry(QRect(330, 430, 200, 40));
+        editButton->setGeometry(QRect(300, 430, 220, 40));
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
-        deleteButton->setGeometry(QRect(330, 480, 200, 40));
-        nameLabel = new QLabel(centralwidget);
+        deleteButton->setGeometry(QRect(300, 480, 220, 40));
+        designLabel_big = new QLabel(centralwidget);
+        designLabel_big->setObjectName(QString::fromUtf8("designLabel_big"));
+        designLabel_big->setEnabled(false);
+        designLabel_big->setGeometry(QRect(280, 90, 931, 531));
+        nameLabel = new QLineEdit(centralwidget);
         nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
-        nameLabel->setGeometry(QRect(320, 330, 220, 40));
-        nameLabel->setCursor(QCursor(Qt::IBeamCursor));
+        nameLabel->setGeometry(QRect(300, 330, 220, 40));
         MainWindow->setCentralWidget(centralwidget);
+        designLabel_big->raise();
+        bestButton->raise();
+        searchBox->raise();
+        outputBox->raise();
+        categoriesButton->raise();
+        recipesTable->raise();
+        addButton->raise();
+        edit_bestButton->raise();
+        picLabel->raise();
+        editButton->raise();
+        deleteButton->raise();
+        nameLabel->raise();
 
         retranslateUi(MainWindow);
 
@@ -134,7 +153,7 @@ public:
         picLabel->setText(QString());
         editButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
-        nameLabel->setText(QString());
+        designLabel_big->setText(QString());
     } // retranslateUi
 
 };
