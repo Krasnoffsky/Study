@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -52,6 +53,9 @@ public:
         MainWindow->setMinimumSize(QSize(1219, 636));
         MainWindow->setMaximumSize(QSize(1219, 636));
         MainWindow->setMouseTracking(false);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setStyleSheet(QString::fromUtf8("QMainWindow {\n"
 "	background-color: rgb(205, 249, 62)}\n"
 "#searchBox {\n"

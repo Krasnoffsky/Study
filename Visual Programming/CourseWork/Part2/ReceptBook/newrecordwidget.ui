@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Новый рецепт</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../src/icon.png</normaloff>../src/icon.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#NewRecordWidget {background-color: blue}
 QLabel {background-color: white}

@@ -5,7 +5,6 @@ NewRecordWidget::NewRecordWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::NewRecordWidget)
 {
-    setAttribute(Qt::WA_DeleteOnClose);
 
     ui->setupUi(this);
 

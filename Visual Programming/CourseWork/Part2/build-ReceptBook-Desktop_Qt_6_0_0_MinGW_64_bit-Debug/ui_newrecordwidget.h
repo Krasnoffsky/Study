@@ -10,6 +10,7 @@
 #define UI_NEWRECORDWIDGET_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -36,6 +37,9 @@ public:
         if (NewRecordWidget->objectName().isEmpty())
             NewRecordWidget->setObjectName(QString::fromUtf8("NewRecordWidget"));
         NewRecordWidget->resize(900, 650);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        NewRecordWidget->setWindowIcon(icon);
         NewRecordWidget->setStyleSheet(QString::fromUtf8("#NewRecordWidget {background-color: blue}\n"
 "QLabel {background-color: white}\n"
 "QTextEdit {background-color: white}\n"
