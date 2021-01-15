@@ -15,7 +15,7 @@ void loadModules(QSplashScreen *psplash)
         psplash->showMessage("Loading modules: "
                              + QString::number(i) + "%",
                              Qt::AlignCenter|Qt::AlignBottom,
-                             Qt::black
+                             QColor(163,185,90)
                              );
         qApp->processEvents();
         Sleep(40);
