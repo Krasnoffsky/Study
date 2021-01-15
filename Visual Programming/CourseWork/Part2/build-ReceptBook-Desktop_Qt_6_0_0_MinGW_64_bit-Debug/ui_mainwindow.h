@@ -39,6 +39,7 @@ public:
     QPushButton *deleteButton;
     QLabel *designLabel_big;
     QLineEdit *nameLabel;
+    QPushButton *filterButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -122,10 +123,12 @@ public:
         nameLabel = new QLineEdit(centralwidget);
         nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
         nameLabel->setGeometry(QRect(300, 330, 220, 40));
+        filterButton = new QPushButton(centralwidget);
+        filterButton->setObjectName(QString::fromUtf8("filterButton"));
+        filterButton->setGeometry(QRect(270, 10, 160, 30));
         MainWindow->setCentralWidget(centralwidget);
         designLabel_big->raise();
         bestButton->raise();
-        searchBox->raise();
         outputBox->raise();
         categoriesButton->raise();
         recipesTable->raise();
@@ -135,6 +138,8 @@ public:
         editButton->raise();
         deleteButton->raise();
         nameLabel->raise();
+        searchBox->raise();
+        filterButton->raise();
 
         retranslateUi(MainWindow);
 
@@ -154,6 +159,7 @@ public:
         editButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         designLabel_big->setText(QString());
+        filterButton->setText(QCoreApplication::translate("MainWindow", "\320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
     } // retranslateUi
 
 };

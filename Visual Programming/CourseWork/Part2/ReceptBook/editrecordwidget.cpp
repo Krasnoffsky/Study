@@ -157,7 +157,6 @@ void EditRecordWidget::on_saveButton_clicked()
     QString name = ui->nameLine->text();
     QString ingredients = ui->ingredientsBox->toPlainText();
     QString recipe = ui->recipeBox->toPlainText();
-    int id = 0;
 
     if (currentPic == "")
         currentPic = "C:\\Study\\Visual Programming\\CourseWork\\Part2\\src\\default.jpg";
@@ -169,7 +168,7 @@ void EditRecordWidget::on_saveButton_clicked()
     inBuffer.open( QIODevice::WriteOnly );
     inPixmap.save( &inBuffer, "PNG" );
 
-    emit sendToWidgetUpdate(id, name, ingredients, recipe, currentCategory, inByteArray);
+    emit sendToWidgetUpdate(currentID, name, ingredients, recipe, currentCategory, inByteArray);
     QMessageBox::information(0, "Avocado", "Рецепт редактирован");
     close();
 

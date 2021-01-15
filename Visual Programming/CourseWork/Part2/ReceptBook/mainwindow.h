@@ -45,11 +45,18 @@ private slots:
     void categoriesSnackButton_selected();
     void categoriesSweetButton_selected();
 
+    void filterAll_selected();
+    void filterName_selected();
+    void filterIngredients_selected();
+    void filterRecipe_selected();
+
 
     void on_editButton_clicked();
 
     void on_addButton_clicked();
 
+
+    void on_searchBox_textEdited(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
@@ -62,6 +69,7 @@ private:
     QSqlTableModel *recipesModel;
 
     QMenu *categoriesMenu;
+    QMenu *filtersMenu;
 
     QAction *categoryAll;
     QAction *categoryFirst;
@@ -76,10 +84,16 @@ private:
     QAction *categorySnack;
     QAction *categorySweet;
 
+    QAction *filterAll;
+    QAction *filterName;
+    QAction *filterIngredients;
+    QAction *filterRecipe;
+
     int currentID;
     int currentRow;
     QString currentCategory;
     QString currentPic;
+    QString currentFilter;
 
     int picLabel_width;
     int picLabel_height;

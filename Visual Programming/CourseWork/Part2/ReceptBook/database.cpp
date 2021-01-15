@@ -120,8 +120,8 @@ bool database::editInDatabase(const int &id, const QString &name, const QString 
     query.bindValue(":INGREDIENTS", ingredients);
     query.bindValue(":RECIPE", recipe);
     query.bindValue(":TYPE", type);
-    query.bindValue(":ID", id);
     query.bindValue(":PIC", pic);
+    query.bindValue(":ID", id);
 
     if(!query.exec()){
 

@@ -240,9 +240,21 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="filterButton">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>10</y>
+      <width>160</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Фильтр</string>
+    </property>
+   </widget>
    <zorder>designLabel_big</zorder>
    <zorder>bestButton</zorder>
-   <zorder>searchBox</zorder>
    <zorder>outputBox</zorder>
    <zorder>categoriesButton</zorder>
    <zorder>recipesTable</zorder>
@@ -252,6 +264,8 @@
    <zorder>editButton</zorder>
    <zorder>deleteButton</zorder>
    <zorder>nameLabel</zorder>
+   <zorder>searchBox</zorder>
+   <zorder>filterButton</zorder>
   </widget>
  </widget>
  <resources/>

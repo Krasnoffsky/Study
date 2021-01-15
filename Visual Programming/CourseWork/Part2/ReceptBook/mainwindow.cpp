@@ -128,10 +128,35 @@ MainWindow::MainWindow(QWidget *parent)
     connect(categorySnack, SIGNAL(triggered()), SLOT(categoriesSnackButton_selected()));
     connect(categorySweet, SIGNAL(triggered()), SLOT(categoriesSweetButton_selected()));
 
+    filterAll = new QAction;
+    filterName = new QAction;
+    filterIngredients = new QAction;
+    filterRecipe = new QAction;
+
+    filterAll->setText("Глобальный поиск");
+    filterName->setText("Название");
+    filterIngredients->setText("Ингредиенты");
+    filterRecipe->setText("Рецепт");
+
+    filtersMenu = new QMenu;
+    filtersMenu->addAction(filterAll);
+    filtersMenu->addAction(filterName);
+    filtersMenu->addAction(filterIngredients);
+    filtersMenu->addAction(filterRecipe);
+
+    ui->filterButton->setMenu(filtersMenu);
+
+    connect(filterAll, SIGNAL(triggered()), SLOT(filterAll_selected()));
+    connect(filterName, SIGNAL(triggered()), SLOT(filterName_selected()));
+    connect(filterIngredients, SIGNAL(triggered()), SLOT(filterIngredients_selected()));
+    connect(filterRecipe, SIGNAL(triggered()), SLOT(filterRecipe_selected()));
+
     picLabel_width = ui->picLabel->width();
     picLabel_height = ui->picLabel->height();
 
     currentCategory = "Все рецепты";
+    currentFilter = "ALL";
+    currentID = 0;
 
     flag_best = false;
 
@@ -359,8 +384,49 @@ void MainWindow::editOldRecipe(const int &id, const QString &name, const QString
     dataControl.editInDatabase(id, name, ingredients, recipe, type, pic);
 
     recipesModel->select();
+    ui->recipesTable->selectRow(currentRow);
 }
 
 
 
 
+
+void MainWindow::on_searchBox_textEdited(const QString &arg1)
+{
+
+    if (currentFilter == "NAME")
+        recipesModel->setFilter(QString("name LIKE ('%%1%')").arg(arg1));
+    else if (currentFilter == "INGREDIENTS")
+        recipesModel->setFilter(QString("ingredients LIKE ('%%1%')").arg(arg1));
+    else if (currentFilter == "RECIPE")
+        recipesModel->setFilter(QString("recipe LIKE ('%%1%')").arg(arg1));
+    else
+        recipesModel->setFilter(QString("name LIKE ('%%1%') OR ingredients LIKE ('%%1%') OR recipe LIKE('%%1%')").arg(arg1));
+
+    recipesModel->select();
+
+}
+
+void MainWindow::filterAll_selected()
+{
+    currentFilter = "ALL";
+    ui->filterButton->setText("Глобальный поиск");
+}
+
+void MainWindow::filterName_selected()
+{
+    currentFilter = "NAME";
+    ui->filterButton->setText("Название");
+}
+
+void MainWindow::filterIngredients_selected()
+{
+    currentFilter = "INGREDIENTS";
+    ui->filterButton->setText("Ингредиенты");
+}
+
+void MainWindow::filterRecipe_selected()
+{
+    currentFilter = "RECIPE";
+    ui->filterButton->setText("Рецепт");
+}
