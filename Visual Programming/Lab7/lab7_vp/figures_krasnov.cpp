@@ -20,5 +20,4 @@ void figures_krasnov::drawBorders(QPainter *qp) {
   qp->setPen(pen);
   qp->drawRect(10, 10, 680, 680);
 
-
 }
