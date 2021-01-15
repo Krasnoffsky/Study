@@ -160,6 +160,7 @@ MainWindow::MainWindow(QWidget *parent)
     currentID = 0;
 
     flag_best = false;
+    hideInterface(true);
 
 }
 
@@ -193,6 +194,7 @@ void MainWindow::currentRecipe(QModelIndex id)
     pic.loadFromData(recipesModel->data(recipesModel->index(id.row(), 6)).toByteArray());
     recipePic = recipesModel->data(recipesModel->index(id.row(), 6)).toByteArray();
     ui->picLabel->setPixmap(pic.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
+    hideInterface(false);
 }
 
 void MainWindow::categoriesAllButton_selected()
@@ -312,6 +314,8 @@ void MainWindow::on_deleteButton_clicked()
         ui->outputBox->clear();
         ui->picLabel->clear();
         QMessageBox::information(0, "Avocado", "Рецепт удалён");
+        hideInterface(true);
+        currentID = 0;
     }
 }
 
@@ -435,4 +439,24 @@ void MainWindow::filterRecipe_selected()
 void MainWindow::on_helpButton_clicked()
 {
     helpWidget->show();
+}
+
+void MainWindow::hideInterface(const bool &mode)
+{
+    if (mode){
+        ui->picLabel->setHidden(true);
+        ui->nameLabel->setHidden(true);
+        ui->edit_bestButton->setHidden(true);
+        ui->editButton->setHidden(true);
+        ui->deleteButton->setHidden(true);
+        ui->outputBox->setHidden(true);
+    }
+    else {
+        ui->picLabel->setHidden(false);
+        ui->nameLabel->setHidden(false);
+        ui->edit_bestButton->setHidden(false);
+        ui->editButton->setHidden(false);
+        ui->deleteButton->setHidden(false);
+        ui->outputBox->setHidden(false);
+    }
 }

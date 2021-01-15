@@ -31,6 +31,9 @@
     <height>636</height>
    </size>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="mouseTracking">
    <bool>false</bool>
   </property>
@@ -42,8 +45,16 @@
     <normaloff>../src/icon.png</normaloff>../src/icon.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow {
-	background-color: rgb(205, 249, 62)}
+   <string notr="true">#MainWindow {background-color: rgb(142, 154, 76)}
+QPushButton {background-color: rgb(207, 211, 126);
+	border-width: 0px;}
+QLineEdit {background-color: rgb(207, 211, 126)}
+#nameEdit {border-radius: 20px;
+	border-width: 1px;
+	min-height: 40px;
+	max-height: 40px;
+	min-width: 220px;
+	max-width: 220px}
 #searchBox {
 	border-radius: 15px;
 	border-width: 1px;
@@ -52,11 +63,10 @@
 	min-width: 250px;
 	max-width: 250px;
 	border-color: green }
+#recipesTable  {background-color: rgb(207, 211, 126)}
+#outputBox  {background-color: rgb(207, 211, 126)}
+QMenu {background-color: rgb(207, 211, 126)}
 
-#nameLabel {background-color: white}
-#picLabel {background-color: white}
-
-#designLabel_big { background-color: blue}
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -121,6 +131,9 @@
       <width>631</width>
       <height>531</height>
      </rect>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>IBeamCursor</cursorShape>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -214,22 +227,6 @@
      <string>Удалить рецепт</string>
     </property>
    </widget>
-   <widget class="QLabel" name="designLabel_big">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>90</y>
-      <width>931</width>
-      <height>531</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="nameLabel">
     <property name="geometry">
      <rect>
@@ -238,6 +235,21 @@
       <width>220</width>
       <height>40</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>220</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>220</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="filterButton">
@@ -266,7 +278,6 @@
      <string>Помощь</string>
     </property>
    </widget>
-   <zorder>designLabel_big</zorder>
    <zorder>bestButton</zorder>
    <zorder>outputBox</zorder>
    <zorder>categoriesButton</zorder>

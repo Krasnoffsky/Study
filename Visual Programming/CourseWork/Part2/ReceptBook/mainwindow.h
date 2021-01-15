@@ -7,6 +7,8 @@
 #include <QMenu>
 #include <QSqlTableModel>
 #include <QMessageBox>
+#include <QPainter>
+#include <QPainterPath>
 #include "database.h"
 #include "newrecordwidget.h"
 #include "editrecordwidget.h"
@@ -107,6 +109,7 @@ private:
     bool flag_best;
 
     void categorySelected();
+    void hideInterface(const bool &mode);
 
 signals:
     void sendForEdit(const int &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic);

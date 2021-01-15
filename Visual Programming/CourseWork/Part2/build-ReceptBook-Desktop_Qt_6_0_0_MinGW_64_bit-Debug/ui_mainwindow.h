@@ -37,7 +37,6 @@ public:
     QLabel *picLabel;
     QPushButton *editButton;
     QPushButton *deleteButton;
-    QLabel *designLabel_big;
     QLineEdit *nameLabel;
     QPushButton *filterButton;
     QPushButton *helpButton;
@@ -55,12 +54,21 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(1219, 636));
         MainWindow->setMaximumSize(QSize(1219, 636));
+        MainWindow->setCursor(QCursor(Qt::ArrowCursor));
         MainWindow->setMouseTracking(false);
         QIcon icon;
         icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
-        MainWindow->setStyleSheet(QString::fromUtf8("QMainWindow {\n"
-"	background-color: rgb(205, 249, 62)}\n"
+        MainWindow->setStyleSheet(QString::fromUtf8("#MainWindow {background-color: rgb(142, 154, 76)}\n"
+"QPushButton {background-color: rgb(207, 211, 126);\n"
+"	border-width: 0px;}\n"
+"QLineEdit {background-color: rgb(207, 211, 126)}\n"
+"#nameEdit {border-radius: 20px;\n"
+"	border-width: 1px;\n"
+"	min-height: 40px;\n"
+"	max-height: 40px;\n"
+"	min-width: 220px;\n"
+"	max-width: 220px}\n"
 "#searchBox {\n"
 "	border-radius: 15px;\n"
 "	border-width: 1px;\n"
@@ -69,11 +77,10 @@ public:
 "	min-width: 250px;\n"
 "	max-width: 250px;\n"
 "	border-color: green }\n"
+"#recipesTable  {background-color: rgb(207, 211, 126)}\n"
+"#outputBox  {background-color: rgb(207, 211, 126)}\n"
+"QMenu {background-color: rgb(207, 211, 126)}\n"
 "\n"
-"#nameLabel {background-color: white}\n"
-"#picLabel {background-color: white}\n"
-"\n"
-"#designLabel_big { background-color: blue}\n"
 ""));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -95,6 +102,7 @@ public:
         outputBox->setObjectName(QString::fromUtf8("outputBox"));
         outputBox->setEnabled(true);
         outputBox->setGeometry(QRect(550, 90, 631, 531));
+        outputBox->viewport()->setProperty("cursor", QVariant(QCursor(Qt::IBeamCursor)));
         outputBox->setReadOnly(true);
         categoriesButton = new QPushButton(centralwidget);
         categoriesButton->setObjectName(QString::fromUtf8("categoriesButton"));
@@ -117,13 +125,12 @@ public:
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
         deleteButton->setGeometry(QRect(300, 480, 220, 40));
-        designLabel_big = new QLabel(centralwidget);
-        designLabel_big->setObjectName(QString::fromUtf8("designLabel_big"));
-        designLabel_big->setEnabled(false);
-        designLabel_big->setGeometry(QRect(280, 90, 931, 531));
         nameLabel = new QLineEdit(centralwidget);
         nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
         nameLabel->setGeometry(QRect(300, 330, 220, 40));
+        nameLabel->setMinimumSize(QSize(220, 40));
+        nameLabel->setMaximumSize(QSize(220, 40));
+        nameLabel->setReadOnly(true);
         filterButton = new QPushButton(centralwidget);
         filterButton->setObjectName(QString::fromUtf8("filterButton"));
         filterButton->setGeometry(QRect(270, 10, 160, 30));
@@ -131,7 +138,6 @@ public:
         helpButton->setObjectName(QString::fromUtf8("helpButton"));
         helpButton->setGeometry(QRect(880, 10, 160, 30));
         MainWindow->setCentralWidget(centralwidget);
-        designLabel_big->raise();
         bestButton->raise();
         outputBox->raise();
         categoriesButton->raise();
@@ -163,7 +169,6 @@ public:
         picLabel->setText(QString());
         editButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
-        designLabel_big->setText(QString());
         filterButton->setText(QCoreApplication::translate("MainWindow", "\320\244\320\270\320\273\321\214\321\202\321\200\321\213", nullptr));
         helpButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\274\320\276\321\211\321\214", nullptr));
     } // retranslateUi
