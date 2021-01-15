@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_EditRecordWidget_t {
-    const uint offsetsAndSize[46];
-    char stringdata0[476];
+    const uint offsetsAndSize[48];
+    char stringdata0[500];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_EditRecordWidget_t, stringdata0) + ofs), len 
@@ -51,7 +51,8 @@ QT_MOC_LITERAL(330, 30), // "categoriesStockButton_selected"
 QT_MOC_LITERAL(361, 30), // "categoriesDoughButton_selected"
 QT_MOC_LITERAL(392, 30), // "categoriesSnackButton_selected"
 QT_MOC_LITERAL(423, 30), // "categoriesSweetButton_selected"
-QT_MOC_LITERAL(454, 21) // "on_saveButton_clicked"
+QT_MOC_LITERAL(454, 21), // "on_saveButton_clicked"
+QT_MOC_LITERAL(476, 23) // "on_cancelButton_clicked"
 
     },
     "EditRecordWidget\0sendToWidgetUpdate\0"
@@ -68,7 +69,7 @@ QT_MOC_LITERAL(454, 21) // "on_saveButton_clicked"
     "categoriesDoughButton_selected\0"
     "categoriesSnackButton_selected\0"
     "categoriesSweetButton_selected\0"
-    "on_saveButton_clicked"
+    "on_saveButton_clicked\0on_cancelButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -78,7 +79,7 @@ static const uint qt_meta_data_EditRecordWidget[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -86,29 +87,31 @@ static const uint qt_meta_data_EditRecordWidget[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    6,  104,    2, 0x06,    0 /* Public */,
+       1,    6,  110,    2, 0x06,    0 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       9,    6,  117,    2, 0x0a,    7 /* Public */,
-      10,    0,  130,    2, 0x08,   14 /* Private */,
-      11,    0,  131,    2, 0x08,   15 /* Private */,
-      12,    0,  132,    2, 0x08,   16 /* Private */,
-      13,    0,  133,    2, 0x08,   17 /* Private */,
-      14,    0,  134,    2, 0x08,   18 /* Private */,
-      15,    0,  135,    2, 0x08,   19 /* Private */,
-      16,    0,  136,    2, 0x08,   20 /* Private */,
-      17,    0,  137,    2, 0x08,   21 /* Private */,
-      18,    0,  138,    2, 0x08,   22 /* Private */,
-      19,    0,  139,    2, 0x08,   23 /* Private */,
-      20,    0,  140,    2, 0x08,   24 /* Private */,
-      21,    0,  141,    2, 0x08,   25 /* Private */,
-      22,    0,  142,    2, 0x08,   26 /* Private */,
+       9,    6,  123,    2, 0x0a,    7 /* Public */,
+      10,    0,  136,    2, 0x08,   14 /* Private */,
+      11,    0,  137,    2, 0x08,   15 /* Private */,
+      12,    0,  138,    2, 0x08,   16 /* Private */,
+      13,    0,  139,    2, 0x08,   17 /* Private */,
+      14,    0,  140,    2, 0x08,   18 /* Private */,
+      15,    0,  141,    2, 0x08,   19 /* Private */,
+      16,    0,  142,    2, 0x08,   20 /* Private */,
+      17,    0,  143,    2, 0x08,   21 /* Private */,
+      18,    0,  144,    2, 0x08,   22 /* Private */,
+      19,    0,  145,    2, 0x08,   23 /* Private */,
+      20,    0,  146,    2, 0x08,   24 /* Private */,
+      21,    0,  147,    2, 0x08,   25 /* Private */,
+      22,    0,  148,    2, 0x08,   26 /* Private */,
+      23,    0,  149,    2, 0x08,   27 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QByteArray,    3,    4,    5,    6,    7,    8,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QByteArray,    3,    4,    5,    6,    7,    8,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -147,6 +150,7 @@ void EditRecordWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 12: _t->categoriesSnackButton_selected(); break;
         case 13: _t->categoriesSweetButton_selected(); break;
         case 14: _t->on_saveButton_clicked(); break;
+        case 15: _t->on_cancelButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -169,7 +173,7 @@ const QMetaObject EditRecordWidget::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_EditRecordWidget_t
 , QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QByteArray &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QByteArray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QByteArray &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -196,13 +200,13 @@ int EditRecordWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 16)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }

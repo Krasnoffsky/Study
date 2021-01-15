@@ -1,0 +1,11 @@
+release/database.o
+release/editrecordwidget.o
+release/helper.o
+release/main.o
+release/mainwindow.o
+release/newrecordwidget.o
+release/moc_database.o
+release/moc_editrecordwidget.o
+release/moc_helper.o
+release/moc_mainwindow.o
+release/moc_newrecordwidget.o

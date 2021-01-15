@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     newRecord = new NewRecordWidget;
     editRecord = new EditRecordWidget;
+    helpWidget = new Helper;
 
     connect(newRecord,SIGNAL(sendToWidget(QString,
                                           QString,
@@ -429,4 +430,9 @@ void MainWindow::filterRecipe_selected()
 {
     currentFilter = "RECIPE";
     ui->filterButton->setText("Рецепт");
+}
+
+void MainWindow::on_helpButton_clicked()
+{
+    helpWidget->show();
 }

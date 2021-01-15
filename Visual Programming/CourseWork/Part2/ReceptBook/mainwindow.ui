@@ -250,7 +250,20 @@
      </rect>
     </property>
     <property name="text">
-     <string>Фильтр</string>
+     <string>Фильтры</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="helpButton">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>10</y>
+      <width>160</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Помощь</string>
     </property>
    </widget>
    <zorder>designLabel_big</zorder>
@@ -266,6 +279,7 @@
    <zorder>nameLabel</zorder>
    <zorder>searchBox</zorder>
    <zorder>filterButton</zorder>
+   <zorder>helpButton</zorder>
   </widget>
  </widget>
  <resources/>

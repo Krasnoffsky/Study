@@ -10,6 +10,7 @@
 #define UI_EDITRECORDWIDGET_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -38,6 +39,9 @@ public:
         EditRecordWidget->resize(900, 650);
         EditRecordWidget->setMinimumSize(QSize(900, 650));
         EditRecordWidget->setMaximumSize(QSize(900, 650));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        EditRecordWidget->setWindowIcon(icon);
         cancelButton = new QPushButton(EditRecordWidget);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
         cancelButton->setGeometry(QRect(700, 606, 180, 40));
@@ -70,7 +74,7 @@ public:
 
     void retranslateUi(QWidget *EditRecordWidget)
     {
-        EditRecordWidget->setWindowTitle(QCoreApplication::translate("EditRecordWidget", "Form", nullptr));
+        EditRecordWidget->setWindowTitle(QCoreApplication::translate("EditRecordWidget", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         cancelButton->setText(QCoreApplication::translate("EditRecordWidget", "\320\236\321\202\320\274\320\265\320\275\320\270\321\202\321\214", nullptr));
         picLabel->setText(QString());
         saveButton->setText(QCoreApplication::translate("EditRecordWidget", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));

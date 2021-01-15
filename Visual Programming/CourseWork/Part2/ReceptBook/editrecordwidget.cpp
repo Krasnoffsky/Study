@@ -188,3 +188,8 @@ void EditRecordWidget::catchInfo(const int &id, const QString &name, const QStri
     img.loadFromData(pic);
     ui->picLabel->setPixmap(img.scaled(picLabel_width,picLabel_height,Qt::KeepAspectRatio));
 }
+
+void EditRecordWidget::on_cancelButton_clicked()
+{
+    close();
+}

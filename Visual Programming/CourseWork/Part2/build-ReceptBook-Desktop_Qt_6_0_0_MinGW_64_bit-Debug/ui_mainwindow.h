@@ -40,6 +40,7 @@ public:
     QLabel *designLabel_big;
     QLineEdit *nameLabel;
     QPushButton *filterButton;
+    QPushButton *helpButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -126,6 +127,9 @@ public:
         filterButton = new QPushButton(centralwidget);
         filterButton->setObjectName(QString::fromUtf8("filterButton"));
         filterButton->setGeometry(QRect(270, 10, 160, 30));
+        helpButton = new QPushButton(centralwidget);
+        helpButton->setObjectName(QString::fromUtf8("helpButton"));
+        helpButton->setGeometry(QRect(880, 10, 160, 30));
         MainWindow->setCentralWidget(centralwidget);
         designLabel_big->raise();
         bestButton->raise();
@@ -140,6 +144,7 @@ public:
         nameLabel->raise();
         searchBox->raise();
         filterButton->raise();
+        helpButton->raise();
 
         retranslateUi(MainWindow);
 
@@ -159,7 +164,8 @@ public:
         editButton->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         designLabel_big->setText(QString());
-        filterButton->setText(QCoreApplication::translate("MainWindow", "\320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
+        filterButton->setText(QCoreApplication::translate("MainWindow", "\320\244\320\270\320\273\321\214\321\202\321\200\321\213", nullptr));
+        helpButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\274\320\276\321\211\321\214", nullptr));
     } // retranslateUi
 
 };

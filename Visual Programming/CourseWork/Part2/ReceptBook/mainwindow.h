@@ -10,6 +10,7 @@
 #include "database.h"
 #include "newrecordwidget.h"
 #include "editrecordwidget.h"
+#include "helper.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -58,11 +59,14 @@ private slots:
 
     void on_searchBox_textEdited(const QString &arg1);
 
+    void on_helpButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     NewRecordWidget *newRecord;
     EditRecordWidget *editRecord;
+    Helper *helpWidget;
 
     database dataControl;
 

@@ -23,7 +23,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Изменить рецепт</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../src/icon.png</normaloff>../src/icon.png</iconset>
   </property>
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
