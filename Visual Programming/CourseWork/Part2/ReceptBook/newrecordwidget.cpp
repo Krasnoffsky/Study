@@ -70,11 +70,7 @@ NewRecordWidget::NewRecordWidget(QWidget *parent) :
 
     currentPic = "";
     currentCategory = "";
-    ui->picLabel->clear();
-    ui->nameLine->clear();
-    ui->recipeBox->clear();
-    ui->ingredientsBox->clear();
-    ui->selectCategoryButton->setText("Категория");
+
 }
 
 NewRecordWidget::~NewRecordWidget()

@@ -1,0 +1,11 @@
+debug/database.o
+debug/editrecordwidget.o
+debug/helper.o
+debug/main.o
+debug/mainwindow.o
+debug/newrecordwidget.o
+debug/moc_database.o
+debug/moc_editrecordwidget.o
+debug/moc_helper.o
+debug/moc_mainwindow.o
+debug/moc_newrecordwidget.o
