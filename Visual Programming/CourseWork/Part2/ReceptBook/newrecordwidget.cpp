@@ -174,6 +174,13 @@ void NewRecordWidget::on_saveButton_clicked()
 
     if (name != "" && ingredients != "" && recipe != "" && currentCategory != ""){
         emit sendToWidget(name, ingredients, recipe, currentCategory, inByteArray);
+        ui->ingredientsBox->clear();
+        ui->nameLine->clear();
+        ui->selectCategoryButton->setText("Категория");
+        ui->picLabel->clear();
+        ui->recipeBox->clear();
+        currentCategory = "";
+        currentPic = "";
         QMessageBox::information(0, "Avocado", "Новый рецепт добавлен");
         close();
     }

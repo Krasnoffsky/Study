@@ -67,7 +67,7 @@ QLineEdit {background-color: rgb(207, 211, 126)}
 	border-color: green }
 #recipesTable {background-color: rgb(207, 211, 126)}
 #outputBox  {background-color: rgb(207, 211, 126)}
-QMenu {background-color: rgb(207, 211, 126)}
+
 
 </string>
   </property>

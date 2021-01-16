@@ -81,7 +81,7 @@ public:
 "	border-color: green }\n"
 "#recipesTable {background-color: rgb(207, 211, 126)}\n"
 "#outputBox  {background-color: rgb(207, 211, 126)}\n"
-"QMenu {background-color: rgb(207, 211, 126)}\n"
+"QAction {background-color: rgb(207, 211, 126)}\n"
 "\n"
 ""));
         centralwidget = new QWidget(MainWindow);
