@@ -2,6 +2,7 @@
 #define EDITRECORDWIDGET_H
 
 #include <QBuffer>
+#include <QByteArray>
 #include <QWidget>
 #include <QFileDialog>
 #include <QMenu>
@@ -65,6 +66,7 @@ private:
 
     QString currentCategory;
     QString currentPic;
+    QByteArray picture;
 
 
 private:

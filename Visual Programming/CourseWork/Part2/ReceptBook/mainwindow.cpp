@@ -383,6 +383,7 @@ void MainWindow::on_editButton_clicked()
     QString ingredients = recipesModel->data(recipesModel->index(currentRow, 2)).toString();
     QString recipe = recipesModel->data(recipesModel->index(currentRow, 3)).toString();
     QString type = recipesModel->data(recipesModel->index(currentRow, 4)).toString();
+//    recipePic = recipesModel->data(recipesModel->index(currentRow, 6)).toByteArray();
 
     editRecord->show();
     emit sendForEdit(currentID, name, ingredients, recipe, type, recipePic);
