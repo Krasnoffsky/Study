@@ -164,6 +164,22 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+
+    QPainter qp(this);
+    QPainterPath path;
+    QPen pen(QColor(204, 229, 134), 2, Qt::SolidLine);
+    path.addRoundedRect(290, 80, 901, 551, 10, 10);
+//    path.addRoundedRect(30, 80, 200, 551, 10, 10);
+
+    qp.setPen(pen);
+    qp.fillPath(path, QColor(204, 229, 134));
+    qp.drawPath(path);
+
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;

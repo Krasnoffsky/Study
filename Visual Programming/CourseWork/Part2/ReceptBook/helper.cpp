@@ -10,7 +10,7 @@ Helper::Helper(QWidget *parent) :
     QFile *File = new QFile("C:\\Study\\Visual Programming\\CourseWork\\Part2\\src\\main.html");
     File->open(QFile::ReadOnly | QFile::Text);
     QString html = File->readAll();
-    QColor linkColor("#77DD77");
+    QColor linkColor(Qt::blue);
     QString sheet = QString::fromLatin1("a { text-decoration: underline; color: %1 }").arg(linkColor.name());
     ui->textBrowser->document()->setDefaultStyleSheet(sheet);
     ui->textBrowser->setHtml(html);

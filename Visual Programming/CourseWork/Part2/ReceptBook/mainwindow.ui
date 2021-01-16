@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1219</width>
-    <height>636</height>
+    <height>645</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>1219</width>
-    <height>636</height>
+    <height>645</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>1219</width>
-    <height>636</height>
+    <height>645</height>
    </size>
   </property>
   <property name="cursor">
@@ -46,15 +46,17 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#MainWindow {background-color: rgb(142, 154, 76)}
-QPushButton {background-color: rgb(207, 211, 126);
+QPushButton {background-color: rgb(207, 211, 126);;
+	border-width: 0px;}
+QPushButton:hover {background-color: rgb(207, 240, 126);;
 	border-width: 0px;}
 QLineEdit {background-color: rgb(207, 211, 126)}
-#nameEdit {border-radius: 20px;
+#nameEdit {border-radius: 15px;
 	border-width: 1px;
-	min-height: 40px;
-	max-height: 40px;
-	min-width: 220px;
-	max-width: 220px}
+	min-height: 30px;
+	max-height: 30px;
+	min-width: 250px;
+	max-width: 250px;}
 #searchBox {
 	border-radius: 15px;
 	border-width: 1px;
@@ -63,7 +65,7 @@ QLineEdit {background-color: rgb(207, 211, 126)}
 	min-width: 250px;
 	max-width: 250px;
 	border-color: green }
-#recipesTable  {background-color: rgb(207, 211, 126)}
+#recipesTable {background-color: rgb(207, 211, 126)}
 #outputBox  {background-color: rgb(207, 211, 126)}
 QMenu {background-color: rgb(207, 211, 126)}
 
@@ -132,6 +134,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <height>531</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="cursor" stdset="0">
      <cursorShape>IBeamCursor</cursorShape>
     </property>
@@ -148,6 +156,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <height>40</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>Категория</string>
     </property>
@@ -161,6 +175,11 @@ QMenu {background-color: rgb(207, 211, 126)}
       <height>360</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+     </font>
+    </property>
    </widget>
    <widget class="QPushButton" name="addButton">
     <property name="geometry">
@@ -170,6 +189,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <width>200</width>
       <height>40</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>11</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Новый рецепт</string>
@@ -183,6 +208,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <width>220</width>
       <height>40</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>11</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Добавить в избранное</string>
@@ -210,6 +241,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <height>40</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>Изменить рецепт</string>
     </property>
@@ -222,6 +259,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <width>220</width>
       <height>40</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>11</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Удалить рецепт</string>
@@ -248,6 +291,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <height>40</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="readOnly">
      <bool>true</bool>
     </property>
@@ -261,6 +310,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <height>30</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>Фильтры</string>
     </property>
@@ -273,6 +328,12 @@ QMenu {background-color: rgb(207, 211, 126)}
       <width>160</width>
       <height>30</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Помощь</string>

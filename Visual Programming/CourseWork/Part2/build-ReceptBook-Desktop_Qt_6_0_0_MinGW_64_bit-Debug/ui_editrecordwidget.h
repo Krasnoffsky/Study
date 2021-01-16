@@ -42,30 +42,54 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         EditRecordWidget->setWindowIcon(icon);
+        EditRecordWidget->setStyleSheet(QString::fromUtf8("#EditRecordWidget {background-color: rgb(142, 154, 76)}\n"
+"QPushButton {background-color: rgb(207, 211, 126);;\n"
+"	border-width: 0px;}\n"
+"QPushButton:hover {background-color: rgb(207, 240, 126);;\n"
+"	border-width: 0px;}\n"
+"QLineEdit {background-color: rgb(207, 211, 126)}\n"
+"#nameLine {border-radius: 20px;\n"
+"	border-width: 1px;\n"
+"	min-height: 40px;\n"
+"	max-height: 40px;\n"
+"	min-width: 200px;\n"
+"	max-width: 200px}\n"
+"\n"
+"QTextEdit  {background-color: rgb(207, 211, 126)}\n"
+""));
         cancelButton = new QPushButton(EditRecordWidget);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
         cancelButton->setGeometry(QRect(700, 606, 180, 40));
+        QFont font;
+        font.setFamily(QString::fromUtf8("Calibri Light"));
+        font.setPointSize(11);
+        cancelButton->setFont(font);
         picLabel = new QLabel(EditRecordWidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
         picLabel->setGeometry(QRect(30, 26, 200, 200));
         saveButton = new QPushButton(EditRecordWidget);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
         saveButton->setGeometry(QRect(510, 606, 180, 40));
+        saveButton->setFont(font);
         ingredientsBox = new QTextEdit(EditRecordWidget);
         ingredientsBox->setObjectName(QString::fromUtf8("ingredientsBox"));
         ingredientsBox->setGeometry(QRect(280, 20, 600, 200));
+        ingredientsBox->setFont(font);
         nameLine = new QLineEdit(EditRecordWidget);
         nameLine->setObjectName(QString::fromUtf8("nameLine"));
         nameLine->setGeometry(QRect(30, 309, 200, 40));
         recipeBox = new QTextEdit(EditRecordWidget);
         recipeBox->setObjectName(QString::fromUtf8("recipeBox"));
         recipeBox->setGeometry(QRect(280, 236, 601, 351));
+        recipeBox->setFont(font);
         selectCategoryButton = new QPushButton(EditRecordWidget);
         selectCategoryButton->setObjectName(QString::fromUtf8("selectCategoryButton"));
         selectCategoryButton->setGeometry(QRect(30, 356, 200, 40));
+        selectCategoryButton->setFont(font);
         addPicButton = new QPushButton(EditRecordWidget);
         addPicButton->setObjectName(QString::fromUtf8("addPicButton"));
         addPicButton->setGeometry(QRect(30, 236, 200, 40));
+        addPicButton->setFont(font);
 
         retranslateUi(EditRecordWidget);
 

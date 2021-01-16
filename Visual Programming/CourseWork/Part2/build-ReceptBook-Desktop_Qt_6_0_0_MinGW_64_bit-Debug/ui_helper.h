@@ -10,6 +10,7 @@
 #define UI_HELPER_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
@@ -28,6 +29,10 @@ public:
         Helper->resize(900, 650);
         Helper->setMinimumSize(QSize(900, 650));
         Helper->setMaximumSize(QSize(900, 650));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        Helper->setWindowIcon(icon);
+        Helper->setStyleSheet(QString::fromUtf8("QTextBrowser {background-color:  rgb(142, 154, 76)}"));
         textBrowser = new QTextBrowser(Helper);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
         textBrowser->setGeometry(QRect(0, 0, 901, 651));
@@ -39,7 +44,7 @@ public:
 
     void retranslateUi(QWidget *Helper)
     {
-        Helper->setWindowTitle(QCoreApplication::translate("Helper", "Form", nullptr));
+        Helper->setWindowTitle(QCoreApplication::translate("Helper", "\320\237\320\276\320\274\320\276\321\211\321\214", nullptr));
     } // retranslateUi
 
 };

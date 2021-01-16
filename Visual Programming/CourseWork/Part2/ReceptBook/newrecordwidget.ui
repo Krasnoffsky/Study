@@ -30,9 +30,20 @@
     <normaloff>../src/icon.png</normaloff>../src/icon.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#NewRecordWidget {background-color: blue}
-QLabel {background-color: white}
-QTextEdit {background-color: white}
+   <string notr="true">#NewRecordWidget {background-color: rgb(142, 154, 76)}
+QPushButton {background-color: rgb(207, 211, 126);;
+	border-width: 0px;}
+QPushButton:hover {background-color: rgb(207, 240, 126);;
+	border-width: 0px;}
+QLineEdit {background-color: rgb(207, 211, 126)}
+#nameLine {border-radius: 20px;
+	border-width: 1px;
+	min-height: 40px;
+	max-height: 40px;
+	min-width: 200px;
+	max-width: 200px}
+
+QTextEdit  {background-color: rgb(207, 211, 126)}
 </string>
   </property>
   <widget class="QLabel" name="picLabel">
@@ -57,6 +68,12 @@ QTextEdit {background-color: white}
      <height>40</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>Загрузить изображение</string>
    </property>
@@ -69,6 +86,12 @@ QTextEdit {background-color: white}
      <width>200</width>
      <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Категория</string>
@@ -83,6 +106,12 @@ QTextEdit {background-color: white}
      <height>351</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
   </widget>
   <widget class="QPushButton" name="saveButton">
    <property name="geometry">
@@ -92,6 +121,12 @@ QTextEdit {background-color: white}
      <width>180</width>
      <height>40</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Сохранить рецепт</string>
@@ -106,6 +141,12 @@ QTextEdit {background-color: white}
      <height>40</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>Отменить</string>
    </property>
@@ -119,6 +160,12 @@ QTextEdit {background-color: white}
      <height>40</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
   </widget>
   <widget class="QTextEdit" name="ingredientsBox">
    <property name="geometry">
@@ -128,6 +175,12 @@ QTextEdit {background-color: white}
      <width>600</width>
      <height>200</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
   </widget>
  </widget>

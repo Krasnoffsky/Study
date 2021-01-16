@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QPainter>
 #include <QPainterPath>
+#include <QPaintEvent>
 #include "database.h"
 #include "newrecordwidget.h"
 #include "editrecordwidget.h"
@@ -110,6 +111,8 @@ private:
 
     void categorySelected();
     void hideInterface(const bool &mode);
+
+    void paintEvent(QPaintEvent *event);
 
 signals:
     void sendForEdit(const int &id, const QString &name, const QString &ingredients, const QString &recipe, const QString &type, const QByteArray &pic);

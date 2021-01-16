@@ -46,29 +46,31 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->setEnabled(true);
-        MainWindow->resize(1219, 636);
+        MainWindow->resize(1219, 645);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
-        MainWindow->setMinimumSize(QSize(1219, 636));
-        MainWindow->setMaximumSize(QSize(1219, 636));
+        MainWindow->setMinimumSize(QSize(1219, 645));
+        MainWindow->setMaximumSize(QSize(1219, 645));
         MainWindow->setCursor(QCursor(Qt::ArrowCursor));
         MainWindow->setMouseTracking(false);
         QIcon icon;
         icon.addFile(QString::fromUtf8("../src/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         MainWindow->setStyleSheet(QString::fromUtf8("#MainWindow {background-color: rgb(142, 154, 76)}\n"
-"QPushButton {background-color: rgb(207, 211, 126);\n"
+"QPushButton {background-color: rgb(207, 211, 126);;\n"
+"	border-width: 0px;}\n"
+"QPushButton:hover {background-color: rgb(207, 240, 126);;\n"
 "	border-width: 0px;}\n"
 "QLineEdit {background-color: rgb(207, 211, 126)}\n"
-"#nameEdit {border-radius: 20px;\n"
+"#nameEdit {border-radius: 15px;\n"
 "	border-width: 1px;\n"
-"	min-height: 40px;\n"
-"	max-height: 40px;\n"
-"	min-width: 220px;\n"
-"	max-width: 220px}\n"
+"	min-height: 30px;\n"
+"	max-height: 30px;\n"
+"	min-width: 250px;\n"
+"	max-width: 250px;}\n"
 "#searchBox {\n"
 "	border-radius: 15px;\n"
 "	border-width: 1px;\n"
@@ -77,7 +79,7 @@ public:
 "	min-width: 250px;\n"
 "	max-width: 250px;\n"
 "	border-color: green }\n"
-"#recipesTable  {background-color: rgb(207, 211, 126)}\n"
+"#recipesTable {background-color: rgb(207, 211, 126)}\n"
 "#outputBox  {background-color: rgb(207, 211, 126)}\n"
 "QMenu {background-color: rgb(207, 211, 126)}\n"
 "\n"
@@ -102,41 +104,59 @@ public:
         outputBox->setObjectName(QString::fromUtf8("outputBox"));
         outputBox->setEnabled(true);
         outputBox->setGeometry(QRect(550, 90, 631, 531));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Calibri Light"));
+        font1.setPointSize(11);
+        outputBox->setFont(font1);
         outputBox->viewport()->setProperty("cursor", QVariant(QCursor(Qt::IBeamCursor)));
         outputBox->setReadOnly(true);
         categoriesButton = new QPushButton(centralwidget);
         categoriesButton->setObjectName(QString::fromUtf8("categoriesButton"));
         categoriesButton->setGeometry(QRect(30, 130, 200, 40));
+        categoriesButton->setFont(font1);
         recipesTable = new QTableView(centralwidget);
         recipesTable->setObjectName(QString::fromUtf8("recipesTable"));
         recipesTable->setGeometry(QRect(30, 180, 200, 360));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Calibri Light"));
+        recipesTable->setFont(font2);
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
         addButton->setGeometry(QRect(30, 550, 200, 40));
+        addButton->setFont(font1);
         edit_bestButton = new QPushButton(centralwidget);
         edit_bestButton->setObjectName(QString::fromUtf8("edit_bestButton"));
         edit_bestButton->setGeometry(QRect(300, 380, 220, 40));
+        edit_bestButton->setFont(font1);
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
         picLabel->setGeometry(QRect(300, 90, 220, 220));
         editButton = new QPushButton(centralwidget);
         editButton->setObjectName(QString::fromUtf8("editButton"));
         editButton->setGeometry(QRect(300, 430, 220, 40));
+        editButton->setFont(font1);
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
         deleteButton->setGeometry(QRect(300, 480, 220, 40));
+        deleteButton->setFont(font1);
         nameLabel = new QLineEdit(centralwidget);
         nameLabel->setObjectName(QString::fromUtf8("nameLabel"));
         nameLabel->setGeometry(QRect(300, 330, 220, 40));
         nameLabel->setMinimumSize(QSize(220, 40));
         nameLabel->setMaximumSize(QSize(220, 40));
+        nameLabel->setFont(font);
         nameLabel->setReadOnly(true);
         filterButton = new QPushButton(centralwidget);
         filterButton->setObjectName(QString::fromUtf8("filterButton"));
         filterButton->setGeometry(QRect(270, 10, 160, 30));
+        filterButton->setFont(font);
         helpButton = new QPushButton(centralwidget);
         helpButton->setObjectName(QString::fromUtf8("helpButton"));
         helpButton->setGeometry(QRect(880, 10, 160, 30));
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("Calibri Light"));
+        font3.setPointSize(9);
+        helpButton->setFont(font3);
         MainWindow->setCentralWidget(centralwidget);
         bestButton->raise();
         outputBox->raise();
