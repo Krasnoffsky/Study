@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     widget_krasnov window;
+    window.setWindowTitle("Krasnov");
 
     window.show();
     return a.exec();

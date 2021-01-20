@@ -10,12 +10,17 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    snowflake.cpp \
+    tree.cpp \
     widget_krasnov.cpp
 
 HEADERS += \
+    snowflake.h \
+    tree.h \
     widget_krasnov.h
 
 FORMS += \
+    tree.ui \
     widget_krasnov.ui
 
 # Default rules for deployment.

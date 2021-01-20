@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include "windows.h"
+#include <QTimer>
+#include <snowflake.h>
+#include <tree.h>
 
 namespace Ui {
 class widget_krasnov;
@@ -20,6 +24,11 @@ public:
 private:
     Ui::widget_krasnov *ui;
     QGraphicsScene *scene;
+    QTimer timer;
+
+    Snowflake *sf;
+    Tree *ch;
+
 };
 
 #endif // WIDGET_KRASNOV_H
