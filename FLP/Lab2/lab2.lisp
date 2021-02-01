@@ -1,5 +1,0 @@
-(defun rec(lis1 lis2)
-	( (cons `(last lis1) `lis2)
-	  (if (not (equal lis1 nil)) rec((butlast lis1) lis2)) 
-	)
-)

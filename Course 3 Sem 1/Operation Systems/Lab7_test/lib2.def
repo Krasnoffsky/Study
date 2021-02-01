@@ -1,0 +1,5 @@
+LIBRARY lib2
+EXPORTS
+a @1
+f @2
+g @3

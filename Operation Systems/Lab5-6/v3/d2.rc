@@ -1,6 +1,0 @@
-#include <windows.h>
-#include "host_resource.h"
-
- PUSHBUTTON "Send",IDC_BTN1,7,20,30,15
-END
-
