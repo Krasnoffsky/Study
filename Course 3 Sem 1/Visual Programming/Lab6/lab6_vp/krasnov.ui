@@ -14,11 +14,11 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton:hover {background: rgb(93, 93, 93)}
-QPushButton {background: rgb(87,87,87); color: white}
-QTextEdit {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
-QLabel {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
-QWidget{background-color: rgb(55, 55, 55); color: white;}
+   <string notr="true">QPushButton:hover {background: rgb(243, 255, 17)}
+QPushButton {background: rgb(200, 255, 17); color: black}
+QLabel {background: rgb(243,255,150);  border-color: rgb(45,45,45)}
+QTextEdit {background: rgb(243,255,150)}
+QWidget{background-color: rgb(243,255,150)}
 
 
 

@@ -39,7 +39,7 @@ void MainWindow::on_pushButton_2_clicked()
             + "ФИО: " + ui->lineEdit->text() + "\n"
             + "Дата рождения: " + ui->dateEdit->text() + "\n"
             + "Должность: " + ui->lineEdit_2->text()+ "\n"
-            + "Дата вступдения в должность: " + ui->dateEdit_2->text();
+            + "Любимая дата: " + ui->dateEdit_2->text();
         if (ui->radioButton->isChecked())
             st += "\nПол: Мужской";
       else

@@ -14,13 +14,12 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton:hover {background: rgb(93, 93, 93)}
-QPushButton {background: rgb(87,87,87); color: white}
-QRadioButton {color: white}
-QLabel {background: rgb(55,55,55); color: white; border-color: rgb(45,45,45)}
-QLineEdit {background: rgb(45,45,45); color: white;}
-QDateEdit {background: rgb(45,45,45); color: white;}
-QMainWindow{background-color: rgb(55, 55, 55); color: white;}
+   <string notr="true">QPushButton:hover {background: rgb(243, 255, 17)}
+QPushButton {background: rgb(200, 255, 17); color: black}
+QLabel {background: rgb(243,255,150);  border-color: rgb(45,45,45)}
+QLineEdit {background: rgb(243,255,150)}
+QDateEdit {background: rgb(243,255,150)}
+QMainWindow{background-color: rgb(243,255,150)}
 
 
 
@@ -78,7 +77,7 @@ QMainWindow{background-color: rgb(55, 55, 55); color: white;}
      <item row="2" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Дата вступления в должность</string>
+        <string>Любимая дата</string>
        </property>
       </widget>
      </item>

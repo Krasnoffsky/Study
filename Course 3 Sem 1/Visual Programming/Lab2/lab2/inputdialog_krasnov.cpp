@@ -19,7 +19,7 @@ inputdialog::inputdialog(QWidget* pwgt) : QDialog(pwgt)
     QPushButton* pcmdCancel = new QPushButton("&Cancel");
 
     connect(pcmdOk, SIGNAL(clicked()), SLOT(accept()));
-    connect(pcmdOk, SIGNAL(clicked()), SLOT(reject()));
+    connect(pcmdCancel, SIGNAL(clicked()), SLOT(reject()));
 
     QGridLayout* ptopLayout = new QGridLayout;
     ptopLayout->addWidget(plblFirstName, 0, 0);

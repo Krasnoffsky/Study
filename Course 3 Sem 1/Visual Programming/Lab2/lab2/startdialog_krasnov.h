@@ -23,7 +23,7 @@ public slots:
             QMessageBox::information(0,
                                      "Ваша информация: ",
                                      "Имя: "
-                                     + pInputDialog->firstName(),
+                                     + pInputDialog->firstName()
                                      + "\nФамилия: "
                                      + pInputDialog->lastName()
                                      );
