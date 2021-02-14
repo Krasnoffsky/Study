@@ -26,7 +26,7 @@ SimpleFrac::SimpleFrac()
 
 SimpleFrac::~SimpleFrac()
 {
-
+	
 }
 
 SimpleFrac SimpleFrac::operator+(SimpleFrac t)
