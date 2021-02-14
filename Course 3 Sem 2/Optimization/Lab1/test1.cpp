@@ -8,19 +8,18 @@ int N, M;
 
 void DeleteLine(SimpleFrac **mtrx, int line)
 {
-	SimpleFrac *temp = new SimpleFrac[M];
+	SimpleFrac temp;
 	if (line == N - 1){
 		N--;
 	}
 	else {
 		for (int i = line + 1; i < N; i++){
-			temp = mtrx[i];
+			temp = *mtrx[i];
 			mtrx[i] = mtrx[i - 1];
-			mtrx[i - 1] = temp;
+			*mtrx[i - 1] = temp;
 		}
 		M--;	
 	}
-	delete(temp);
 }
 
 bool CheckZero(SimpleFrac **mtrx)
@@ -43,14 +42,18 @@ bool CheckZero(SimpleFrac **mtrx)
 		else if (flag_zero && mtrx[i][M].a != 0)
 			return false;
 				
-		else if (flag_zero && mtrx[i][M].a == 0)
+		else if (flag_zero && mtrx[i][M].a == 0){
+		
 			DeleteLine(mtrx, i);
+			cout << "d_1" << endl;
+		}
 			
 		else {
 			cout << "CRITICAL ERROR: INVALID SITUATION" << endl;
 			return false;
 		}	
 	}
+	cout << "d_2" << endl;
 	return true;
 }
 
@@ -152,7 +155,11 @@ int main()
     
 		if (N == M){
 			for (int i = 0; i < N; i++){
-				cout << "x" << i + 1 << " = " << matrix[i][M].a << "/" << matrix[i][M].b << endl;
+				cout << "x" << i + 1 << " = " << matrix[i][M].a;
+				if (matrix[i][M].b != 1)
+					cout << "/" << matrix[i][M].b << endl;
+				else
+					cout << endl;
 			}	
 		}
 		else {
@@ -160,7 +167,11 @@ int main()
 				cout << "x" << i + 1 << " = " << matrix[i][M].a << "/" << matrix[i][M].b << " ";
 				for (int j = i + 1; j < M; j++){
 					if (matrix[i][j].a != 0){
-						cout << " + " << matrix[i][j].a * (-1) << "/" << matrix[i][j].b << " * x" << i + 1 << " ";
+						cout << " + " << matrix[i][j].a * (-1) << "/";
+						if (matrix[i][j].b != 1)
+							cout << matrix[i][j].b << " * x" << i + 1 << " ";
+						else
+							cout << " * x" << i + 1 << " ";
 					}
 				}
 				cout << endl;
