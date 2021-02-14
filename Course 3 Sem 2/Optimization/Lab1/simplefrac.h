@@ -2,16 +2,20 @@
 
 class SimpleFrac
 {
-    public:
-        SimpleFrac();
-        ~SimpleFrac();
+public:
+    SimpleFrac();
+    ~SimpleFrac();
 
-        int a, b;
+    long int a, b;
 
-        void FracPlus(SimpleFrac t1, SimpleFrac t2);
-        void FracMinus(SimpleFrac t1, SimpleFrac t2);
-        void FracMulti(SimpleFrac t1, SimpleFrac t2);
-        void FracDiv(SimpleFrac t1, SimpleFrac t2);
+    SimpleFrac operator=(SimpleFrac t);
+    SimpleFrac operator+(SimpleFrac t);
+    SimpleFrac operator-(SimpleFrac t);
+	SimpleFrac operator*(SimpleFrac t);
+    SimpleFrac operator/(SimpleFrac t);
+	
+private:
+	SimpleFrac Reduce(SimpleFrac t);
 };
 
 SimpleFrac::SimpleFrac()
@@ -25,68 +29,82 @@ SimpleFrac::~SimpleFrac()
 
 }
 
-void SimpleFrac::FracPlus(SimpleFrac t1, SimpleFrac t2)
+SimpleFrac SimpleFrac::operator+(SimpleFrac t)
 {
-    if (t1.b != t2.b){
-        a = t1.a * t2.b + t2.a * t1.b;
-        b = t1.b * t2.b;
-    }
-    else {
-        a = t1.a + t2.a;
-        b = t1.b;
-    }
-    
-    if ((a < 0 && b < 0) || (a >= 0 && b < 0)) {
-    	a *= -1;
-    	b *= -1;
+	SimpleFrac result;
+    result.a = a * t.b + t.a * b;
+    result.b = b * t.b;
+    if (result.b < 0){
+    	result.a *= -1;
+		result.b *= -1;	
 	}
+    result = Reduce(result);
+    return result;
 }
 
-void SimpleFrac::FracMinus(SimpleFrac t1, SimpleFrac t2)
+SimpleFrac SimpleFrac::operator-(SimpleFrac t)
 {
-    if (t1.b != t2.b){
-        a = t1.a * t2.b - t2.a * t1.b;
-        b = t1.b * t2.b;
-    }
-    else {
-        a = t1.a - t2.a;
-        b = t1.b;
-    }
-    
-    if ((a < 0 && b < 0) || (a >= 0 && b < 0)) {
-    	a *= -1;
-    	b *= -1;
+	SimpleFrac result;
+    result.a = a * t.b - t.a *b;
+    result.b = b * t.b;
+    if (result.b < 0){
+    	result.a *= -1;
+		result.b *= -1;	
 	}
+    result = Reduce(result);
+    return result;
 }
 
-void SimpleFrac::FracMulti(SimpleFrac t1, SimpleFrac t2)
+SimpleFrac SimpleFrac::operator*(SimpleFrac t)
 {
-    a = t1.a * t2.a;
-    b = t1.b * t2.b;
-    
-    if ((a < 0 && b < 0) || (a >= 0 && b < 0)) {
-    	a *= -1;
-    	b *= -1;
+	SimpleFrac result;
+    result.a = a * t.a;
+    result.b = b * t.b;
+    if (result.b < 0){
+    	result.a *= -1;
+		result.b *= -1;	
 	}
+    result = Reduce(result);
+    return result;
 }
 
-void SimpleFrac::FracDiv(SimpleFrac t1, SimpleFrac t2)
+SimpleFrac SimpleFrac::operator/(SimpleFrac t)
 {
-    a = t1.a * t2.b;
-    b = t1.b * t2.a;
-    
-    if ((a < 0 && b < 0) || (a >= 0 && b < 0)) {
-    	a *= -1;
-    	b *= -1;
+	SimpleFrac result;
+    result.a = a * t.b;
+    result.b = b * t.a;
+    if (result.b < 0){
+    	result.a *= -1;
+		result.b *= -1;	
 	}
+    result = Reduce(result);
+    return result;
+}
+
+SimpleFrac SimpleFrac::operator=(SimpleFrac t)
+{
+	a = t.a;
+	b = t.b;
+	return *this;
+}
+
+SimpleFrac SimpleFrac::Reduce(SimpleFrac t)
+{
+	int j, less;                                  
+	do{
+  	  if (abs(t.a) < abs(t.b))                                    
+ 	       less = abs(t.a);                               
+    	else                                                  
+     	   less = abs(t.b);                                
+    	for(j = less; j > 0; j--){                    
+        	if(!(t.a % j) && !(t.b % j)){     
+            	t.a /= j;                     
+            	t.b /= j;                      
+            	break;                        
+        	}
+    	}
+//    	printf("%d\n", j);
+	} while (j > 1);
 	
-	if (a % b == 0){
-		a = a / b;
-		b = 1;
-	}
-	else if (b % a == 0){
-		b = b / a;
-		a = 1;
-	}
+	return t; 
 }
-
