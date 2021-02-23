@@ -6,7 +6,7 @@ public:
     SimpleFrac();
     ~SimpleFrac();
 
-    long int a, b;
+    long long int a, b;
 
     SimpleFrac operator=(SimpleFrac t);
     SimpleFrac operator+(SimpleFrac t);
@@ -39,6 +39,8 @@ SimpleFrac SimpleFrac::operator+(SimpleFrac t)
 		result.b *= -1;	
 	}
     result = Reduce(result);
+    if (result.a == 0)
+        result.b = 1;
     return result;
 }
 
@@ -52,32 +54,52 @@ SimpleFrac SimpleFrac::operator-(SimpleFrac t)
 		result.b *= -1;	
 	}
     result = Reduce(result);
+    if (result.a == 0)
+        result.b = 1;
     return result;
 }
 
 SimpleFrac SimpleFrac::operator*(SimpleFrac t)
 {
 	SimpleFrac result;
-    result.a = a * t.a;
-    result.b = b * t.b;
+    SimpleFrac temp1, temp2;
+    temp1.a = a;
+    temp1.b = t.b;
+    temp2.a = t.a;
+    temp2.b = b;
+    temp1 = Reduce(temp1);
+    temp2 = Reduce(temp2);
+    result.a = temp1.a * temp2.a;
+    result.b = temp1.b * temp2.b;
     if (result.b < 0){
     	result.a *= -1;
 		result.b *= -1;	
 	}
     result = Reduce(result);
+    if (result.a == 0)
+        result.b = 1;
     return result;
 }
 
 SimpleFrac SimpleFrac::operator/(SimpleFrac t)
 {
 	SimpleFrac result;
-    result.a = a * t.b;
-    result.b = b * t.a;
+    SimpleFrac temp1, temp2;
+    temp1.a = a;
+    temp1.b = t.a;
+    temp2.a = t.b;
+    temp2.b = b;
+    temp1 = Reduce(temp1);
+    temp2 = Reduce(temp2);
+    result.a = temp1.a * temp2.a;
+    result.b = temp1.b * temp2.b;
     if (result.b < 0){
     	result.a *= -1;
 		result.b *= -1;	
 	}
     result = Reduce(result);
+    if (result.a == 0)
+        result.b = 1;
     return result;
 }
 
@@ -90,7 +112,7 @@ SimpleFrac SimpleFrac::operator=(SimpleFrac t)
 
 SimpleFrac SimpleFrac::Reduce(SimpleFrac t)
 {
-	int j, less;                                  
+    long long int j, less;
 	do{
   	  if (abs(t.a) < abs(t.b))                                    
  	       less = abs(t.a);                               
