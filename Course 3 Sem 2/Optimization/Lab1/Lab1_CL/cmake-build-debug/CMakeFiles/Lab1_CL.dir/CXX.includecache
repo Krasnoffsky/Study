@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Study/Course 3 Sem 2/Optimization/Lab1/Lab1_CL/main.cpp
+iostream
+-
+string
+-
+simplefrac.h
+C:/Study/Course 3 Sem 2/Optimization/Lab1/Lab1_CL/simplefrac.h
+
+C:/Study/Course 3 Sem 2/Optimization/Lab1/Lab1_CL/simplefrac.h
+math.h
+-
+

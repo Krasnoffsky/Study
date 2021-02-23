@@ -1,0 +1,3 @@
+C:/Study/Course 3 Sem 2/Optimization/Lab1/Lab1_CL/cmake-build-debug/CMakeFiles/Lab1_CL.dir
+C:/Study/Course 3 Sem 2/Optimization/Lab1/Lab1_CL/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Study/Course 3 Sem 2/Optimization/Lab1/Lab1_CL/cmake-build-debug/CMakeFiles/rebuild_cache.dir

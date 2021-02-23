@@ -13,7 +13,7 @@ public:
     SimpleFrac operator-(SimpleFrac t);
 	SimpleFrac operator*(SimpleFrac t);
     SimpleFrac operator/(SimpleFrac t);
-	
+
 private:
 	SimpleFrac Reduce(SimpleFrac t);
 };
@@ -26,7 +26,7 @@ SimpleFrac::SimpleFrac()
 
 SimpleFrac::~SimpleFrac()
 {
-	
+
 }
 
 SimpleFrac SimpleFrac::operator+(SimpleFrac t)
@@ -36,7 +36,7 @@ SimpleFrac SimpleFrac::operator+(SimpleFrac t)
     result.b = b * t.b;
     if (result.b < 0){
     	result.a *= -1;
-		result.b *= -1;	
+		result.b *= -1;
 	}
     result = Reduce(result);
     if (result.a == 0)
@@ -51,7 +51,7 @@ SimpleFrac SimpleFrac::operator-(SimpleFrac t)
     result.b = b * t.b;
     if (result.b < 0){
     	result.a *= -1;
-		result.b *= -1;	
+		result.b *= -1;
 	}
     result = Reduce(result);
     if (result.a == 0)
@@ -73,7 +73,7 @@ SimpleFrac SimpleFrac::operator*(SimpleFrac t)
     result.b = temp1.b * temp2.b;
     if (result.b < 0){
     	result.a *= -1;
-		result.b *= -1;	
+		result.b *= -1;
 	}
     result = Reduce(result);
     if (result.a == 0)
@@ -95,7 +95,7 @@ SimpleFrac SimpleFrac::operator/(SimpleFrac t)
     result.b = temp1.b * temp2.b;
     if (result.b < 0){
     	result.a *= -1;
-		result.b *= -1;	
+		result.b *= -1;
 	}
     result = Reduce(result);
     if (result.a == 0)
@@ -112,21 +112,19 @@ SimpleFrac SimpleFrac::operator=(SimpleFrac t)
 
 SimpleFrac SimpleFrac::Reduce(SimpleFrac t)
 {
-    long long int j, less;
-	do{
-  	  if (abs(t.a) < abs(t.b))                                    
- 	       less = abs(t.a);                               
-    	else                                                  
-     	   less = abs(t.b);                                
-    	for(j = less; j > 0; j--){                    
-        	if(!(t.a % j) && !(t.b % j)){     
-            	t.a /= j;                     
-            	t.b /= j;                      
-            	break;                        
-        	}
-    	}
-//    	printf("%d\n", j);
-	} while (j > 1);
-	
-	return t; 
+    long long int temp_a = abs(t.a), temp_b = abs(t.b), tmp;
+
+    while (temp_a != temp_b) {
+        if (temp_a > temp_b) {
+            tmp = temp_a;
+            temp_a = temp_b;
+            temp_b = tmp;
+        }
+        temp_b = temp_b - temp_a;
+    }
+
+    t.a /= temp_a;
+    t.b /= temp_a;
+
+    return t;
 }
