@@ -114,6 +114,9 @@ SimpleFrac SimpleFrac::Reduce(SimpleFrac t)
 {
     long long int temp_a = abs(t.a), temp_b = abs(t.b), tmp;
 
+    if (t.a == 0)
+        return t;
+
     while (temp_a != temp_b) {
         if (temp_a > temp_b) {
             tmp = temp_a;

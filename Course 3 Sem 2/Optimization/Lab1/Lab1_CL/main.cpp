@@ -53,7 +53,6 @@ bool CheckZero(SimpleFrac **mtrx)
             return false;
         }
     }
-    cout << "d_2" << endl;
     return true;
 }
 
@@ -76,14 +75,28 @@ int EMatrix(SimpleFrac **resMtrx)
 
     SimpleFrac temp_1, temp_2, temp_div;
 
+    SimpleFrac *temp_swap;
+    temp_swap = new SimpleFrac;
+
     for (k_m = 0; k_m < N; k_m++){
+
+        cout << "Phase 0: prepare" << endl;
+
         CheckZero(resMtrx);
         k_n = 0;
-        while (resMtrx[k_m][k_m + k_n].a == 0){
+        while (resMtrx[k_m + k_n][k_m].a == 0){
             k_n++;
-            if (k_m + k_n == M + 1)
-                return 1;
+            if (k_m + k_n == N)
+                break;
         }
+
+        if (k_n != 0 && k_m + k_n < N) {
+            temp_swap = resMtrx[k_m];
+            resMtrx[k_m] = resMtrx[k_m + k_n];
+            resMtrx[k_m + k_n] = temp_swap;
+        }
+
+
         cout << "Col " << k_m << endl;
 
         cout << endl << "Phase 1: div" << endl;
@@ -95,7 +108,7 @@ int EMatrix(SimpleFrac **resMtrx)
             }
         }
 
-        temp_div = resMtrx[k_m][k_m + k_n];
+        temp_div = resMtrx[k_m][k_m];
         for (int j = k_m; j < M + 1; j++){
             resMtrx[k_m][j] = resMtrx[k_m][j] / temp_div;
         }
@@ -108,8 +121,8 @@ int EMatrix(SimpleFrac **resMtrx)
         for(int i = 0; i < N; i++){
             for (int j = k_m + 1; j < M + 1; j++){
                 if (i != k_m && j != k_m){
-                    temp_1 = resMtrx[k_m][k_m + k_n] * resMtrx[i][j];
-                    temp_2 = resMtrx[i][k_m + k_n] * resMtrx[k_m][j];
+                    temp_1 = resMtrx[k_m][k_m] * resMtrx[i][j];
+                    temp_2 = resMtrx[i][k_m] * resMtrx[k_m][j];
                     resMtrx[i][j] = temp_1 - temp_2;
                 }
             }
@@ -121,7 +134,7 @@ int EMatrix(SimpleFrac **resMtrx)
 
         for (int i = 0; i < N; i++){
             if (i != k_m){
-                resMtrx[i][k_m + k_n].a = 0;
+                resMtrx[i][k_m].a = 0;
             }
         }
         PrintMatrix(resMtrx);
@@ -135,6 +148,7 @@ int EMatrix(SimpleFrac **resMtrx)
 
         cout << endl;
     }
+
     return 0;
 }
 
@@ -238,3 +252,29 @@ int main()
 8
 152
 */
+
+/*
+ 4
+ 4
+
+ 1
+ 0
+ 2
+ 3
+ 4
+ 0
+ 0
+ 0
+ 1
+ 3
+ 0
+ 1
+ 0
+ 0
+ 5
+ 0
+ 0
+ 1
+ 0
+ 6
+ */
