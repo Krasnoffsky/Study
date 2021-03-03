@@ -90,6 +90,11 @@ int EMatrix(SimpleFrac **resMtrx)
             k_n++;
             if (k_m + k_n == N) {
                 k++;
+                if (k_n + k == M) {
+                    k = 0;
+                    break;
+                }
+                else
                 k_n = 0;
             }
         }
