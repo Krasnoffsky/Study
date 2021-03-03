@@ -72,6 +72,7 @@ int EMatrix(SimpleFrac **resMtrx)
 {
     int k_m = 0;
     int k_n = 0;
+    int k = 0;
 
     SimpleFrac temp_1, temp_2, temp_div;
 
@@ -84,10 +85,13 @@ int EMatrix(SimpleFrac **resMtrx)
 
         CheckZero(resMtrx);
         k_n = 0;
-        while (resMtrx[k_m + k_n][k_m].a == 0){
+        k = 0;
+        while (resMtrx[k_m + k_n][k_m + k].a == 0){
             k_n++;
-            if (k_m + k_n == N)
-                break;
+            if (k_m + k_n == N) {
+                k++;
+                k_n = 0;
+            }
         }
 
         if (k_n != 0 && k_m + k_n < N) {
@@ -97,7 +101,7 @@ int EMatrix(SimpleFrac **resMtrx)
         }
 
 
-        cout << "Col " << k_m << endl;
+        cout << "Col " << k_m + 1 << endl;
 
         cout << endl << "Phase 1: div" << endl;
         for (int i = 0; i < N; i++){
@@ -108,8 +112,8 @@ int EMatrix(SimpleFrac **resMtrx)
             }
         }
 
-        temp_div = resMtrx[k_m][k_m];
-        for (int j = k_m; j < M + 1; j++){
+        temp_div = resMtrx[k_m][k_m + k];
+        for (int j = k_m + k; j < M + 1; j++){
             resMtrx[k_m][j] = resMtrx[k_m][j] / temp_div;
         }
 
@@ -119,10 +123,10 @@ int EMatrix(SimpleFrac **resMtrx)
 
 
         for(int i = 0; i < N; i++){
-            for (int j = k_m + 1; j < M + 1; j++){
+            for (int j = k_m + k + 1; j < M + 1; j++){
                 if (i != k_m && j != k_m){
-                    temp_1 = resMtrx[k_m][k_m] * resMtrx[i][j];
-                    temp_2 = resMtrx[i][k_m] * resMtrx[k_m][j];
+                    temp_1 = resMtrx[k_m][k_m + k] * resMtrx[i][j];
+                    temp_2 = resMtrx[i][k_m + k] * resMtrx[k_m][j];
                     resMtrx[i][j] = temp_1 - temp_2;
                 }
             }
@@ -134,7 +138,7 @@ int EMatrix(SimpleFrac **resMtrx)
 
         for (int i = 0; i < N; i++){
             if (i != k_m){
-                resMtrx[i][k_m].a = 0;
+                resMtrx[i][k_m + k].a = 0;
             }
         }
         PrintMatrix(resMtrx);
