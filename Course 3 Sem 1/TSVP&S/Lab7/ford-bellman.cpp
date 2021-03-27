@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 const int INF = 1e9;
 
@@ -12,17 +13,19 @@ struct edge
 };
 
 int main(){
+	
+	ifstream inf("C:\\Study\\Course 3 Sem 1\\TSVP&S\\Lab7\\file.txt");
 
     int n, m;
-    cin >> n >> m;
+    inf >> n >> m;
 
     vector <edge> g(m);
 
     for (int i = 0; i < m; i++)
     {
         int a, b, weight;
-        cout << i+1 << ") ";
-        cin >> a >> b >> weight;
+//        cout << i+1 << ") ";
+        inf >> a >> b >> weight;
         edge e;
         e.weight = weight;
         e.a = a - 1;
@@ -30,9 +33,9 @@ int main(){
         g[i] = e;
     }
 
-    cout << "Input start vertex:" << endl;
+//    cout << "Input start vertex:" << endl;
     long long start;
-    cin >> start;
+    inf >> start;
     
 /*    cout << "Input end vertex:" << endl;
     long long end;
@@ -63,6 +66,7 @@ int main(){
  //       }
     }
     cout << endl;
+    inf.close();
 
     return 0;
 }
