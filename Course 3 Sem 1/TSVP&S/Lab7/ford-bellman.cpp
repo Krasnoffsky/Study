@@ -47,12 +47,20 @@ int main(){
                 
     for (int i = 0; i < n - 1; i++)
     {
+    	cout << "Step " << i + 1 << endl;
     	for (int j = 0; j < m; j++)
     	{
-	    	if ((d[g[j].a] != INF) && (d[g[j].b] > d[g[j].a] + g[j].weight))
+    		cout << "D[" << g[j].b << "] =  D[" << g[j].a << "] + " << g[j].weight << " = ";
+			
+ 	    	if ((d[g[j].a] != INF) && (d[g[j].b] > d[g[j].a] + g[j].weight))
             {
+            	cout << d[g[j].a] + g[j].weight << endl;
 	            d[g[j].b] = d[g[j].a] + g[j].weight;
             }
+            else if (d[g[j].a] == INF)
+            	cout << "INF" << endl;
+            else
+            	cout << d[g[j].a] + g[j].weight << endl;
     	}  
     }   
 
