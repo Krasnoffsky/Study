@@ -121,7 +121,7 @@ def artificial_basis(matrix, n, m, z):
 
     print("\n", "Этап 3: Решение методом искуственного базиса")
 
-    stop_it = True
+    print_matrix(simplex, N, m, "simplex")
     # print("\n\t", "BASIS = ", basis)
     while True:
 
@@ -172,7 +172,7 @@ def artificial_basis(matrix, n, m, z):
                     simplex[i][maxi_i].b = 1
 
             if basis[n + 1 + mini_i] >= 0:      # удаление столбца с искусственной переменной и обновление базиса
-                print("\n\t", "DEL = ", basis[n + 1 + mini_i])
+                # print("\n\t", "DEL = ", basis[n + 1 + mini_i])
                 temp_k = basis[n + 1 + mini_i]
                 for i in range(m + 2):
                     simplex[i].pop(temp_k)
@@ -217,7 +217,7 @@ def artificial_basis(matrix, n, m, z):
 
             if k == -1:
                 print("Начинайте паниковать")
-                print("Но сперва проверь правильно ли записана строка z")
+                print("Но сперва проверьте правильно ли записана строка z")
                 return 1
             # print("Cur mini = ", mini)
             for i in range(k, m):  # поиск строки с минимальным сиплексным отношением
@@ -244,28 +244,26 @@ def artificial_basis(matrix, n, m, z):
                     simplex[i][maxi_i].a = 0
                     simplex[i][maxi_i].b = 1
 
-            basis[mini_i] = maxi_i
-            # print("\n", "BASIS = ", basis)      # записываем новый элемент в базис
+            basis[mini_i] = maxi_i              # записываем новый элемент в базис
+            # print("\n", "BASIS = ", basis)
 
             print_matrix(simplex, N, m - 1, "simplex")
 
         if kof == 1:
-            print("Z -> min = Z(", end='')
+            print("Z -> max = Z(", end='')
 
-            for i in range(n - m):
+            for i in range(n):
                 k = -1
                 for j in range(n):
-                    if i + 1 == basis[j]:
-                        print(simplex[i][0], end='');
+                    if i + 1 == basis[j] and j <= m:
+                        print(simplex[j][0], end='');
                         k = 0
                         break;
                 if k != 0:
                     print(0, end='')
-                if i != n - m - 1:
+                if i != n - 1:
                     print(", ", end='')
-            temp = simplex[m][0]
-            temp.a *= -1
-            print(") = ", temp)
+            print(") = ", simplex[m][0])
             return 0
 
     return 1
