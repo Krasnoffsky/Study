@@ -61,6 +61,8 @@ def artificial_basis(matrix, n, m, z):
 
     for i in range(n + m + 1):
         basis.append(i)
+    for i in range(n + 1):
+        basis[i] = 0
 
     print("\n", "Этап 1: Расширение матрицы")
 
@@ -120,6 +122,7 @@ def artificial_basis(matrix, n, m, z):
     print("\n", "Этап 3: Решение методом искуственного базиса")
 
     stop_it = True
+    # print("\n\t", "BASIS = ", basis)
     while True:
 
         stop_kof = check_m(simplex[m + 1], n)           # проверка строки M
@@ -169,15 +172,16 @@ def artificial_basis(matrix, n, m, z):
                     simplex[i][maxi_i].b = 1
 
             if basis[n + 1 + mini_i] >= 0:      # удаление столбца с искусственной переменной и обновление базиса
+                print("\n\t", "DEL = ", basis[n + 1 + mini_i])
                 temp_k = basis[n + 1 + mini_i]
                 for i in range(m + 2):
                     simplex[i].pop(temp_k)
                 N -= 1
                 basis[mini_i] = maxi_i
                 basis[n + 1 + mini_i] = -1
-                for i in range(n + 1 + mini_i, N + 2):
+                for i in range(n + 1 + mini_i, n + m + 1):
                     basis[i] -= 1
-                print("BASIS = ", basis)
+            # print("BASIS = ", basis)
 
             print_matrix(simplex, N, m, "simplex")
 
@@ -191,8 +195,7 @@ def artificial_basis(matrix, n, m, z):
     print("\n", "Этап 4: Решение симплекс-методом")
 
     simplex.pop(m + 1)
-    m -= 1
-    print_matrix(simplex, N, m, "simplex")
+    print_matrix(simplex, N, m - 1, "simplex")
     while True:
         kof = check_z(simplex[m], N)        # проверяем строку z
 
@@ -203,12 +206,10 @@ def artificial_basis(matrix, n, m, z):
                 if int(simplex[m][j].a) < 0 and simplex[m][j] < maxi:
                     maxi = simplex[m][j]
                     maxi_i = j
-
             mini = SimpleFrac()
             mini_i = -1
             k = -1
-            for i in range(
-                    m):  # поиск опорного элемента, чьё симплексное отношение будет взято как минимальное
+            for i in range(m):  # поиск опорного элемента, чьё симплексное отношение будет взято как минимальное
                 if simplex[i][maxi_i].a > 0 and simplex[i][0].a > 0:
                     mini = simplex[i][0] / simplex[i][maxi_i]
                     k = i
@@ -216,8 +217,9 @@ def artificial_basis(matrix, n, m, z):
 
             if k == -1:
                 print("Начинайте паниковать")
+                print("Но сперва проверь правильно ли записана строка z")
                 return 1
-
+            # print("Cur mini = ", mini)
             for i in range(k, m):  # поиск строки с минимальным сиплексным отношением
                 if simplex[i][maxi_i].a > 0 and simplex[i][0].a > 0 and simplex[i][0] / simplex[i][maxi_i] <= mini:
                     mini = simplex[i][0] / simplex[i][maxi_i]
@@ -242,17 +244,28 @@ def artificial_basis(matrix, n, m, z):
                     simplex[i][maxi_i].a = 0
                     simplex[i][maxi_i].b = 1
 
-            basis[mini_i] = maxi_i      # записываем новый элемент в базис
+            basis[mini_i] = maxi_i
+            # print("\n", "BASIS = ", basis)      # записываем новый элемент в базис
 
-            print_matrix(simplex, N, m, "simplex")
+            print_matrix(simplex, N, m - 1, "simplex")
 
         if kof == 1:
-            print("Z -> max = Z(", end='')
-            for i in range(1, n + 1):
-                print(basis[i], end='')
-                if i != n - 1:
-                    print(",", end='')
-            print(") = ", simplex[m][0])
+            print("Z -> min = Z(", end='')
+
+            for i in range(n - m):
+                k = -1
+                for j in range(n):
+                    if i + 1 == basis[j]:
+                        print(simplex[i][0], end='');
+                        k = 0
+                        break;
+                if k != 0:
+                    print(0, end='')
+                if i != n - m - 1:
+                    print(", ", end='')
+            temp = simplex[m][0]
+            temp.a *= -1
+            print(") = ", temp)
             return 0
 
     return 1

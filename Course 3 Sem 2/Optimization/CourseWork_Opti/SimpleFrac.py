@@ -125,7 +125,7 @@ class SimpleFrac:
 
     def __ge__(self, other):
         result = self - other
-        if result.a > 0:
+        if result.a >= 0:
             return True
         else:
             return False
