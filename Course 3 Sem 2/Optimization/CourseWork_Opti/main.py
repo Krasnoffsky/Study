@@ -177,11 +177,11 @@ def artificial_basis(matrix, n, m, z):
                 for i in range(m + 2):
                     simplex[i].pop(temp_k)
                 N -= 1
-                basis[mini_i] = maxi_i
                 basis[n + 1 + mini_i] = -1
                 for i in range(n + 1 + mini_i, n + m + 1):
                     basis[i] -= 1
-            # print("BASIS = ", basis)
+            basis[mini_i] = maxi_i
+            print("BASIS = ", basis)
 
             print_matrix(simplex, N, m, "simplex")
 
@@ -245,7 +245,7 @@ def artificial_basis(matrix, n, m, z):
                     simplex[i][maxi_i].b = 1
 
             basis[mini_i] = maxi_i              # записываем новый элемент в базис
-            # print("\n", "BASIS = ", basis)
+            print("\n", "BASIS = ", basis)
 
             print_matrix(simplex, N, m - 1, "simplex")
 
