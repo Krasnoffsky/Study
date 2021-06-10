@@ -145,7 +145,7 @@ def artificial_basis(matrix, n, m, z):
                     break
 
             if k == -1:
-                print("Начинайте паниковать")
+                print("Нет решений")
                 return 1
 
             for i in range(k, m):           # поиск строки с минимальным сиплексным отношением
@@ -189,7 +189,7 @@ def artificial_basis(matrix, n, m, z):
             break
 
         elif stop_kof == 2:                 # если матрица не разрешима
-            print("\n", "Матрица не разрешима")
+            print("\n", "Система ограничений не совместна")
             return 1
 
     print("\n", "Этап 4: Решение симплекс-методом")
